@@ -356,3 +356,5 @@ let 및 const 변수가 선언되기 전에 액세스 할 때 참조 오류가 �
 그래서 우리는 JavaScript 프로그램이 내부적으로 어떻게 실행되는지를 논의했습니다.  
 이러한 모든 개념을 멋진 JavaScript 개발자로 배울 필요는 없지만 위의 개념을 제대로 이해하면 호이스팅,  
 범위 및 클로저와 같은 다른 개념을보다 쉽고 깊이 이해할 수 있습니다.
+
+출처 : https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
