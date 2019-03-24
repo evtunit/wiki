@@ -1,4 +1,4 @@
-번역 : [BangSM](https://github.com/BangSM)
+번역 : [BbangYa](https://github.com/BangSM)
 
 원문 출처 : [Understanding Execution Context and Execution Stack in Javascript](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
 
