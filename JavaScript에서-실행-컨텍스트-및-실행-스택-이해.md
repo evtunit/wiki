@@ -1,3 +1,10 @@
+번역 : [BangSM](https://github.com/BangSM)
+
+원문 출처 : [Understanding Execution Context and Execution Stack in Javascript](https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0)
+
+> 일부 의역이 들어간 경우도 있으므로 해당 원문의 내용과 조금 다를 수 있습니다. 문제가 될 소지가 있다거나 혹은 수정이 필요한 사항이 있다면 있다면 댓글 달아 주세요.
+
+
 ## 실행 컨텍스트가 무엇인가?
 
 간단히 말해 실행 컨텍스트는 자바 스크립트 코드가 평가되고 실행되는 환경의 추상 개념입니다.   
@@ -357,5 +364,3 @@ let 및 const 변수가 선언되기 전에 액세스 할 때 참조 오류가 �
 그래서 우리는 JavaScript 프로그램이 내부적으로 어떻게 실행되는지를 논의했습니다.  
 이러한 모든 개념을 멋진 JavaScript 개발자로 배울 필요는 없지만 위의 개념을 제대로 이해하면 호이스팅,  
 범위 및 클로저와 같은 다른 개념을보다 쉽고 깊이 이해할 수 있습니다.
-
-출처 : https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
