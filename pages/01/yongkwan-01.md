@@ -4,7 +4,7 @@
 
 Javascript 생태계는 그 어느 때 보다 복잡해졌으며 계속해서 더 복잡해질 것이다. 모던 웹 앱을 만드는 데 필요한 도구는 Webpack, Babel, ESLint, Mocha, Karma, Grunt 등등 압도적이게 많다. 어떤 것을 사용해야하며 무슨 툴이 어느 동작을 수행할까? 오늘 날의 웹 개발자들의 투쟁을 완벽하게 보여주는 만화를 발견했다.
 
-![Javascript Fatigue — What it feels like to learn Javascript](../../resource/yongkwan/01/1_1akEKXC95jhmIudAayITPA.png)
+[[/resource/yongkwan/01/1_1akEKXC95jhmIudAayITPA.png]]
 
 위에 나온 것들을 다 제쳐두고, 모든 자바스크립트 개발자는 프레임워크나 라이브러리를 사용하기 전에 먼저 루트 레벨에서 내부적으로 어떻게 동작하는지 알아야한다. 대부분의 JS 개발자는 크롬의 런타임 엔진인 V8이라는 용어를 들었을 지 모르지만 어떤 이들은 이 단어가 무엇을 의미하고 어떤 동작을 하는지 모를 수 있다. 나 또한 처음 개발 경력 1년 동안엔 V8을 비롯한 다른 멋진 용어에 대해 잘 알지 못했고, 작업을 완료하는 것에만 몰두했었다. 그 이후에 Javascript가 어떻게 이런 일을 할 수 있는지에 대한 호기심이 생겼고 깊게 파고 들기로 결심했다. 구글을 뒤적거리며[Philip Roberts](https://twitter.com/philip_roberts)가 쓴 블로그 포스팅을 포함한 몇가지의 좋은 글들과 [great talk at JSConf on the event loop](https://www.youtube.com/watch?v=8aGhZQkoFbQ)를 발견했다. 그리고 내가 배운 것들을 요약하여 공유해야겠다고 결심했다. 알아야 할 것들이 많기 때문에 글을 두 부분으로 나누었다. 첫 부분은 일반적으로 사용되는 용어를 소개하고, 두 번째 부분에서는 모든 용어 간의 연결을 소개할 예정이다.
 
@@ -12,7 +12,7 @@ Javascript 생태계는 그 어느 때 보다 복잡해졌으며 계속해서 �
 Javascript는 단일 스레드 언어이다. 즉, 한 번에 하나의 작업이나 하나의 코드 조각만 처리 할 수 ​​있다는 뜻이다. 자바스크립트는 **하나의 콜 스택**과 동시성 모델(Concurrency Model)로 불려지는 힙과 큐 같은 부가 요소를 가지고 있다. 먼저 각 용어를 살펴보자.
 
 
-![자바스크립트 모델의 시각화](../../resource/yongkwan/01/jsmodel.png)
+[[/resource/yongkwan/01/jsmodel.png]]
 
 
 ## 콜 스택 (Call Stack)
@@ -57,12 +57,12 @@ function baz() {
 baz();
 ```
 	
-![error-stack-trace](../../resource/yongkwan/01/error-stack-trace.png)
+[[/resource/yongkwan/01/error-stack-trace.png]]
 	
 	
 때때로 무한 루프 처럼 함수 호출 횟수가 너무 많아 콜 스택의 최대 허용치를 넘어가게 되면 **Max Stack** Error가 발생된다.(Chrome 브라우저의 경우 스택의 크기가 16,000 프레임). 아래 이미지를 참고하자.
 	
-![max-stack-error](../../resource/yongkwan/01/max-stack-error.png)
+[[/resource/yongkwan/01/max-stack-error.png]]
 	
 ## 힙 (Heap)
 
@@ -81,12 +81,12 @@ baz();
 네트워크 요청은 느릴 수 있고, 이미지 요청은 느릴 수 있다. 그러나 고맙게도 서버 요청은 비동기 함수인 AJAX를 통해 수행된다. 이러한 네트워크 요청이 동기함수를 통해 이루어진다고 가정하면 어떻게 될까? 네트워크 요청은 기본적으로 다른 컴퓨터/기계로 이루어진 어떤 서버로 전송된다.  서버는 요청에 대한 응답의 회신을 천천히 할 수도 있다.  때문에 그동안 사용자가 어떤 버튼을 클릭하거나 다른 **렌더링**을 완료 해야 할 경우엔 아무 일도 일어나지 않는다. 스택이 차단되기 때문이다.  Ruby와 같은 다중 스레드 언어에서는 처리할 수 있지만, 자바스크립트와 같은 단일 스레드 언어에서는 스택 내부의 함수가 값을 반환하지 않는 한 다른 작업을 하는 것은 불가능하다. 따라서 브라우저는 아무것도 할 수 없기 때문에 웹페이지가 완전히 망가질 것이다. 사용자를 위한 유동적인 UI를 원한다면 이러한 현상은 올지 않다. 어떻게 처리해야할까?
  
 > JS에서의 동시성(Concurrency) -  한번에 한 작업만! 단, 비동기 콜백 제외
- as
-![ASYNC](../../resource/yongkwan/01/async.png)
+
+[[/resource/yongkwan/01/async.png]]
  
 가장 쉬운 해결책은 비동기 콜백을 사용하는 것이다. 즉, 코드의 일부를 실행하고 나중에 실행할 콜백 (함수)을 제공하면 된다. 우리는 AJAX 요청과 같은`$.get(),setTimeout(),setInterval(), Promises, 등`을 사용함으로  비동기 콜백을 접했을 것이다. Node는 비동기 함수 실행에 관한 것이다. 모든 비동기 콜백은 즉시 실행되지 않고 얼마 후 실행된다. 따라서 `console.log(), 수학 연산`과 같은 동기 함수와 달리 스택에 즉시 넣을 수 없다. 그럼 비동기 함수는 어디로 가고 어떻게 처리될까?
  
-![example](../../resource/yongkwan/01/example.png)
+[[/resource/yongkwan/01/example.png]]
  
 위 코드 처럼 Javascript에서 네트워크 요청을 실행할 경우: 
  
@@ -106,7 +106,7 @@ while (queue.waitForMessage()) {
 }
 ```
  
-![이벤트 루프](../../resource/yongkwan/01/eventloop.png)
+[[/resource/yongkwan/01/eventloop.png]]
  
 웹 브라우저에서는 이벤트가 발생하면 메시지가 추가되고 해당 메시지를 위한 이벤트 리스너가 추가된다. 만약 이벤트 리스너가 없으면 이벤트는 소실된다.  클릭 이벤트 핸들러가 등록된 요소를 클릭하면 메시지가 추가된다. (다른 이벤트와도 마찬가지). 이 콜백 함수의 호출은 호출 스택의 초기 프레임으로 사용되며 JavaScript가 단일 스레드이므로 스택의 모든 호출이 반환 될 때까지 추가 메시지 폴링 및 처리가 중단됩니다. 후속 (동기식) 함수 호출은 스택에 새로운 호출 프레임을 추가합니다.
  
