@@ -1,21 +1,21 @@
 ![](https://cdn-images-1.medium.com/max/800/1*aGnwvStsrH3OnrwdlHvsgQ.jpeg)
 
-> Why 0.1+0.2 IS NOT equal to 0.3 and 9007199254740992 IS equal to 9007199254740993
+> 왜 0.1+0.2가 0.3과 같지 않으며 9007199254740992는 9007199254740993과 동일할까?
 
 ***
 
 
-Most statically typed languages like Java or C have different data types for numbers. For example, if you need to store an integer that is in the range [-128;127] you can use ‘byte’ in Java and ‘char’ in C, which both take up only 1 byte. If you need to store a larger integer, you can use ‘int’ or ‘long’ data types which take up 4 and 8 bytes respectively. There are also separate data types that you can use to store numbers with fractional part — ‘float’ which takes up 4 bytes and ‘double’ with 8 bytes. These are usually referred to as floating point format and we’ll see later where this name comes from.
+자바나 C와 같이 정적으로 타이핑된 언어들은 숫자에 대한 데이터 유형이 다르다. 예를 들어, 범위에 있는 정수를 저장해야 하는 경우 [-128;127] 당신은 Java에서는 'byte'를, C에서는 'char'를 사용할 수 있는데, 둘 다 1byte만 차지한다. 더 큰 정수를 저장해야 할 경우 각각 4바이트와 8바이트를 차지하는 'in' 또는 'long' 데이터 유형을 사용할 수 있다. 또한 부분적인 부분이 있는 숫자를 저장하는 데 사용할 수 있는 별도의 데이터 유형인 'float'은 4바이트를 차지하며 'double'은 8바이트를 차지한다. 이것들은 보통 부동 소수점 형식이라고 불리며 우리는 나중에 이 이름이 어디서 유래했는지 알게 될 것이다.
 
-But we don’t have such a variety of number types in JavaScript. According to the ECMAScript standard, there is only one type for numbers and it is the ‘double-precision 64-bit binary format IEEE 754 value’. This type is used to store both integers and fractions and is the equivalent of `double` data type in Java and C. Some new developers to JavaScript do not realize that and believe that if they use 1 it is stored in 64 bits as:
+그러나 우리는 자바스크립트에 그렇게 다양한 숫자 유형을 가지고 있지 않다. ECMAScript 표준에 따르면 숫자에 대한 형식은 한 가지뿐이며 '이중 정밀 64비트 이진 형식 IEEE 754 값'(double-precision 64-bit binary format IEEE 754 value) 이다. 이 유형은 정수와 분수를 모두 저장하는 데 사용되며 Java와 C의 "이중" 데이터 유형에 해당한다. JavaScript의 일부 새로운 개발자는 이를 깨닫지 못하고 1을 사용하면 64비트에 다음과 같이 저장된다고 믿는다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*bsjyzWhOZ2YNDwlawneK_w.png)
 
-while in fact it’s stored as:
+실제로 다음과 같이 저장됨:
 
 ![](https://cdn-images-1.medium.com/max/800/1*dQ1IqWxT0Gwi07gsn62vFA.png)
 
-This misunderstanding may cause a great deal of confusion. Let’s for example, take this loop written in Java:
+이런 오해로 인해 큰 혼란이 일어날지도 모른다. 예를 들어, Java로 쓰여진 이 루프를 봅시다.
 
 ```js
 for (int i=1; 1/i > 0; i++) {
@@ -23,8 +23,8 @@ for (int i=1; 1/i > 0; i++) {
 }
 ```
 
-How long will it run? It’s not difficult to see that it will stop after the first iteration. On the second iteration the counter `i` will be increased to `2`, `1/2` will produce `0.5` which will be truncated to `0` since the counter i is an integer and the condition `1/2 > 0` will evaluate to false.
-Now what do you think will happen if we write the same loop in JavaScript:
+얼마나 걸릴까? 첫 번째 반복 후에 멈출 것이라고 보는 것은 어렵지 않다. 2차 반복 시 카운터 i는 2로, 1/2는 0으로 잘리는 0.5가 생성되는데, 이는 카운터 i가 정수이고 1/2 > 0이 거짓으로 평가되기 때문이다.
+자바스크립트에 같은 루프를 쓰면 어떻게 될까?
 
 ```js
 for (var i=1; 1/i > 0; i++) {
@@ -32,86 +32,86 @@ for (var i=1; 1/i > 0; i++) {
 }
 ```
 
-As it turns out this loop will never stop because the result of 1/i is not evaluated as integer, but as a floating point and that leads to very interesting behavior. Want to learn more? Read on.
+밝혀진 바와 같이 이 루프는 1/i의 결과가 정수로 평가되는 것이 아니라 부동점으로 평가되어 매우 흥미로운 행동을 이끌어내기 때문에 결코 멈추지 않을 것이다. 
 
-Those that are unfamiliar with the way JavaScript works usually mention another unexpected behavior that is easy to explain once you understand the language. Adding `0.1` to `0.2` produces `0.30000000000000004`, which means that `0.1+0.2` is not equal to `0.3`. Questions related to this behavior pop up so often that stackoverflow people had to add special note:
+자바스크립트의 작동 방식에 익숙하지 않은 사람들은 보통 언어를 이해하면 설명하기 쉬운 또 다른 예상치 못한 행동을 언급한다. `0.2`에 `0.1`을 더하면 `0.30000000000000004`가 생성돼 `0.1+0.2`가 `0.3`과 같지 않다. 이 행동과 관련된 질문이 너무 자주 나타나서 stackoverflow 사람들은 특별한 메모를 추가해야 했다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*SnYf-ofdeR3Fe-pbU341cg.png)
 
-It’s interesting that this behavior is often attributed to JavaScript, while it’s pertaining to any language the uses floating point format for numbers. This means that if you use ‘float’ or ‘double’ data types in Java or C you’ll see the same result. Another interesting point is that the result of `0`.1+0.2` is not `0.30000000000000004` as seen in a browser’s console, but is actually `0.3000000000000000444089209850062616169452667236328125`.
 
+이러한 행동이 자바스크립트에 기인하는 경우가 많다는 것은 흥미롭다. 자바스크립트는 숫자에 부동 소수점 형식을 사용한다. 이는 자바나 C에서 `float` 또는 `double` 데이터 유형을 사용하면 동일한 결과가 나타난다는 것을 의미한다. `0.1+0.2`의 결과는 브라우저의 콘솔에서 보는 것처럼 `0.3000000000000000000000004`가 아니라, 실제로는 `0.30000000000000000044098006261694526672368125`라는 점도 흥미롭다.
 
-In this article I’d like to explain how floating point numbers work and take a close look at the for loop and 0.1+0.2 examples alluded earlier.
+이 글에서 나는 부동 소수점 숫자가 어떻게 작용하는지 설명하고 앞에서 설명한 `0.1+0.2` 예제를 자세히 살펴보고자 한다.
 
-> It’s worth mentioning BigInt, a new numeric primitive in JavaScript that can represent integers with arbitrary precision. With BigInts, you can safely store and operate on large integers even beyond the safe integer limit for Numbers. It was introduced in V8 this year and is supported in Chrome 67+ and Node v10.4.0+. You can read more about it here.
+> 임의의 정밀도로 정수를 나타낼 수 있는 자바스크립트의 새로운 숫자 원시인 BigInt를 언급할 만하다. BigInts를 사용하면 안전한 정수 한계를 넘어서는 경우에도 큰 정수로 안전하게 저장하고 조작할 수 있다. 올해 V8에 도입되었으며 Chrome 67+와 Node v10.4.0+에서 지원되고 있다. 당신은 여기서 그것에 대해 더 많이 읽을 수 있다.
 
 ***
 
-## Representing numbers in the scientific notation
+## 과학적 표기법에서 숫자 표시
 
-Before we start talking about floating point and the IEEE754 standard, we need to first look into what it means to represent a number in the scientific notation. In the general form the number in scientific notation can be represented like this:
+부동 소수점과 IEEE754 표준에 대해 이야기하기 전에, 우리는 먼저 과학적 표기법에 숫자를 나타내는 것이 무엇을 의미하는지 살펴볼 필요가 있다. 일반적인 형태에서 과학적 표기법의 숫자는 다음과 같이 나타낼 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*FoBb3L5tCBu54c1JSo1z5A.png)
 
-Significand shows the number of significant digits. It’s also often referred to as Mantissa or Precision. Zeros are not considered significant; they just hold a place. Base specifies the numeric system base, i.e. `10` for decimal system and `2` for binary. Exponent defines by how many places a radix point must be moved to the left or right to obtain an original number.
+유의도는 유의한 자릿수를 나타낸다. 흔히 만티사(Mantissa) 또는 정밀(Precision)이라고도 한다. 0은 중요한 것으로 여겨지지 않는다. 단지 자리를 잡고 있을 뿐이다. Base는 숫자 체계 베이스, 즉 십진법 `10`은 `10`, 이진법 `2`는 `2`를 지정한다. 얼마나 많은 장소에서Exponent defines 기수 지점 왼쪽이나 오른쪽에 독창적인 번호를 부여 받으로 이동해야 한다.
 
-Any number can be represented in the scientific notation. For example, the number `2` in decimal and binary systems can be represented like this:
+어떤 숫자도 과학적 표기법으로 나타낼 수 있다. 예를 들어 10진수 및 2진수 시스템의 숫자 `2`는 다음과 같이 나타낼 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*MDU0hga7csrHdPOWHTu_kA.png)
 
-An exponent of zero simply shows us that no additional operations should be done to obtain the original number. Let’s see another example — the number `0.00000022`. The significant numbers here are `22, so let’s remove zeros:
+0의 지수란 원래 숫자를 얻기 위해 추가 연산을 해서는 안 된다는 것을 단순히 보여준다. `0.00000022`라는 또 다른 예를 보자. 여기서 중요한 숫자는 `22`이므로 0을 제거하자.
 
 ![](https://cdn-images-1.medium.com/max/800/1*AsTGOQl6gbLWCVBgjrSuUw.png)
 
-The calculation above demonstrates why the exponent of the base is decreased if the radix point moved to the right. So, by performing multiplication we refined our original number to have only significand digits:
+위의 계산은 radix poin가 오른쪽으로 이동하면 베이스의 지수화가 감소하는 이유를 보여준다. 그래서, 곱셈을 수행함으로써, 우리는 원래의 숫자를 오직 signific와 숫자로 수정했다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*HKEcO_6mfIU2EZSlobFlpw.png)
 
-Since we used multiplication by 8, we had to compensate it by division and this is where negative exponent of 8 comes from. The same process, only this time the division is used to obtain significand digits, can be performed on the number `22300000`:
+8까지 곱셈을 사용했기 때문에 구분별로 보상해야 했고 여기서 8의 마이너스 지수들이 나오는 겁니다. 이 중분할을 사용하여 숫자 `22300000`에 대해 동일한 과정을 수행할 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*gMetjorAQWTFep3sqjPNxA.png)
 
-This time the radix point was moved to the left and hence the exponent increased. As you can see, the scientific notation is a way to work easily with very large or small numbers. Depending on the exponent, the significand may represent an integer or a number with fractional part. When converting to the original number a negative exponent requires shifting the radix point to the left. The positive exponent requires shifting to the right and usually denotes large integers.
+이번에는 라딕스 포인트를 왼쪽으로 이동시켜 지수 상승이 이루어졌다. 보시다시피, 과학적 표기법은 매우 크거나 작은 숫자로 쉽게 작업하는 방법이다. 지수에 따라, andand는 분수 부분을 가진 정수나 숫자를 나타낼 수 있다. 원래 숫자로 변환할 때 음수 지수는 라다ix 점을 왼쪽으로 이동시켜야 한다. 긍정적인 지수가 오른쪽에, 그리고 보통의 큰 정수를 나타내는 전환이 필요하다.
 
-It’s also important to understand what a normalized form of a number is. A number is normalized when it is written in scientific notation with one nonzero decimal digit before the radix point. So, if we take our original numbers and represent them in the normalized form they will have the following representations:
-
+숫자의 표준화된 형태가 무엇인지 이해하는 것도 중요하다. 숫자는 라다스 포인트 이전에 10진수 1자리로 과학 표기할 때 정규화된다. 그래서 우리가 원래의 숫자를 취해서 표준화된 형태로 나타낸다면 그들은 다음과 같은 표현을 갖게 될 것이다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*MJQABIORAWZgnN3A-IQ_eA.png)
 
-As you may have guessed that the binary numbers will always have 1 before the radix point. Having numbers represented in the normalized form enables easy comparison of numbers by order of magnitude.
+2진수 숫자는 라다스 포인트 이전에 항상 1을 가질 것이라고 추측했을 것이다. 숫자를 정규화된 형태로 표시하면 크기 순서로 숫자를 쉽게 비교할 수 있다.
 
-Scientific notation can be thought of as a floating point representation of a number. The term floating point refers to the fact that a number’s radix point can “float” — it can be put anywhere relative to the significant digits of the number. And as we’ve learnt, the original position is indicated by the exponent.
+과학적 표기법은 숫자의 부동 소수점 표현으로 생각할 수 있다. 부동 소수점이라는 용어는 숫자의 라다믹스 포인트가 "평탄"할 수 있다는 사실을 가리킨다. 즉, 숫자의 중요한 숫자에 비례하여 어디에나 배치할 수 있다. 그리고 우리가 배웠듯이, 원래의 위치는 지수에게 표시된다.
 
 ***
 
-## Floating point according to the IEEE754
+## IEEE754에 따른 부동 소수점
 
-The IEEE Standard for Floating-Point Arithmetic (IEEE 754) defines many things related to floating point arithmetic, but for the purposes of our exploration we’re interested only in how numbers are stored, rounded and added. I’ve written a very detailed article explaining how to round binary numbers. Rounding is a frequent operation and occurs when a selected format doesn’t allow enough bits to store a number. It is an important topic so get a good grasp of its mechanics. Now, let’s take a look at how numbers are stored. All examples onward are going to be mostly for numbers in binary system.
+부동 소수점 산술용 IEEE 표준(IEE 754)은 부동 소수점 산술과 관련된 많은 것을 정의하지만, 우리의 탐사를 위해 우리는 숫자가 저장, 반올림 및 추가되는 방법에만 관심이 있다. 나는 이진수를 반올림하는 방법을 설명하는 아주 상세한 기사를 썼다. 라운딩은 빈번한 작업이며 선택한 포맷으로 인해 비트가 숫자를 저장할 수 없을 때 발생한다. 그것은 중요한 주제니까 그것의 역학을 잘 이해해라. 이제 숫자가 어떻게 저장되는지 살펴봅시다. 향후의 모든 예는 대부분 이진법으로 된 숫자일 것이다.
 
-### Understanding how numbers are stored
-There are two formats defined by the standard that are used most often — single and double precision. They differ in the number of bits each takes up and consequently in the range of numbers each format can store. The approach to translating a number in scientific notation into IEEE754 form is the same for all formats, only the number of bits allocated for mantissa (significand digits) and the exponent differ.
+### 숫자 저장 방법 이해
 
-IEEE754 floating point allocates bits to store a number sign, its mantissa (significant digits) and exponent. Here is the how it distributes those bits in the double-precision format (64 bit for each number) used by JavaScript’s Number type:
+표준에 의해 정의되는 두 가지 형식, 즉 단일 정밀도와 이중 정밀도가 가장 많이 사용된다. 그것들은 각각 취할 수 있는 비트 수와 결과적으로 각 포맷이 저장할 수 있는 숫자의 범위에서 다르다. 과학적 표기법의 숫자를 IEEE754 형식으로 변환하는 접근방식은 모든 형식에 대해 동일하며, 맨티사(신호수자리)에 할당된 비트 수 및 지수만 다를 뿐이다.
+
+IEEE754 부동 소수점은 숫자 기호, 맨티사(큰 자리) 및 지수(지수를 저장하기 위해 비트를 할당한다. 자바스크립트의 Number type에 사용되는 더블정밀 형식(숫자당 64비트)으로 이러한 비트를 배포하는 방법은 다음과 같다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*V0mPKZLKeAOxZMwspz3Htw.png)
 
-The sign bit gets 1 bit, exponent — 11 bits and 52 bits are allocated for mantissa (significand). Here is the table that shows the number of bits allocated for each format:
+기호 비트는 1비트, 지수 — 11비트 및 52비트가 맨티사(significand)에 할당된다. 각 형식에 할당된 비트 수를 보여주는 표:
 
 ![](https://cdn-images-1.medium.com/max/800/1*j0WQBZnmqURh6EXVZlqQgA.png)
 
-The exponent is stored in the offset binary format. I’ve written a detailed article explaining this format and it’s differences against two’s complement. Please take some time to understand this topic as I’ll be using it when translating numbers into floating point format.
+지수는 오프셋 이진 형식으로 저장된다. 나는 이 형식을 설명하는 상세한 기사를 썼고 그것은 두 사람의 보완책과는 다르다. 
 
 ## Examples of how integers are stored
 
-To see the bits distribution scheme I outlined above let’s see how the integers `1` and `3` are stored. Number `1` is represented in all numeric systems as `1` so no conversion is required. It can be represented in scientific form as:
+위에서 설명한 비트 분포 체계를 보려면 정수 '1'과 '3'이 어떻게 저장되는지 보자. 숫자 '1'은 모든 숫자 체계에서 '1'로 표시되므로 변환이 필요하지 않다. 그것은 다음과 같이 과학적인 형태로 나타낼 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*TJI9QzWevKj8wCtS57ji3Q.png)
 
-Here we have a mantissa of `1` and the exponent of `0`. Using this information you may assume that the number is represented in floating point like this:
+여기에 1의 만티사와 0의 지수를 가지고 있다. 이 정보를 사용하면 숫자가 다음과 같이 부동 소수점에 표시된다고 가정할 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*aeY_0kjanK1hAy_m8O_n7A.png)
 
-Let’s see if it’s really the case. Unfortunately, there are no built-in functions in JavaScript that allow you to see the bits pattern of a stored number. But I’ve written a simple JavaScript function that allows taking a look at how numbers are stored regardless of the your computer’s endianess. Here it is:
+안타깝게도 저장된 숫자의 비트 패턴을 볼 수 있는 자바스크립트에는 내장 기능이 없다. 하지만 나는 당신의 컴퓨터의 엔디아니스에 상관없이 숫자가 어떻게 저장되는지 살펴볼 수 있는 간단한 자바스크립트 기능을 작성했다. Here it is:
 
 ```js
 function to64bitFloat(number) {
@@ -131,143 +131,146 @@ function to64bitFloat(number) {
 }
 ```
 
-So, using it you can see that the number `1` is stored like this:
+그래서 그것을 사용하면 '1'이라는 숫자가 다음과 같이 저장되어 있음을 알 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*Td4FnJ5g6c40rCmtwgDXtA.png)
 
-It’s completely different from the assumptions set above. We have no digits in mantissa and there are `1`’s in the exponent. Now let’s see why it is so. 
-The first thing we need to understand is that every number is translated from the normalized scientific form. What is the advantage of this? If the first digit before the radix point is always `1`, then there is no need to store it which gives one extra bit for mantissa digits. When performing mathematical operations this first digit `1` is prepended back by hardware. Since number `1` has no digits after the radix point in the normalized form and the first digit before the radix point is not stored, we have nothing to put into mantissa and so it’s all zeros.
-Now, let’s see where `1`’s come from in the exponent. I mentioned earlier that exponent is stored as offset binary. If we calculate the offset:
+위에서 정한 가정과는 완전히 다르다. 맨티사에는 숫자가 없고 지수에는 1이 있다. 이제 왜 그런지 보자. 
+
+우리가 가장 먼저 이해해야 할 것은 모든 숫자가 정규화된 과학 형태에서 번역된다는 것이다. 이것의 장점은 무엇인가? 라딕스 지점 이전의 첫 번째 자리가 항상 '1'인 경우 맨티사 숫자에 1비트를 더 주는 저장하지 않아도 된다. 수학 연산을 수행할 때 첫 번째 숫자 '1'은 하드웨어에 의해 선봉된다.
+
+숫자 '1'은 정규화된 양식의 라다믹스 포인트 이후 숫자와 라다믹스 포인트 이전의 첫 번째 자릿수가 없기 때문에 맨티사에 넣을 것이 없고 따라서 모두 0이다.
+이제 지수에서 1이 어디서 나왔는지 보자. 나는 앞에서 지수형이 상쇄 이진법으로 저장되어 있다고 말했다. 오프셋을 계산할 경우:
 
 ![](https://cdn-images-1.medium.com/max/800/1*qkyFehfYHv14LpzOzFt8Cw.png)
 
-we can see that this is exactly what we have in the representation. So under offset binary the value stored there is really `0`. If it’s unclear how the offset gives us `0` read my article on offset binary.
+우리는 이것이 정확히 우리가 대표적으로 가지고 있는 것임을 알 수 있다. 그래서 상쇄 이진법 아래 저장된 값은 정말 0이다. 오프셋이 어떻게 0을 제공하는지 확실하지 않으면 오프셋 2진법에 대한 내 기사를 읽는다.
 
-Let’s use the information we’ve learnt above and try to represent the number `3` in the floating point form. In binary it is represented as `11`. If you don’t remember why, check out my very detailed article on decimal-binary conversion algorithms. And upon normalization the number `3` has this form (numbers in binary):
+위에서 배운 정보를 사용하여 숫자 3을 부동 소수점 형태로 나타내도록 하자. 이진법에서는 '11'으로 표기한다. 그 이유를 기억하지 못한다면, 십진수 변환 알고리즘에 관한 아주 상세한 기사를 확인해 보십시오. 그리고 정상화가 되면 숫자 3은 다음과 같은 형태를 가진다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*dQlDxxCewJ6Y8o7o-I8_Nw.png)
 
-After the radix point we have only one digit of `1` that will be stored in mantissa. As explained earlier the first digit before the radix point is not stored. Also, normalization also gave us the exponent of `1`. Let’s calculate how it’s represented in offset binary and then we have all the information required:
+라다스 포인트 이후 우리는 맨티사에 보관될 '1'자릿수만을 갖게 된다. 앞에서 설명한 바와 같이 라디릭스 포인트가 저장되지 않는 첫 번째 자리. 또 정상화는 우리에게 '1'이라는 지수를 주었다. 오프셋 2진수로 표시되는 방법을 계산한 다음 필요한 모든 정보를 얻으십시오.
 
 ![](https://cdn-images-1.medium.com/max/800/1*gDHTixUiu3HT2mHVsBTj_Q.png)
 
-One thing to remember about mantissa is that digits are stored in the exact order they are placed in the scientific form — left to right from radix point. With that in mind, let’s put all numbers in the floating point representation:
+맨티사에 대해 기억해야 할 한 가지는 숫자들이 과학적 형태, 즉 라다스 지점에서 오른쪽으로 정확히 순서대로 저장된다는 것이다. 이를 염두에 두고 모든 숫자를 부동 소수점 표현에 넣자.
 
 ![](https://cdn-images-1.medium.com/max/800/1*-yZETIKShb9g9W20BU6CtA.png)
 
-If you use the function I showed above you’ll see that we came up with the correct representation.
+위에서 보여드린 기능을 사용하면 우리가 정확한 표현을 생각해 냈음을 알 수 있을 겁니다.
 
 ***
 
 ## Why 0.1+0.2 is not 0.3
 
-Now that we know how numbers are stored, let’s see what happens in this often-cited example. The quick explanation goes like this:
+이제 숫자가 어떻게 저장되는지 알았으니, 이 자주 인용되는 예에서 어떤 일이 일어나는지 보자. 간단한 설명은 다음과 같다.
 
-> Only fractions with a denominator which is a power of two can be finitely represented in a binary form. Since denominators of 0.1 (1 / 10) and 0.2 (1 / 5) are not powers of two, these numbers can’t be finitely represented in a binary format. In order to store them as a IEEE-754 floating point they have to be rounded to the number of available bits for mantissa — 10 bits for half-precision, 23 bits for single-precision or 52 bits for double-precision. Depending on how many bits of precision are available, the floating-point approximations of 0.1 and 0.2 could be slightly less or greater than there corresponding decimal representations, but never equal. Because of that fact, you’re never going to have 0.1+0.2 == 0.3.
+> 2의 힘인 분모와의 분수만이 2진 형태로 정교하게 표현될 수 있다. 0.1(1 / 10)과 0.2(1 / 5)의 분모는 2의 힘이 아니기 때문에, 이 숫자들은 이진 형식으로 정교하게 표현할 수 없다. 그것들을 IEEE-754 부동 소수점으로 저장하기 위해서는 그것들은 반정밀 10비트, 단일정밀 23비트 또는 이중정밀 52비트로 반올림되어야 한다. 사용할 수 있는 정밀도의 비트 수에 따라 0.1과 0.2의 부동 소수점 근사치는 해당 소수점 표시보다 약간 작거나 클 수 있지만 절대 동일하지 않을 수 있다. 그 사실 때문에, 0.1+0.2 == 0.3은 절대 가질 수 없을 겁니다.
 
-This explanation maybe sufficient for some developers, but the best way to see what is going on under the hood is perform all the calculations that the computer is doing yourself. That’s what I’m about to do now.
+이 설명은 일부 개발자들에게는 충분할 수 있지만, 가장 좋은 방법은 컴퓨터가 스스로 하고 있는 모든 계산을 수행하는 것이다. 지금 내가 하려는 일이 바로 그것이다.
 
 ### Representing 0.1 and 0.2 in the floating point format
 
-Let’s see the bits pattern for 0.1 in floating point form. The first thing we need to do is to convert 0.1 to binary. This can be done using the algorithm of multiplication by 2. I explain its mechanics in my article on decimal-binary conversion algorithm. If we convert 0.1 to binary we get an infinite fraction:
+0.1에 대한 비트 패턴을 부동 소수점 형태로 봅시다. 우리가 가장 먼저 해야 할 일은 0.1을 2진법으로 바꾸는 것이다. 이것은 2에 의한 곱셈 알고리즘을 이용하여 할 수 있다. 나는 십진수 변환 알고리즘에 대한 내 기사에서 그것의 역학을 설명한다. 0.1을 이진수로 변환하면 무한 분율이 나온다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*47litx2SPldE4_bhytk-ug.png)
 
-The next step is to represent this number in the normalized scientific notation:
+다음 단계는 이 숫자를 표준화된 과학 표기법으로 표시하는 것이다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*qEBApVomEABGVK4eXh09wA.png)
 
-Since mantissa can only have 52 bits, we need to round our infinite number to 52 bits after the radix point.
+맨티사는 52비트만 가질 수 있기 때문에, 라다스 포인트 이후 우리의 무한번호는 52비트로 반올림해야 한다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*E1aUp_0BuTREWdtUquhulA.png)
 
-Using the rounding rules defined by IEEE-754 standard and explained in my article on binary numbers rounding we need to round the number **up** to:
+IEEE-754 표준에서 정의하고 이진 숫자 반올림에 대한 내 기사에서 설명한 반올림 규칙을 사용하여 다음 작업을 수행해야 한다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*3c2yLvBN5zeQdrVp74-GNg.png)
 
-The last thing left is to calculate the exponent representation in offset binary:
+마지막으로 남은 것은 오프셋 이진수로 지수표현을 계산하는 것이다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*yikpW22OiP6uU85e7w_j3Q.png)
 
-And when put into floating point format representation the number `0.1` has the following bits pattern:
+그리고 숫자 '0.1'을 나타내는 부동 소수점 형식으로 입력하면 다음과 같은 비트 패턴이 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*kx17MFmx0gpX_j8LLYp1uA.png)
 
-I encourage you to calculate the floating representation of `0.2` on your own. You should end up with the following representations in the scientific notation and binary:
+0.2의 부동표현을 스스로 계산해 보라고 권한다. 과학적 표기법과 이진법에서 다음과 같은 표현으로 끝나야 한다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*fLRp3gdoDoUbXJ-Fkroo-Q.png)
 
 ### Calculating the result of 0.1 + 0.2
 
-If we assemble the numbers back from their representation as floating point into scientific form, here is what we have:
+만약 우리가 그 숫자들을 부동 소수점으로부터 과학적인 형태로 다시 조합한다면, 우리가 가진 것은 다음과 같다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*fgpXrDT3m20m0D65vlNDoA.png)
 
-To add numbers, they need to have equal exponents. The rule says that we need to adjust the number with the smaller exponent to that of the larger. So, let’s adjust the exponent of `-4` of the first number to have the exponent `-3` like the second number:
+숫자를 더하기 위해서, 그들은 동등한 지수들을 가질 필요가 있다. 그 규칙은 우리가 더 작은 지수를 더 큰 지수에 맞춰 숫자를 조정할 필요가 있다고 말한다. 따라서 첫 번째 숫자의 '-4'의 지수를 두 번째 숫자와 같은 지수 '-3'으로 조정해 봅시다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*WJiNR6IPL_7bhmJ7Jjp48w.png)
 
-Now we can add the numbers:
+이제 숫자를 추가할 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*uS64AitPYwcx_MhF9IVcZw.png)
 
-Now, the result of the calculation is stored in a floating point format, so we need to normalize the result, round if necessary and calculate the exponent in offset binary.
+이제 계산 결과는 부동 소수점 형식으로 저장되므로, 결과를 정상화하고, 필요하면 반올림하고, 지수값을 오프셋 2진수로 계산해야 한다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*FUwRm1QN4oMrvxdYuTQcSw.png)
 
-The normalized number falls right in the middle between the rounding options, so we apply tie-breaking rule and round **up** to the even. This gives the following resulting number in the normalized scientific form:
+정규화된 숫자는 라운딩 옵션 사이에 바로 중간에 있기 때문에 우리는 동점 규정을 적용하고 반올림한다. 이를 통해 다음과 같은 결과를 표준화된 과학 형태로 얻을 수 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*I2wM8yj42guOgiurlplCcw.png)
 
-And when converted to the floating point format for storing, it has the following bits pattern:
+그리고 저장을 위한 부동 소수점 포맷으로 변환하면 다음과 같은 비트 패턴이 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*_yh_ARgX6TT51biAXDbHUA.png)
 
-**This is exactly the bits pattern that is stored when you execute the statement** `0.1+0.2`. To get it, the computer has to round three times — one for each number and third time for their sum. When simply 0.3 is stored, the computer performs rounding only once. **This rounding operations lead to different bits pattern stored for** `0.1+0.2` **and for standalone** `0.3`. When JavaScript executes comparison statement `0.1+0.2 === 0.3`, its these bits pattern that are compared, and since they are different the returned result is false. If such formats existed than even with rounding the bits pattern would be equal, the `0.1+0.2 === 0.3` would evaluate to true regardless of the fact that `0.1` and `0.2` are not finitely representable in binary.
+**`0.1+0.2` 문을 실행할 때 저장되는 비트 패턴과 정확히 일치한다.** 그것을 얻기 위해 컴퓨터는 세 번, 즉 각 숫자에 한 번, 총합에 세 번 반올림해야 한다. 단순히 0.3을 저장하면 컴퓨터는 한 번만 반올림을 한다. **이 반올림 작업으로 인해 *** "0.1+0.2" **와 독립 실행형* "0.3"에 각각 다른 비트 패턴이 저장됨. 자바스크립트가 비교문 '0.1+0.2 === 0.3'을 실행할 때 비교되는 비트 패턴과 서로 다르기 때문에 반환된 결과는 거짓이다. 이러한 형식이 비트 패턴을 반올림하는 것 보다도 존재한다면, "0.1+0.2 0.2 0.3"은 "0.1"과 "0.2"가 2진법으로 정밀하게 표현되지 않는다는 사실과 상관없이 "0.1+0.2 === 0.3"은 사실로 평가될 것이다.
 
-Try checking the bits for the number `0.3` using the function I showed above to64bitFloat(0.3). The pattern will be different than the one we calculated above for the result of 0.1+0.2. 
-If you want to know what decimal number the stored bits represent, assemble the bits into the scientific form with zero exponent and convert them into decimal numeric system. The actual decimal number stored for `0.1+0.2` is `0.3000000000000000444089209850062616169452667236328125 `
-and for `0.3` it is `0.299999999999999988897769753748434595763683319091796875.`
+위의 64bitFloat(0.3) 기능을 사용하여 '0.3'이라는 숫자의 비트를 확인해 보십시오. 패턴은 0.1+0.2의 결과에 대해 위에서 계산한 것과 다를 것이다. 
+저장된 비트가 나타내는 10진수를 알고 싶으면 0 지수(zero expectent)로 과학 형태로 비트를 조립한 후 10진수로 변환한다. '0.1+0.2'에 저장된 실제 십진수는 '0.300000000000004440892098006261694526672368125'이다.
+그리고 0.3의 경우 '0.2999999999999989876975374843459576368319091796875'이다.`
 
 ## Why the `for` loop never stops
 
-The key to understanding why the for loop never stops is the number `9007199254740991`. Let’s see what is special about that number.
+루프가 멈추지 않는 이유를 이해하는 열쇠는 `9007199254740991`이다. 그 숫자에 대해 무엇이 특별한지 보자.
 
 ### Number.MAX_SAFE_INTEGER
 
-If you type Number.MAX_SAFE_INTEGER into console, it outputs our key number `9007199254740991`. What is so special about that number that it got its own constant? Here is what ECMAScript Language Specification has to say about it:
+콘솔에 입력하는 경우 Number.MAX_SAFE_INTEGER는 콘솔로 키 번호 9007199254740991을 출력한다. 그 숫자에 대해 무엇이 그렇게 특별해서 스스로 상수를 얻었을까? ECMAScript 언어 사양에 대해 다음과 같이 설명하십시오.
 
-> The value of Number.MAX_SAFE_INTEGER is the largest integer n such that n and n + 1 are both exactly representable as a Number value. The value of Number.MAX_SAFE_INTEGER is 9007199254740991 (2⁵³−1).
+> Number.MAX_SAFE_INTEGER는 n과 n + 1이 모두 숫자 값으로 정확히 표현될 수 있는 가장 큰 정수 n이다. Number.MAX_SAFE_INTEGER는 9007199254740991(253-1)이다.
 
-And MDN also adds some explanation:
+또한 MDN은 다음과 같은 몇 가지 설명을 덧붙인다.
 
-> Safe in the constant name refers to the ability to represent integers exactly and to correctly compare them. For example, `Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2` will evaluate to true, which is mathematically incorrect.
+> 상수명 안전(safe in the constant name)은 정수를 정확하게 나타내고 정확하게 비교하는 능력을 말한다. 예를 들어, '번호' 입니다. `Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2`는 수학적으로 틀린 진실로 평가할 것이다.
 
-The first thing to understand is that this is not the largest integer that can be represented. For example, the number `9007199254740994` which is `MAX_SAFE_INTEGER + 3` can be safely represented. The maximum number that can be represented can be seen using the constant Number.MAX_VALUE and it’s equal to 1.7976931348623157e+308. What may come to you as surprise is that there are some integers that can’t be represented between MAX_SAFE_INTEGER and MAX_VALUE. In fact, there’s an integer that can’t be represented between MAX_SAFE_INTEGER and MAX_SAFE_INTEGER+ 3. This number is 9007199254740993. If you type it into console, you will see that it evaluates to 9007199254740992. So, instead of working with the original number, JavaScript transformed it into the number less than the original by 1.
+가장 먼저 이해해야 할 것은 이것이 나타낼 수 있는 가장 큰 정수가 아니라는 것이다. 예를 들어 'MAX_SAFE_INTEGER + 3'인 '9007199254740994'라는 숫자는 안전하게 나타낼 수 있다. 나타낼 수 있는 최대 숫자는 상수(Constant Number)를 사용하여 볼 수 있다.MAX_VALUE 그리고 그것은 1.7976931348623157e+308과 같다. 놀랄 만한 것은 MAX_SAFE_INTEGER와 MAX_VALUE 사이에 나타낼 수 없는 정수가 있다는 것이다. 사실 MAX_SAFE_INTEGER와 MAX_SAFE_INTEGER+3 사이에 나타낼 수 없는 정수가 있다. 이 숫자는 9007199254740993이다. 콘솔에 입력하면 9007199254740992로 평가된다. 그래서 자바스크립트는 원래 번호로 작업하는 대신 원본보다 적은 숫자로 1로 변형시켰다.
 
-To understand why that happens, let’s first look at the bits representation of 9007199254740991 (MAX_SAFE_INTEGER) in the floating point:
+이러한 현상이 발생하는 이유를 이해하려면 먼저 부동 소수점 9007199254740991(MAX_SAFE_INTEGER)의 비트 표현을 살펴보자.
 
 ![](https://cdn-images-1.medium.com/max/800/1*jyYOIgmj-5Mfatu8NV3htg.png)
 
-which when converted to scientific form has the following representation:
+과학적 형태로 변환될 때 다음과 같은 표현이 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*P60vgnZwLYwU1UbaA2pHsg.png)
 
-Now, to get the binary resulting number with zero exponent we just move the radix point 52 places to the right and get:
+이제 0 지수에서 2진수 결과 숫자를 얻으려면 52자리 라다믹스 지점을 오른쪽으로 이동하여 다음을 얻으십시오.
 
 ![](https://cdn-images-1.medium.com/max/800/1*uDFvnqHBM1-vwao77rjkeQ.png)
 
-So, to store the MAX_SAFE_INTEGER number we used all places in the mantissa with the exponent of 52. Since all places are used, to be able to store the next number the only option we have is to increase the exponent by 1 to 53. For the exponent of 53, we move the radix point 53 places to the right. But since we have only 52 digits in the mantissa, we append 0 at the end. For the exponent of 54 two zeros will be appended. For 55 — three. And so on.
+그래서, MAX_SAFE_INTEGER 번호를 저장하기 위해 우리는 52의 지수를 가지고 맨티사의 모든 장소를 사용했다. 모든 장소가 사용되기 때문에 다음 숫자를 저장할 수 있는 유일한 옵션은 지수 1을 53으로 늘리는 것이다. 53의 지수에서는 라다믹스 포인트를 오른쪽으로 53자리 이동한다. 그러나 맨티사에는 52자리밖에 없기 때문에 마지막에 0자리만 더한다. 54의 지수에는 두 개의 0이 추가된다. 55 — 3. 등등
 
-What implications does it have? You might have guessed already yourself. Since we’re going to have all numbers larger than MAX_SAFE_INTEGER end with 0, no odd integer larger than MAX_SAFE_INTEGER can be represented in 64 bit floating point. To be able to store some of them, the mantissa should be allocated more than 52 bits. Let’s see this in action:
+그것은 어떤 의미를 가지고 있는가? 이미 짐작했을지도 모른다. 0으로 끝나는 MAX_SAFE_INTEGER보다 큰 모든 숫자를 가지기 때문에 MAX_SAFE_INTEGER보다 큰 홀수 정수는 64비트 부동점으로 나타낼 수 없다. 그들 중 일부를 저장할 수 있게 하려면, 맨티사는 52비트 이상을 할당해야 한다. 다음 작업을 통해 확인하십시오.
 
 ![](https://cdn-images-1.medium.com/max/800/1*9WgZriHQa0yQZFQLWr-E_A.png)
 
-You can see that the numbers 9007199254740993, 9007199254740995 can’t be represented in 64 bit floating point. As exponent increases, the range of numbers that can’t be stored starts increasing dramatically.
+숫자 9007199254740993, 9007199254740995는 64비트 부동점으로 나타낼 수 없다는 것을 알 수 있다. 기하급수적으로 증가하면서 저장할 수 없는 숫자의 범위가 급격히 증가하기 시작한다.
 
 ## The never ending loop
 
-Let me bring up the example with `for` loop here again:
+여기서 다시 한번 예를 들어보자.
 
 ```js
 for (var i=1; 1/i > 0; i++) {
@@ -275,19 +278,22 @@ for (var i=1; 1/i > 0; i++) {
 }
 ```
 
-It never stops. I mentioned in the beginning that it happens because the the result of 1/i is not evaluated as integer, but as a floating point. Now that you know how floating point works and what Number.MAX_SAFE_INTEGER it’s easy to understand why it never stops.
+그것은 멈추지 않았다. 나는 1/i의 결과가 정수로 평가되는 것이 아니라 부동점으로 평가되기 때문에 발생한다고 처음에 언급했었다. 이제 부동 소수점이 어떻게 작용하는지, 그리고 어떤 숫자인지 알게 되었으니 말이다.MAX_SAFE_INTEGER 왜 그것이 멈추지 않는지 이해하기 쉽다.
 
-For the loop to stop, the counter i would have to reach Infinity, since 1/Infinity > 0 evaluates to false. Yet it never happens. In the previous paragraph I explained why some integers can’t be stored and that they are rounded to the nearest even. So in our example JavaScript keeps increasing the counter i by 1 until it reaches 9007199254740993, which is MAX_SAFE_INTEGER+2. And this is the first integer that can’t be stored, thus it gets rounded to the nearest even integer 9007199254740992. So the loop is stuck at this number. The loop won’t be able to get over it and we’ve got an infinite loop here.
+루프가 멈추기 위해서는 `1/Infinity > 0`이 false로 평가되기 때문에 계수기 i가 Infinity에 도달해야 할 것이다. 하지만 그런 일은 결코 일어나지 않는다. 앞의 단락에서 나는 일부 정수를 저장할 수 없는 이유와 가장 가까운 짝수로 반올림하는 이유를 설명했다. 그래서 우리의 예에서 자바스크립트는 9007199254740993에 이를 때까지 카운터 i를 1만큼 계속 증가시킨다. MAX_SAFE_INTEGER+2이다. 그리고 이것은 저장할 수 없는 첫 번째 정수여서 심지어 가장 가까운 정수 9007199254740992까지 반올림된다. 그래서 이 숫자에 고리가 박혀 있다. 그 고리는 그것을 극복할 수 없을 것이고 우리는 여기에 무한한 고리를 가지고 있다.
 
-## A few words about NaN and Infiinity
+## NaN과 Infiinity에 대하여
 
-To concluded this article I’ve decided to give a very brief explanation of NaNand Infinity. NaN stands for Not a Number and it is not the same as Infinity, although both are typically handled as special cases in floating-point representations of real numbers as well as in floating-point operations. They are distinct by having an exponent of 1024 (11111111111) as opposed to the Number.MAX_VALUE, which has the exponent of 1023 (111111111101).
+마무리하기 위해 `NaN, Infinity`에 대해 아주 간략하게 설명하기로 결정했다. NaN은 Not a Number를 의미하며 Infinity와 동일하지 않다. 두 가지 모두 일반적으로 실제 숫자의 부동 소수점 표시와 부동 소수점 작동에서 특별한 사례로 취급된다
 
-Since NaN is represented as floating point you should not be surprised that when you run typeof NaN in a browser you’ll get "number". And it has the exponent of all 1’s and one non-zero digit in the mantissa:
+NaN은 부동 소수점으로 표시되므로 브라우저에서 NaN 유형을 실행하면 "숫자"가 나타난다는 사실에 놀라지 말고고 맨티사(Mantissa)에서는 1의 지수, 0이 아닌 1개의 숫자를 가지고 있다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*79XAOZbkKGW6RtO0K11Wfw.png)
 
-There is a list of mathematical operations that result in NaN, like 0/0 or Math.sqrt(-4). In JavaScript there are some functions that can return NaN. For example, parseInt can return NaN when used with a string parameter parseInt(“s”). The interesting thing is that any comparison operation with NaN returns false. For example, all operations below return false:
+0/0 또는 Math.sqrt(-4)와 같이 NaN을 초래하는 수학 연산 목록이 있다. 자바스크립트에는 NaN을 반환할 수 있는 몇 가지 기능이 있다. 
+
+예를 들어, parseInt는 문자열 매개변수 parseInt("s")와 함께 사용할 때 NaN을 반환할 수 있다. 흥미로운 것은 NaN과의 비교 작업은 거짓으로 돌아온다는 것이다. 예를 들어 아래의 모든 작업은 false를 반환한다.
+
 
 ```js
 NaN === NaN
@@ -299,10 +305,12 @@ NaN < 3
 NaN === 3
 ```
 
-NaN, and only NaN, always compares unequal to itself. To check if a value is NaN, JavaScript has isNan() function.
+NaN, 그리고 오직 NaN만이 항상 자신과 불평등한 것을 비교한다. 값이 NaN인지 확인하기 위해 JavaScript에는 isNan() 함수가 있다.
 
-Infinity is another special case in floating point designed to deal with overflows and some mathematical operations, like 1/0. Infinity is represented with all 1’s in exponent and all zeros in mantissa:
+Infinity는 1/0과 같은 오버플로 및 일부 수학적 연산을 다루도록 설계된 부동 소수점에서의 또 다른 특별한 경우다. Infinity는 지수에서 1을 모두 나타내고 맨티사에서는 0을 모두 나타낸다.
 
 ![](https://cdn-images-1.medium.com/max/800/1*P-eG15ena5skwaECmss3Kw.png)
 
-For positive Infinity the sign bit is zero, for negative Infinity it’s 1. The MDN article describes some operations that result in Infinity. Unlike NaN, Infinity can safely be used in comparisons.
+양의 Infinity의 경우 기호 비트는 0이고, 음의 Infinity의 경우 1이다. MDN 기사에서는 Infinity를 초래하는 일부 작업을 설명한다. 
+
+NaN과 달리 Infinity는 비교에서 안전하게 사용될 수 있다.
