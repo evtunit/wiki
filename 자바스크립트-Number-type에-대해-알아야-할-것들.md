@@ -1,21 +1,23 @@
-![](https://cdn-images-1.medium.com/max/800/1*aGnwvStsrH3OnrwdlHvsgQ.jpeg)
+<br>![](https://cdn-images-1.medium.com/max/800/1*aGnwvStsrH3OnrwdlHvsgQ.jpeg)
 
 > 왜 0.1+0.2가 0.3과 같지 않으며 9007199254740992는 9007199254740993과 동일할까?
 
 ***
 
 
-자바나 C와 같이 정적으로 타이핑된 언어들은 숫자에 대한 데이터 유형이 다르다. 예를 들어, 범위에 있는 정수를 저장해야 하는 경우 [-128;127] 당신은 Java에서는 'byte'를, C에서는 'char'를 사용할 수 있는데, 둘 다 1byte만 차지한다. 더 큰 정수를 저장해야 할 경우 각각 4바이트와 8바이트를 차지하는 'in' 또는 'long' 데이터 유형을 사용할 수 있다. 또한 부분적인 부분이 있는 숫자를 저장하는 데 사용할 수 있는 별도의 데이터 유형인 'float'은 4바이트를 차지하며 'double'은 8바이트를 차지한다. 이것들은 보통 부동 소수점 형식이라고 불리며 우리는 나중에 이 이름이 어디서 유래했는지 알게 될 것이다.
+자바나 C와 같이 정적으로 타이핑된 언어들은 숫자에 대한 데이터 유형이 다르다. 예를 들어, 범위에 있는 정수를 저장해야 하는 경우 [-128;127] 당신은 Java에서는 `byte`를, C에서는 `char`를 사용할 수 있는데, 둘 다 1byte만 차지한다. 더 큰 정수를 저장해야 할 경우 각각 4바이트와 8바이트를 차지하는 `in` 또는 `long` 데이터 유형을 사용할 수 있다. 또한 부분적인 부분이 있는 숫자를 저장하는 데 사용할 수 있는 별도의 데이터 유형인 `float`은 4바이트를 차지하며 `double`은 8바이트를 차지한다. 이것들은 보통 부동 소수점 형식이라고 불리며 우리는 나중에 이 이름이 어디서 유래했는지 알게 될 것이다.
 
-그러나 우리는 자바스크립트에 그렇게 다양한 숫자 유형을 가지고 있지 않다. ECMAScript 표준에 따르면 숫자에 대한 형식은 한 가지뿐이며 '이중 정밀 64비트 이진 형식 IEEE 754 값'(double-precision 64-bit binary format IEEE 754 value) 이다. 이 유형은 정수와 분수를 모두 저장하는 데 사용되며 Java와 C의 "이중" 데이터 유형에 해당한다. JavaScript의 일부 새로운 개발자는 이를 깨닫지 못하고 1을 사용하면 64비트에 다음과 같이 저장된다고 믿는다.
+그러나 우리는 자바스크립트에 그렇게 다양한 숫자 유형을 가지고 있지 않다. ECMAScript 표준에 따르면 숫자에 대한 형식은 한 가지뿐이며 `이중 정밀 64비트 이진 형식 IEEE 754 값`(double-precision 64-bit binary format IEEE 754 value) 이다. 이 유형은 정수와 분수를 모두 저장하는 데 사용되며 Java와 C의 "이중" 데이터 유형에 해당한다. JavaScript의 일부 새로운 개발자는 이를 깨닫지 못하고 1을 사용하면 64비트에 다음과 같이 저장된다고 믿는다.
 
-![](https://cdn-images-1.medium.com/max/800/1*bsjyzWhOZ2YNDwlawneK_w.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*bsjyzWhOZ2YNDwlawneK_w.png)<br>
 
 실제로 다음과 같이 저장됨:
 
-![](https://cdn-images-1.medium.com/max/800/1*dQ1IqWxT0Gwi07gsn62vFA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*dQ1IqWxT0Gwi07gsn62vFA.png)<br>
 
 이런 오해로 인해 큰 혼란이 일어날지도 모른다. 예를 들어, Java로 쓰여진 이 루프를 봅시다.
+
+<br>
 
 ```js
 for (int i=1; 1/i > 0; i++) {
@@ -23,8 +25,12 @@ for (int i=1; 1/i > 0; i++) {
 }
 ```
 
+<br>
+
 얼마나 걸릴까? 첫 번째 반복 후에 멈출 것이라고 보는 것은 어렵지 않다. 2차 반복 시 카운터 i는 2로, 1/2는 0으로 잘리는 0.5가 생성되는데, 이는 카운터 i가 정수이고 1/2 > 0이 거짓으로 평가되기 때문이다.
 자바스크립트에 같은 루프를 쓰면 어떻게 될까?
+
+<br>
 
 ```js
 for (var i=1; 1/i > 0; i++) {
@@ -32,11 +38,13 @@ for (var i=1; 1/i > 0; i++) {
 }
 ```
 
+<br>
+
 밝혀진 바와 같이 이 루프는 1/i의 결과가 정수로 평가되는 것이 아니라 부동점으로 평가되어 매우 흥미로운 행동을 이끌어내기 때문에 결코 멈추지 않을 것이다. 
 
 자바스크립트의 작동 방식에 익숙하지 않은 사람들은 보통 언어를 이해하면 설명하기 쉬운 또 다른 예상치 못한 행동을 언급한다. `0.2`에 `0.1`을 더하면 `0.30000000000000004`가 생성돼 `0.1+0.2`가 `0.3`과 같지 않다. 이 행동과 관련된 질문이 너무 자주 나타나서 stackoverflow 사람들은 특별한 메모를 추가해야 했다.
 
-![](https://cdn-images-1.medium.com/max/800/1*SnYf-ofdeR3Fe-pbU341cg.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*SnYf-ofdeR3Fe-pbU341cg.png)<br>
 
 
 이러한 행동이 자바스크립트에 기인하는 경우가 많다는 것은 흥미롭다. 자바스크립트는 숫자에 부동 소수점 형식을 사용한다. 이는 자바나 C에서 `float` 또는 `double` 데이터 유형을 사용하면 동일한 결과가 나타난다는 것을 의미한다. `0.1+0.2`의 결과는 브라우저의 콘솔에서 보는 것처럼 `0.3000000000000000000000004`가 아니라, 실제로는 `0.30000000000000000044098006261694526672368125`라는 점도 흥미롭다.
@@ -51,31 +59,31 @@ for (var i=1; 1/i > 0; i++) {
 
 부동 소수점과 IEEE754 표준에 대해 이야기하기 전에, 우리는 먼저 과학적 표기법에 숫자를 나타내는 것이 무엇을 의미하는지 살펴볼 필요가 있다. 일반적인 형태에서 과학적 표기법의 숫자는 다음과 같이 나타낼 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*FoBb3L5tCBu54c1JSo1z5A.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*FoBb3L5tCBu54c1JSo1z5A.png)<br>
 
 유의도는 유의한 자릿수를 나타낸다. 흔히 만티사(Mantissa) 또는 정밀(Precision)이라고도 한다. 0은 중요한 것으로 여겨지지 않는다. 단지 자리를 잡고 있을 뿐이다. Base는 숫자 체계 베이스, 즉 십진법 `10`은 `10`, 이진법 `2`는 `2`를 지정한다. 얼마나 많은 장소에서Exponent defines 기수 지점 왼쪽이나 오른쪽에 독창적인 번호를 부여 받으로 이동해야 한다.
 
 어떤 숫자도 과학적 표기법으로 나타낼 수 있다. 예를 들어 10진수 및 2진수 시스템의 숫자 `2`는 다음과 같이 나타낼 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*MDU0hga7csrHdPOWHTu_kA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*MDU0hga7csrHdPOWHTu_kA.png)<br>
 
 0의 지수란 원래 숫자를 얻기 위해 추가 연산을 해서는 안 된다는 것을 단순히 보여준다. `0.00000022`라는 또 다른 예를 보자. 여기서 중요한 숫자는 `22`이므로 0을 제거하자.
 
-![](https://cdn-images-1.medium.com/max/800/1*AsTGOQl6gbLWCVBgjrSuUw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*AsTGOQl6gbLWCVBgjrSuUw.png)<br>
 
 위의 계산은 radix poin가 오른쪽으로 이동하면 베이스의 지수화가 감소하는 이유를 보여준다. 그래서, 곱셈을 수행함으로써, 우리는 원래의 숫자를 오직 signific와 숫자로 수정했다.
 
-![](https://cdn-images-1.medium.com/max/800/1*HKEcO_6mfIU2EZSlobFlpw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*HKEcO_6mfIU2EZSlobFlpw.png)<br>
 
 8까지 곱셈을 사용했기 때문에 구분별로 보상해야 했고 여기서 8의 마이너스 지수들이 나오는 겁니다. 이 중분할을 사용하여 숫자 `22300000`에 대해 동일한 과정을 수행할 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*gMetjorAQWTFep3sqjPNxA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*gMetjorAQWTFep3sqjPNxA.png)<br>
 
 이번에는 라딕스 포인트를 왼쪽으로 이동시켜 지수 상승이 이루어졌다. 보시다시피, 과학적 표기법은 매우 크거나 작은 숫자로 쉽게 작업하는 방법이다. 지수에 따라, andand는 분수 부분을 가진 정수나 숫자를 나타낼 수 있다. 원래 숫자로 변환할 때 음수 지수는 라다ix 점을 왼쪽으로 이동시켜야 한다. 긍정적인 지수가 오른쪽에, 그리고 보통의 큰 정수를 나타내는 전환이 필요하다.
 
 숫자의 표준화된 형태가 무엇인지 이해하는 것도 중요하다. 숫자는 라다스 포인트 이전에 10진수 1자리로 과학 표기할 때 정규화된다. 그래서 우리가 원래의 숫자를 취해서 표준화된 형태로 나타낸다면 그들은 다음과 같은 표현을 갖게 될 것이다.
 
-![](https://cdn-images-1.medium.com/max/800/1*MJQABIORAWZgnN3A-IQ_eA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*MJQABIORAWZgnN3A-IQ_eA.png)<br>
 
 2진수 숫자는 라다스 포인트 이전에 항상 1을 가질 것이라고 추측했을 것이다. 숫자를 정규화된 형태로 표시하면 크기 순서로 숫자를 쉽게 비교할 수 있다.
 
@@ -93,25 +101,27 @@ for (var i=1; 1/i > 0; i++) {
 
 IEEE754 부동 소수점은 숫자 기호, 맨티사(큰 자리) 및 지수(지수를 저장하기 위해 비트를 할당한다. 자바스크립트의 Number type에 사용되는 더블정밀 형식(숫자당 64비트)으로 이러한 비트를 배포하는 방법은 다음과 같다.
 
-![](https://cdn-images-1.medium.com/max/800/1*V0mPKZLKeAOxZMwspz3Htw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*V0mPKZLKeAOxZMwspz3Htw.png)<br>
 
 기호 비트는 1비트, 지수 — 11비트 및 52비트가 맨티사(significand)에 할당된다. 각 형식에 할당된 비트 수를 보여주는 표:
 
-![](https://cdn-images-1.medium.com/max/800/1*j0WQBZnmqURh6EXVZlqQgA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*j0WQBZnmqURh6EXVZlqQgA.png)<br>
 
 지수는 오프셋 이진 형식으로 저장된다. 나는 이 형식을 설명하는 상세한 기사를 썼고 그것은 두 사람의 보완책과는 다르다. 
 
 ## Examples of how integers are stored
 
-위에서 설명한 비트 분포 체계를 보려면 정수 '1'과 '3'이 어떻게 저장되는지 보자. 숫자 '1'은 모든 숫자 체계에서 '1'로 표시되므로 변환이 필요하지 않다. 그것은 다음과 같이 과학적인 형태로 나타낼 수 있다.
+위에서 설명한 비트 분포 체계를 보려면 정수 `1`과 `3`이 어떻게 저장되는지 보자. 숫자 `1`은 모든 숫자 체계에서 `1`로 표시되므로 변환이 필요하지 않다. 그것은 다음과 같이 과학적인 형태로 나타낼 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*TJI9QzWevKj8wCtS57ji3Q.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*TJI9QzWevKj8wCtS57ji3Q.png)<br>
 
 여기에 1의 만티사와 0의 지수를 가지고 있다. 이 정보를 사용하면 숫자가 다음과 같이 부동 소수점에 표시된다고 가정할 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*aeY_0kjanK1hAy_m8O_n7A.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*aeY_0kjanK1hAy_m8O_n7A.png)<br>
 
 안타깝게도 저장된 숫자의 비트 패턴을 볼 수 있는 자바스크립트에는 내장 기능이 없다. 하지만 나는 당신의 컴퓨터의 엔디아니스에 상관없이 숫자가 어떻게 저장되는지 살펴볼 수 있는 간단한 자바스크립트 기능을 작성했다. Here it is:
+
+<br>
 
 ```js
 function to64bitFloat(number) {
@@ -123,7 +133,7 @@ function to64bitFloat(number) {
     for (i = 0; i < 8; i++) {
         var bits = dv.getUint8(i).toString(2);
         if (bits.length < 8) {
-            bits = new Array(8 - bits.length).fill('0').join("") + bits;
+            bits = new Array(8 - bits.length).fill(`0`).join("") + bits;
         }
         result += bits;
     }
@@ -131,32 +141,34 @@ function to64bitFloat(number) {
 }
 ```
 
-그래서 그것을 사용하면 '1'이라는 숫자가 다음과 같이 저장되어 있음을 알 수 있다.
+<br>
 
-![](https://cdn-images-1.medium.com/max/800/1*Td4FnJ5g6c40rCmtwgDXtA.png)
+그래서 그것을 사용하면 `1`이라는 숫자가 다음과 같이 저장되어 있음을 알 수 있다.
+
+<br>![](https://cdn-images-1.medium.com/max/800/1*Td4FnJ5g6c40rCmtwgDXtA.png)<br>
 
 위에서 정한 가정과는 완전히 다르다. 맨티사에는 숫자가 없고 지수에는 1이 있다. 이제 왜 그런지 보자. 
 
-우리가 가장 먼저 이해해야 할 것은 모든 숫자가 정규화된 과학 형태에서 번역된다는 것이다. 이것의 장점은 무엇인가? 라딕스 지점 이전의 첫 번째 자리가 항상 '1'인 경우 맨티사 숫자에 1비트를 더 주는 저장하지 않아도 된다. 수학 연산을 수행할 때 첫 번째 숫자 '1'은 하드웨어에 의해 선봉된다.
+우리가 가장 먼저 이해해야 할 것은 모든 숫자가 정규화된 과학 형태에서 번역된다는 것이다. 이것의 장점은 무엇인가? 라딕스 지점 이전의 첫 번째 자리가 항상 `1`인 경우 맨티사 숫자에 1비트를 더 주는 저장하지 않아도 된다. 수학 연산을 수행할 때 첫 번째 숫자 `1`은 하드웨어에 의해 선봉된다.
 
-숫자 '1'은 정규화된 양식의 라다믹스 포인트 이후 숫자와 라다믹스 포인트 이전의 첫 번째 자릿수가 없기 때문에 맨티사에 넣을 것이 없고 따라서 모두 0이다.
+숫자 `1`은 정규화된 양식의 라다믹스 포인트 이후 숫자와 라다믹스 포인트 이전의 첫 번째 자릿수가 없기 때문에 맨티사에 넣을 것이 없고 따라서 모두 0이다.
 이제 지수에서 1이 어디서 나왔는지 보자. 나는 앞에서 지수형이 상쇄 이진법으로 저장되어 있다고 말했다. 오프셋을 계산할 경우:
 
-![](https://cdn-images-1.medium.com/max/800/1*qkyFehfYHv14LpzOzFt8Cw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*qkyFehfYHv14LpzOzFt8Cw.png)<br>
 
 우리는 이것이 정확히 우리가 대표적으로 가지고 있는 것임을 알 수 있다. 그래서 상쇄 이진법 아래 저장된 값은 정말 0이다. 오프셋이 어떻게 0을 제공하는지 확실하지 않으면 오프셋 2진법에 대한 내 기사를 읽는다.
 
-위에서 배운 정보를 사용하여 숫자 3을 부동 소수점 형태로 나타내도록 하자. 이진법에서는 '11'으로 표기한다. 그 이유를 기억하지 못한다면, 십진수 변환 알고리즘에 관한 아주 상세한 기사를 확인해 보십시오. 그리고 정상화가 되면 숫자 3은 다음과 같은 형태를 가진다.
+위에서 배운 정보를 사용하여 숫자 3을 부동 소수점 형태로 나타내도록 하자. 이진법에서는 `11`으로 표기한다. 그 이유를 기억하지 못한다면, 십진수 변환 알고리즘에 관한 아주 상세한 기사를 확인해 보십시오. 그리고 정상화가 되면 숫자 3은 다음과 같은 형태를 가진다.
 
-![](https://cdn-images-1.medium.com/max/800/1*dQlDxxCewJ6Y8o7o-I8_Nw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*dQlDxxCewJ6Y8o7o-I8_Nw.png)<br>
 
-라다스 포인트 이후 우리는 맨티사에 보관될 '1'자릿수만을 갖게 된다. 앞에서 설명한 바와 같이 라디릭스 포인트가 저장되지 않는 첫 번째 자리. 또 정상화는 우리에게 '1'이라는 지수를 주었다. 오프셋 2진수로 표시되는 방법을 계산한 다음 필요한 모든 정보를 얻으십시오.
+라다스 포인트 이후 우리는 맨티사에 보관될 `1`자릿수만을 갖게 된다. 앞에서 설명한 바와 같이 라디릭스 포인트가 저장되지 않는 첫 번째 자리. 또 정상화는 우리에게 `1`이라는 지수를 주었다. 오프셋 2진수로 표시되는 방법을 계산한 다음 필요한 모든 정보를 얻으십시오.
 
-![](https://cdn-images-1.medium.com/max/800/1*gDHTixUiu3HT2mHVsBTj_Q.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*gDHTixUiu3HT2mHVsBTj_Q.png)<br>
 
 맨티사에 대해 기억해야 할 한 가지는 숫자들이 과학적 형태, 즉 라다스 지점에서 오른쪽으로 정확히 순서대로 저장된다는 것이다. 이를 염두에 두고 모든 숫자를 부동 소수점 표현에 넣자.
 
-![](https://cdn-images-1.medium.com/max/800/1*-yZETIKShb9g9W20BU6CtA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*-yZETIKShb9g9W20BU6CtA.png)<br>
 
 위에서 보여드린 기능을 사용하면 우리가 정확한 표현을 생각해 냈음을 알 수 있을 겁니다.
 
@@ -174,63 +186,63 @@ function to64bitFloat(number) {
 
 0.1에 대한 비트 패턴을 부동 소수점 형태로 봅시다. 우리가 가장 먼저 해야 할 일은 0.1을 2진법으로 바꾸는 것이다. 이것은 2에 의한 곱셈 알고리즘을 이용하여 할 수 있다. 나는 십진수 변환 알고리즘에 대한 내 기사에서 그것의 역학을 설명한다. 0.1을 이진수로 변환하면 무한 분율이 나온다.
 
-![](https://cdn-images-1.medium.com/max/800/1*47litx2SPldE4_bhytk-ug.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*47litx2SPldE4_bhytk-ug.png)<br>
 
 다음 단계는 이 숫자를 표준화된 과학 표기법으로 표시하는 것이다.
 
-![](https://cdn-images-1.medium.com/max/800/1*qEBApVomEABGVK4eXh09wA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*qEBApVomEABGVK4eXh09wA.png)<br>
 
 맨티사는 52비트만 가질 수 있기 때문에, 라다스 포인트 이후 우리의 무한번호는 52비트로 반올림해야 한다.
 
-![](https://cdn-images-1.medium.com/max/800/1*E1aUp_0BuTREWdtUquhulA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*E1aUp_0BuTREWdtUquhulA.png)<br>
 
 IEEE-754 표준에서 정의하고 이진 숫자 반올림에 대한 내 기사에서 설명한 반올림 규칙을 사용하여 다음 작업을 수행해야 한다.
 
-![](https://cdn-images-1.medium.com/max/800/1*3c2yLvBN5zeQdrVp74-GNg.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*3c2yLvBN5zeQdrVp74-GNg.png)<br>
 
 마지막으로 남은 것은 오프셋 이진수로 지수표현을 계산하는 것이다.
 
-![](https://cdn-images-1.medium.com/max/800/1*yikpW22OiP6uU85e7w_j3Q.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*yikpW22OiP6uU85e7w_j3Q.png)<br>
 
-그리고 숫자 '0.1'을 나타내는 부동 소수점 형식으로 입력하면 다음과 같은 비트 패턴이 있다.
+그리고 숫자 `0.1`을 나타내는 부동 소수점 형식으로 입력하면 다음과 같은 비트 패턴이 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*kx17MFmx0gpX_j8LLYp1uA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*kx17MFmx0gpX_j8LLYp1uA.png)<br>
 
 0.2의 부동표현을 스스로 계산해 보라고 권한다. 과학적 표기법과 이진법에서 다음과 같은 표현으로 끝나야 한다.
 
-![](https://cdn-images-1.medium.com/max/800/1*fLRp3gdoDoUbXJ-Fkroo-Q.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*fLRp3gdoDoUbXJ-Fkroo-Q.png)<br>
 
 ### Calculating the result of 0.1 + 0.2
 
 만약 우리가 그 숫자들을 부동 소수점으로부터 과학적인 형태로 다시 조합한다면, 우리가 가진 것은 다음과 같다.
 
-![](https://cdn-images-1.medium.com/max/800/1*fgpXrDT3m20m0D65vlNDoA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*fgpXrDT3m20m0D65vlNDoA.png)<br>
 
-숫자를 더하기 위해서, 그들은 동등한 지수들을 가질 필요가 있다. 그 규칙은 우리가 더 작은 지수를 더 큰 지수에 맞춰 숫자를 조정할 필요가 있다고 말한다. 따라서 첫 번째 숫자의 '-4'의 지수를 두 번째 숫자와 같은 지수 '-3'으로 조정해 봅시다.
+숫자를 더하기 위해서, 그들은 동등한 지수들을 가질 필요가 있다. 그 규칙은 우리가 더 작은 지수를 더 큰 지수에 맞춰 숫자를 조정할 필요가 있다고 말한다. 따라서 첫 번째 숫자의 `-4`의 지수를 두 번째 숫자와 같은 지수 `-3`으로 조정해 봅시다.
 
-![](https://cdn-images-1.medium.com/max/800/1*WJiNR6IPL_7bhmJ7Jjp48w.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*WJiNR6IPL_7bhmJ7Jjp48w.png)<br>
 
 이제 숫자를 추가할 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*uS64AitPYwcx_MhF9IVcZw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*uS64AitPYwcx_MhF9IVcZw.png)<br>
 
 이제 계산 결과는 부동 소수점 형식으로 저장되므로, 결과를 정상화하고, 필요하면 반올림하고, 지수값을 오프셋 2진수로 계산해야 한다.
 
-![](https://cdn-images-1.medium.com/max/800/1*FUwRm1QN4oMrvxdYuTQcSw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*FUwRm1QN4oMrvxdYuTQcSw.png)<br>
 
 정규화된 숫자는 라운딩 옵션 사이에 바로 중간에 있기 때문에 우리는 동점 규정을 적용하고 반올림한다. 이를 통해 다음과 같은 결과를 표준화된 과학 형태로 얻을 수 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*I2wM8yj42guOgiurlplCcw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*I2wM8yj42guOgiurlplCcw.png)<br>
 
 그리고 저장을 위한 부동 소수점 포맷으로 변환하면 다음과 같은 비트 패턴이 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*_yh_ARgX6TT51biAXDbHUA.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*_yh_ARgX6TT51biAXDbHUA.png)<br>
 
-**`0.1+0.2` 문을 실행할 때 저장되는 비트 패턴과 정확히 일치한다.** 그것을 얻기 위해 컴퓨터는 세 번, 즉 각 숫자에 한 번, 총합에 세 번 반올림해야 한다. 단순히 0.3을 저장하면 컴퓨터는 한 번만 반올림을 한다. **이 반올림 작업으로 인해 *** "0.1+0.2" **와 독립 실행형* "0.3"에 각각 다른 비트 패턴이 저장됨. 자바스크립트가 비교문 '0.1+0.2 === 0.3'을 실행할 때 비교되는 비트 패턴과 서로 다르기 때문에 반환된 결과는 거짓이다. 이러한 형식이 비트 패턴을 반올림하는 것 보다도 존재한다면, "0.1+0.2 0.2 0.3"은 "0.1"과 "0.2"가 2진법으로 정밀하게 표현되지 않는다는 사실과 상관없이 "0.1+0.2 === 0.3"은 사실로 평가될 것이다.
+**`0.1+0.2` 문을 실행할 때 저장되는 비트 패턴과 정확히 일치한다.** 그것을 얻기 위해 컴퓨터는 세 번, 즉 각 숫자에 한 번, 총합에 세 번 반올림해야 한다. 단순히 0.3을 저장하면 컴퓨터는 한 번만 반올림을 한다. **이 반올림 작업으로 인해 *** "0.1+0.2" **와 독립 실행형* "0.3"에 각각 다른 비트 패턴이 저장됨. 자바스크립트가 비교문 `0.1+0.2 === 0.3`을 실행할 때 비교되는 비트 패턴과 서로 다르기 때문에 반환된 결과는 거짓이다. 이러한 형식이 비트 패턴을 반올림하는 것 보다도 존재한다면, "0.1+0.2 0.2 0.3"은 "0.1"과 "0.2"가 2진법으로 정밀하게 표현되지 않는다는 사실과 상관없이 "0.1+0.2 === 0.3"은 사실로 평가될 것이다.
 
-위의 64bitFloat(0.3) 기능을 사용하여 '0.3'이라는 숫자의 비트를 확인해 보십시오. 패턴은 0.1+0.2의 결과에 대해 위에서 계산한 것과 다를 것이다. 
-저장된 비트가 나타내는 10진수를 알고 싶으면 0 지수(zero expectent)로 과학 형태로 비트를 조립한 후 10진수로 변환한다. '0.1+0.2'에 저장된 실제 십진수는 '0.300000000000004440892098006261694526672368125'이다.
-그리고 0.3의 경우 '0.2999999999999989876975374843459576368319091796875'이다.`
+위의 64bitFloat(0.3) 기능을 사용하여 `0.3`이라는 숫자의 비트를 확인해 보십시오. 패턴은 0.1+0.2의 결과에 대해 위에서 계산한 것과 다를 것이다. 
+저장된 비트가 나타내는 10진수를 알고 싶으면 0 지수(zero expectent)로 과학 형태로 비트를 조립한 후 10진수로 변환한다. `0.1+0.2`에 저장된 실제 십진수는 `0.300000000000004440892098006261694526672368125`이다.
+그리고 0.3의 경우 `0.2999999999999989876975374843459576368319091796875`이다.`
 
 ## Why the `for` loop never stops
 
@@ -244,27 +256,27 @@ IEEE-754 표준에서 정의하고 이진 숫자 반올림에 대한 내 기사�
 
 또한 MDN은 다음과 같은 몇 가지 설명을 덧붙인다.
 
-> 상수명 안전(safe in the constant name)은 정수를 정확하게 나타내고 정확하게 비교하는 능력을 말한다. 예를 들어, '번호' 입니다. `Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2`는 수학적으로 틀린 진실로 평가할 것이다.
+> 상수명 안전(safe in the constant name)은 정수를 정확하게 나타내고 정확하게 비교하는 능력을 말한다. 예를 들어, `번호` 입니다. `Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2`는 수학적으로 틀린 진실로 평가할 것이다.
 
-가장 먼저 이해해야 할 것은 이것이 나타낼 수 있는 가장 큰 정수가 아니라는 것이다. 예를 들어 'MAX_SAFE_INTEGER + 3'인 '9007199254740994'라는 숫자는 안전하게 나타낼 수 있다. 나타낼 수 있는 최대 숫자는 상수(Constant Number)를 사용하여 볼 수 있다.MAX_VALUE 그리고 그것은 1.7976931348623157e+308과 같다. 놀랄 만한 것은 MAX_SAFE_INTEGER와 MAX_VALUE 사이에 나타낼 수 없는 정수가 있다는 것이다. 사실 MAX_SAFE_INTEGER와 MAX_SAFE_INTEGER+3 사이에 나타낼 수 없는 정수가 있다. 이 숫자는 9007199254740993이다. 콘솔에 입력하면 9007199254740992로 평가된다. 그래서 자바스크립트는 원래 번호로 작업하는 대신 원본보다 적은 숫자로 1로 변형시켰다.
+가장 먼저 이해해야 할 것은 이것이 나타낼 수 있는 가장 큰 정수가 아니라는 것이다. 예를 들어 `MAX_SAFE_INTEGER + 3`인 `9007199254740994`라는 숫자는 안전하게 나타낼 수 있다. 나타낼 수 있는 최대 숫자는 상수(Constant Number)를 사용하여 볼 수 있다.MAX_VALUE 그리고 그것은 1.7976931348623157e+308과 같다. 놀랄 만한 것은 MAX_SAFE_INTEGER와 MAX_VALUE 사이에 나타낼 수 없는 정수가 있다는 것이다. 사실 MAX_SAFE_INTEGER와 MAX_SAFE_INTEGER+3 사이에 나타낼 수 없는 정수가 있다. 이 숫자는 9007199254740993이다. 콘솔에 입력하면 9007199254740992로 평가된다. 그래서 자바스크립트는 원래 번호로 작업하는 대신 원본보다 적은 숫자로 1로 변형시켰다.
 
 이러한 현상이 발생하는 이유를 이해하려면 먼저 부동 소수점 9007199254740991(MAX_SAFE_INTEGER)의 비트 표현을 살펴보자.
 
-![](https://cdn-images-1.medium.com/max/800/1*jyYOIgmj-5Mfatu8NV3htg.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*jyYOIgmj-5Mfatu8NV3htg.png)<br>
 
 과학적 형태로 변환될 때 다음과 같은 표현이 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*P60vgnZwLYwU1UbaA2pHsg.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*P60vgnZwLYwU1UbaA2pHsg.png)<br>
 
 이제 0 지수에서 2진수 결과 숫자를 얻으려면 52자리 라다믹스 지점을 오른쪽으로 이동하여 다음을 얻으십시오.
 
-![](https://cdn-images-1.medium.com/max/800/1*uDFvnqHBM1-vwao77rjkeQ.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*uDFvnqHBM1-vwao77rjkeQ.png)<br>
 
 그래서, MAX_SAFE_INTEGER 번호를 저장하기 위해 우리는 52의 지수를 가지고 맨티사의 모든 장소를 사용했다. 모든 장소가 사용되기 때문에 다음 숫자를 저장할 수 있는 유일한 옵션은 지수 1을 53으로 늘리는 것이다. 53의 지수에서는 라다믹스 포인트를 오른쪽으로 53자리 이동한다. 그러나 맨티사에는 52자리밖에 없기 때문에 마지막에 0자리만 더한다. 54의 지수에는 두 개의 0이 추가된다. 55 — 3. 등등
 
 그것은 어떤 의미를 가지고 있는가? 이미 짐작했을지도 모른다. 0으로 끝나는 MAX_SAFE_INTEGER보다 큰 모든 숫자를 가지기 때문에 MAX_SAFE_INTEGER보다 큰 홀수 정수는 64비트 부동점으로 나타낼 수 없다. 그들 중 일부를 저장할 수 있게 하려면, 맨티사는 52비트 이상을 할당해야 한다. 다음 작업을 통해 확인하십시오.
 
-![](https://cdn-images-1.medium.com/max/800/1*9WgZriHQa0yQZFQLWr-E_A.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*9WgZriHQa0yQZFQLWr-E_A.png)<br>
 
 숫자 9007199254740993, 9007199254740995는 64비트 부동점으로 나타낼 수 없다는 것을 알 수 있다. 기하급수적으로 증가하면서 저장할 수 없는 숫자의 범위가 급격히 증가하기 시작한다.
 
@@ -272,11 +284,15 @@ IEEE-754 표준에서 정의하고 이진 숫자 반올림에 대한 내 기사�
 
 여기서 다시 한번 예를 들어보자.
 
+<br>
+
 ```js
 for (var i=1; 1/i > 0; i++) {
     console.log("Count is: " + i);
 }
 ```
+
+<br>
 
 그것은 멈추지 않았다. 나는 1/i의 결과가 정수로 평가되는 것이 아니라 부동점으로 평가되기 때문에 발생한다고 처음에 언급했었다. 이제 부동 소수점이 어떻게 작용하는지, 그리고 어떤 숫자인지 알게 되었으니 말이다.MAX_SAFE_INTEGER 왜 그것이 멈추지 않는지 이해하기 쉽다.
 
@@ -288,12 +304,14 @@ for (var i=1; 1/i > 0; i++) {
 
 NaN은 부동 소수점으로 표시되므로 브라우저에서 NaN 유형을 실행하면 "숫자"가 나타난다는 사실에 놀라지 말고고 맨티사(Mantissa)에서는 1의 지수, 0이 아닌 1개의 숫자를 가지고 있다.
 
-![](https://cdn-images-1.medium.com/max/800/1*79XAOZbkKGW6RtO0K11Wfw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*79XAOZbkKGW6RtO0K11Wfw.png)<br>
 
 0/0 또는 Math.sqrt(-4)와 같이 NaN을 초래하는 수학 연산 목록이 있다. 자바스크립트에는 NaN을 반환할 수 있는 몇 가지 기능이 있다. 
 
 예를 들어, parseInt는 문자열 매개변수 parseInt("s")와 함께 사용할 때 NaN을 반환할 수 있다. 흥미로운 것은 NaN과의 비교 작업은 거짓으로 돌아온다는 것이다. 예를 들어 아래의 모든 작업은 false를 반환한다.
 
+
+<br>
 
 ```js
 NaN === NaN
@@ -305,11 +323,13 @@ NaN < 3
 NaN === 3
 ```
 
+<br>
+
 NaN, 그리고 오직 NaN만이 항상 자신과 불평등한 것을 비교한다. 값이 NaN인지 확인하기 위해 JavaScript에는 isNan() 함수가 있다.
 
 Infinity는 1/0과 같은 오버플로 및 일부 수학적 연산을 다루도록 설계된 부동 소수점에서의 또 다른 특별한 경우다. Infinity는 지수에서 1을 모두 나타내고 맨티사에서는 0을 모두 나타낸다.
 
-![](https://cdn-images-1.medium.com/max/800/1*P-eG15ena5skwaECmss3Kw.png)
+<br>![](https://cdn-images-1.medium.com/max/800/1*P-eG15ena5skwaECmss3Kw.png)<br>
 
 양의 Infinity의 경우 기호 비트는 0이고, 음의 Infinity의 경우 1이다. MDN 기사에서는 Infinity를 초래하는 일부 작업을 설명한다. 
 
