@@ -1,8 +1,4 @@
 ﻿
-# Javascript에서 숫자가 인코딩 되는 방법
-
-> 원문: [http://2ality.com/2012/04/number-encoding.html](http://2ality.com/2012/04/number-encoding.html)
-
 JavaScript의 모든 숫자는 부동 소수점(floating point)이다. 이 포스팅은 부동 소수점 숫자가 내부적으로 어떻게 binary64(64비트)으로 표현되는지 설명한다. 이 게시물을 읽은 후에는 다음 상호작용이 어떻게 일어나는지 이해하게 될 것이다.
 
 ```
@@ -275,3 +271,5 @@ IEEE 754 에는 은 정확한 값을 계산할 수 없는 다섯 가지 `예외(
 
 * 내가 수학을 공부하는건지 자바스크립트를 공부하는건지 헷갈렸다.
 * exponent, fraction, significand 등 수학 용어들이 어려웠다.
+
+> 원문: [http://2ality.com/2012/04/number-encoding.html](http://2ality.com/2012/04/number-encoding.html)

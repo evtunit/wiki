@@ -1,7 +1,3 @@
-번역 : http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/
-
-# Javascript 의 모든것은 Object 이다.? 아니다.?
-
 자바스크립트가 OOP(객체 지향 언어인지 함수형 언어인지 많은 혼란들이 있다. 실제로 Javascript 는 이 두가지 모두 사용할 수 있다.
 
 그러나 사람들은 자바스크립트 모든것이 객체인지?, 함수는 무엇인지 질문하곤 한다.
@@ -226,3 +222,5 @@ foo.bar = 'baz' // Uncaught TypeError: Cannot set property 'bar' of null
 6. String, booleans 그리고 numbers 는 원시타입으로 대표될 수 있지만 객체이기도 하다.
 7. 확실한 원시타입( strings. numbers, booleans ) 는 마치 객체처럼 보여지기도 하다. 이는 자바스크립트의 autoboxin 이라고 불리오는 특징 때문이다.
 
+
+번역 : http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/

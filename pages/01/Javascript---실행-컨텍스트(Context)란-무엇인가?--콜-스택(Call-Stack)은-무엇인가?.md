@@ -1,5 +1,3 @@
-# Javascript : 실행 컨텍스트(Context)란 무엇인가? / 콜 스택(Call Stack)은 무엇인가?
-
 ## 자바스크립트에서 실행 컨텍스트는 무엇인가?
 
 <!-- ![고급 자바스크립트](https://www.valentinog.com/blog/wp-content/uploads/2018/05/javascript-what-is-execution-context-call-stack-ft.png) -->
