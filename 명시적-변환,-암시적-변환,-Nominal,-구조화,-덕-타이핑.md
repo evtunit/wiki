@@ -10,4 +10,4 @@
 | 6. [(Not) Everything in JavaScript is an Object - Daniel Li](http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/)                                       | Who    |
 | 7. [Type Coercion in JavaScript, and why everyone gets it wrong.](https://thedevs.network/blog/type-coercion-in-javascript-and-why-everyone-gets-it-wrong)             | Who    |
 
-- [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=QkFkFqg-J04)
+- [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=hYHv5m1NMFE)
