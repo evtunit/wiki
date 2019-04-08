@@ -70,6 +70,8 @@ console.log(identity.firstName); // "Carla"
 
 > Object로 작업할 때 =로 할당되는 것은 원래의 객체에 대해 비슷한 객체를 생성하는 것이고 새로운 객채를 생성하지 않는다. "by reference"라는 말이 바로 그 뜻이다.
 
+<br>
+
 ## 2. 함수에 기본값 및 개체 전달
 
 **기본 데이터 유형이 값에 따라 함수에 전달됨**
@@ -86,14 +88,15 @@ console.log(myName); // "Carlos"
 ```
 
 function이 호출된 후 `myNameIs`내부에 있는 변수 `myName`를  바꾸려고 할 때, 이 것은 여전히 'Carlos'라는 값을 가지고 있다.
-it still has the value "Carlos".
-Even if we are changing the myName variable inside of the function myNameIs, when we print it after calling the function, it still has the value "Carlos". That is because when primitive types are passed, they are passed by value.
+그 이유는, 초기값 타입이 통과가 되면서 값 또한 통과가 되었기 때문이다.
 
-We are passing a copy of myName: anything you do to myName inside the body of the function won't affect the myNamevariable in the global scope because you are passing a copy of myName, and not the original myName variable.
+myName의 사본을 전달하고 있다: myName 내부에서 수행하는 모든 작업은 `myName` 변수가 아닌 `myName` 복사본을 전달하기 때문에 전역 범위에서 `myName`변수에 대해 영향을 주지 않는다.
 
-**Objects are passed to a function by reference**
+<br>
 
-When you are passing something by reference, you are passing something that points to something else, not a copy of the object. So since JavaScript passes objects by reference, when you change a property of that object within the function, the change will be reflected in the outer scope:
+**객체가 참조로 함수에 전달됨**
+
+참고자료로 어떤 것을 전달하고 있을 때, 그 물체의 사본이 아닌 다른 것을 가리키는 것을 전달하고 있는 것이다. 따라서 자바스크립트가 참조로 객체를 통과하기 때문에 함수 내에서 해당 객체의 속성을 변경하면 변경 내용이 외부 범위에 반영된다.
 
 ```js
 var myName = {};
@@ -104,11 +107,11 @@ myNameIs(myName);
 console.log(myName); // Object {firstName: "Carla"}
 ```
 
-Now if I log the myName variable after having invoked the function myNameIs, it logs an object with a key of firstName with a value equal to "Carla". The object did change in the global scope when we passed it to the function.
+`myNameIs` function이 호출이 되고 난 후 `myName` 변수는 `firstName`의 key가 'Carla'라는 값을 가지게 된다. 이 값은 함수에 인자로 전달 했을 때 global scope에 의해 변화되었다
 
-This is because when you pass an object into the function, you are not passing a copy. You are passing something that points to the myName object. So when you change a property of that object in the function, you are changing the property of the object in the outer scope.
+이 것은 함수에 전달되면서 사본을 전달하지 않기 때문이다. `myName` 객체에 대해 가르키고 있고 그 것을 전달하고 있다. 따라서 함수에서 그 속성을 변경할 때 외부 범위에서 속성을 바꾸는 것이다.
 
-But there is a subtlety you should be aware of:
+그러나 당신이 알아야 할 미묘한 점은 다음과 같다:
 
 ```js
 var myName = {
@@ -123,9 +126,11 @@ myNameIs(myName);
 console.log(myName); // Object {firstName: "Carla"}
 ```
 
-Here it prints the value of the variable myName in the outer scope and didn't add a nickName property to the object this time. Why is that ? If you look carefully, what we are doing in the function is trying to reassign the myName object a new value.
+외부 범위에서 변수 `myName`의 값을 프린트 하고 객체에 닉네임 속성을 추가하지 않았다. 왜 그런 것일까?
 
-But you can’t change what myName points to, you can only change a property of myName to something else, like this:
+자세히 살펴보면, 함수를 통해 하고 있는 것은 `myName` 객체에 새로운 값을 재 할당 하려고 하는 것이다
+
+하지만 `myName`이 가리키는 것을 변경할 수 없고, 오직 `myName`의 속성을 다음과 같은 다른 것으로 변경할 수 있다:
 
 ```js
 var myName = {
