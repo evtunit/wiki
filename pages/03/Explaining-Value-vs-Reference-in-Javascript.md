@@ -19,7 +19,7 @@ var z = null;
 ```
 x는 10을 포함, y는 'abc'를 포함한다. 이 아이디어를 확고히 하기 위해서 우리는 이 변수들과 각각의 값들이 메모리에서 어떻게 보이는지에 대한 이미지를 유지할 것이다. 
 
-<img src='../../resource/scarlett/03/prim1.png'>
+<img src='../resource/scarlett/03/prim1.png'>
 
 우리는 =을 사용하여 이들 변수에 다른 변수를 할당할 때, 우리는 새로운 변수의 값을 복사한다. 그리고 우리는 값을 복사한다. 
 
@@ -32,7 +32,7 @@ console.log(x, y, a, b); // -> 10, 'abc', 10, 'abc'
 ```
 a와 x에 10을 모두 포함한다. b와 y는 'abc'를 포함한다. 그들은 값이 복사 되었기 때문에 각각의 변수에 값을 가진다.
 
-<img src='../../resource/scarlett/03/prim2.png'>
+<img src='../resource/scarlett/03/prim2.png'>
 
 하나를 바꾼 다고해서 다른 것이 바뀌는 것은 아니다. 변수들이 서로 관계가 없다고 생각해야한다. 
 
@@ -65,7 +65,7 @@ Object는 컴퓨터 메모리의 일부 위치에 생성된다. ```arr = [] ``` 
 
 메모리에서 1, 2 라인을 표현하면 아래와 같다.
 
-<img src='../../resource/scarlett/03/obj1.png'>
+<img src='../resource/scarlett/03/obj1.png'>
 
 이 변수 arr은 값을 포함하고, 주소는 정적임을 유의하라. 배열은 메모리에서 변한다. 우리가 값을 push하는 것 처럼 같게 하기 위해서 arr을 사용 할 때, 자바스크립트 엔진은 메모리에 있는 arr의 위치로 가서 그 곳에 있는 저장된 정보로 일을 하게 한다. 
 
@@ -79,7 +79,7 @@ var refCopy = reference;
 
 위의 코드는 메모리에서는 아래와 같이 보여진다.
 
-<img src='../../resource/scarlett/03/obj2.png'>
+<img src='../resource/scarlett/03/obj2.png'>
 
 각 각의 변수는 지금 같은 배열의 참조를 포함하고 있다. 이 뜻은 만약 reference를 변경하면 retCopy에서 다음과 같은 변경 사항을 볼 수 있다. 
 
@@ -88,7 +88,7 @@ reference.push(2);
 console.log(reference, refCopy); // -> [1, 2], [1, 2]
 ```
 
-<img src='../../resource/scarlett/03/obj3.png'>
+<img src='../resource/scarlett/03/obj3.png'>
 
 2를 메모리에 push하고, reference와 refCopy가 사용될 때 같은 배열을 가리키고 있다.
 
@@ -100,7 +100,7 @@ var obj = { first: 'reference' };
 ```
 이것은 메모리에서
 
-<img src='../../resource/scarlett/03/obj4.png'>
+<img src='../resource/scarlett/03/obj4.png'>
 
 두번째 라인을 추가하면
 ```javascript
@@ -110,7 +110,7 @@ obj = { second: 'ref2' }
 
 주소는 obj 변경사항에 의해 저장이 된다. first object는 여전히 메모리에 존재하며, 그 다음 object도 동일하다. 
 
-<img src='../../resource/scarlett/03/obj5.png'>
+<img src='../resource/scarlett/03/obj5.png'>
 
 위의 주소 ```#234```에서 보듯이 object에 대한 참조가 남아있지 않을 때, 자바스크립트 엔진은 garbage collection을 실행할 수 있다. 이 것은 단지 프로그래머가 그 object에 대한 모든 참조를 잃어버려서 그 object를 더 이상 사용할 수 없다는 것을 의미하므로, 엔진은 계속해서 메모리에서 안전하게 삭제를 할 수 있다. 이 경우 {first:'reference'}는 더 이상 액세스할 수 없으며 엔진에서 garbage collection을 위해 사용할 수 있다.
 
@@ -155,16 +155,20 @@ var twoHundred = multiply(hundred, two);
 
 위의 예제에서, hundred의 값은 100이다. hundred가 multiply로 전달되어 변수 x 가 그 값을 100으로 얻는다. 이 값은 마치 =을 사용하여 값이 복사 되어졌다. 다시 말하지만, hundred의 값은 영향을 받지 않는다. multiply 함수 안의 PAUSE 주석에서 메모리가 어떻게 생겼는지 보여주는 스냅샷이 있다. (Here is a snapshot of what the memory looks like right at the PAUSE comment line in multiply.)
 
-<img src='../../resource/scarlett/03/obj6.png'>
+<img src='../resource/scarlett/03/obj6.png'>
 
-### Pure Functions
-We refer to functions that don’t affect anything in the outside scope as pure functions. As long as a function only takes primitive values as parameters and doesn’t use any variables in its surrounding scope, it is automatically pure, as it can’t affect anything in the outside scope. All variables created inside are garbage-collected as soon as the function returns.
+### 순수 함수(Pure Function)
+우리는 외부 scope에서 아무런 영향을 받지 않는 함수를 pure Function이라고 부른다. 함수가 primitive 값만을 파라미터로 하고, 그 주변 scope에 변수를 사용하지 않는 한, 외부 scope의 어떤 것도 영향을 줄 수 없기 때문에 자동적으로 pure해진다. 내부에서 생성된 모든 변수는 함수가 반환되는 즉시 garbage-colledted 해진다. 
 
-A function that takes in an Object, however, can mutate the state of its surrounding scope. If a function takes in an array reference and alters the array that it points to, perhaps by pushing to it, variables in the surrounding scope that reference that array see that change. After the function returns, the changes it makes persist in the outer scope. This can cause undesired side effects that can be difficult to track down.
+참고 
+- [가비지콜렉션](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
+- [자바스크립트는 어떻게 작동하는가: 메모리 관리 + 4가지 흔한 메모리 누수 대처법](https://engineering.huiseoul.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EA%B0%80-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B4%80%EB%A6%AC-4%EA%B0%80%EC%A7%80-%ED%9D%94%ED%95%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%88%84%EC%88%98-%EB%8C%80%EC%B2%98%EB%B2%95-5b0d217d788d)
 
-Many native array functions, including Array.map and Array.filter, are therefore written as pure functions. They take in an array reference and internally, they copy the array and work with the copy instead of the original. This makes it so the original is untouched, the outer scope is unaffected, and we’re returned a reference to a brand new array.
+그러나 object를 가져오는 함수는 주변 scope의 상태를 변형시킬 수 있다. 만약 함수가 Array 참조를 가지고 와서 해당 함수를 가리키는 배열을 변경한 경우, 해당 배열을 참조하는 범위의 변수는 변화를 감지한다. 함수가 반환된 후, 외부 scope에서 계속 유지된다. 이것은 추적이 어려울 수 있는 side effect를 일으킬 수 있다. 
 
-Let’s go into an example of a pure vs. impure function.
+따라서 Array.map과 Array.filter를 포함한 많은 native array 함수는 pure function으로 쓰여진다. 그들은 array 참조를 복사하고, 원본 대신 복사본으로 작업한다. 이렇게 하면 원본은 그대로, 외부 scope는 영향을 받지 않고, 새로운 array에 대한 참조가 반환된다.
+
+pure vs와 impure function의 예를 보자.
 
 ```javascript
 function changeAgeImpure(person) {
@@ -180,9 +184,9 @@ console.log(alex); // -> { name: 'Alex', age: 25 }
 console.log(changedAlex); // -> { name: 'Alex', age: 25 }
 ```
 
-This impure function takes in an object and changes the property age on that object to be 25. Because it acts on the reference it was given, it directly changes the object alex. Note that when it returns the person object, it is returning the exact same object that was passed in. alex and alexChanged contain the same reference. It’s redundant to return the person variable and to store the reference in a new variable.
+이 impure function은 어떤 object를 가지고, object의 age을 25로 변경한다. 이는 참조에 따라 작용하기 때문에 alex object를 직접적으로 변화 시킨다. person 객체를 반환할 때, 전달된 object와 정확히 동일한 object를 반환한다는 점에 유의해라. alex와 alexChanged는 (코드로 봤을 때는 changedAlex같은데 ...여튼..)는 동일한 참조를 포함하고 있다. person변수를 반환하고 참조를 새 변수에 저장하는 것은 중복이다. 
 
-Let’s look at a pure function.
+pure한 함수를 보자.
 
 ```javascript
 function changeAgePure(person) {
@@ -198,12 +202,13 @@ var alexChanged = changeAgePure(alex);
 console.log(alex); // -> { name: 'Alex', age: 30 }
 console.log(alexChanged); // -> { name: 'Alex', age: 25 }
 ```
-In this function, we use JSON.stringify to transform the object we’re passed into a string, and then parse it back into an object with JSON.parse. By performing this transformation and storing the result in a new variable, we’ve created a new object. There are other ways to do the same thing such as looping through the original object and assigning each of its properties to a new object, but this way is simplest. The new object has the same properties as the original but it is a distinctly separate object in memory.
 
-When we change the age property on this new object, the original is unaffected. This function is now pure. It can’t affect any object outside its own scope, not even the object that was passed in. The new object needs to be returned and stored in a new variable or else it gets garbage collected once the function completes, as the object is no longer in scope.
+이 함수에서 JSON.stringify를 사용하여 object를 문자열로 반환한 다음, 다시 JSON.parse로 object를 파싱한다. 이 변환을 수행하고 그 결과를 새로운 변수에 저장함으로써 우리는 새로운 object를 만들었다. 원래의 object를 반복하고 각각의 속성을 새로운 객체에 할당하는 것과 같은 다른 방법이 있지만, 이 방법은 간단하다. 새로운 object는 원래 object와 같은 property를 가지고 있지만 메모리에서 각각 분리된 object이다. 
+
+이 새로운 object에서 age속성을 바꾸면 원본은 영향을 받지 않는다. 이 기능은 이제 pure해졌다. 이것은 자신의 scope 밖의 어떤 object도 영향을 줄 수 없고, 심지어 전달된 object도 영향을 줄 수 없다. 새로운 object는 반환되고 새로운 변수에 저장 되어야 한다. 그렇지 않으면 더 이상 scope에 포함되지 않기 때문에 함수가 완료되면 garbage collected되어 진다. 
 
 ### 테스트
-Value vs. reference is a concept often tested in coding interviews. Try to figure out for yourself what’s logged here.
+Value와 reference는 코딩 인터뷰에서 시험이 되어진 개념이다. 요기에서 무엇이 기록이 되었는지 스스로 알아내도록 노력해보라. 
 
 ```javascript
 function changeAgeAndReference(person) {
@@ -223,18 +228,17 @@ var personObj2 = changeAgeAndReference(personObj1);
 console.log(personObj1); // -> ?
 console.log(personObj2); // -> ?
 ```
-The function first changes the property age on the original object it was passed in. It then reassigns the variable to a brand new object and returns that object. Here’s what the two objects are logged out.
+이 함수는 먼저 전달된 원래의 object에 대한 age property를 변경한다. 그 다음 변수를 새 object에 재할당하여 object를 반환한다. 여기 두 object가 logout된 내용이 있다.  
 
 ```javascript
 console.log(personObj1); // -> { name: 'Alex', age: 25 }
 console.log(personObj2); // -> { name: 'John', age: 50 }
 ```
+함수 파라미터를 통한 할당은 =으로 할당 되는 것과 동일하다는 것을 기억하라. 함수에서 person변수는 personObj1을 참조하는 것을 포함하고 있다. 그래서 처음에는 그 object에 직접 적용이 된다. 일단 person은 새로운 object에 재할당하면 원래 object에 영향을 주지 않는다. 
 
-Remember that assignment through function parameters is essentially the same as assignment with =. The variable person in the function contains a reference to the personObj1 object, so initially it acts directly on that object. Once we reassign person to a new object, it stops affecting the original.
+이러한 재할당은 personObj1이 외부 scope에서 가리키는 object를 변경하지 않는다. person이 재할당 되었기 때문에 새로운 참조가 있지만 이 재할당은 personObj1을 변경하지 않는다.
 
-This reassignment does not change the object that personObj1 points to in the outer scope. person has a new reference because it was reassigned but this reassignment doesn’t change personObj1.
-
-An equivalent piece of code to the above block would be:
+위의 블록과 같은 코드들은 다음과 같다.
 
 ```javascript
 var personObj1 = {
@@ -251,14 +255,14 @@ var personObj2 = person;
 console.log(personObj1); // -> { name: 'Alex', age: 25 }
 console.log(personObj2); // -> { name: 'John', age: '50' }
 ```
-The only difference is that when we use the function, person is no longer in scope once the function ends.
+유일한 차이점은 우리가 그 함수를 사용할 때, 그 함수가 일단 끝나면 person은 더 이상 그 scope에 있지 않다는 것이다. 
 
-## That’s it. Go write some code.
+## 바로 그겁니다. 가서 몇몇의 코드를 사용하라.
 — — — — 
 
-If this was useful, please hit the heart and feel free to check out my other work.
+만약 이것이 유용하다면, 글쓴이의 작품들을 확인해...
 
-
+> 원문 출처 :번역 원본 URL : https://codeburst.io/explaining-value-vs-reference-in-javascript-647a975e12a0
 
 ## 참조와 관련하여 정리 했었던 에버노트 링크
 - https://www.evernote.com/l/AqB0xOLXgJxIj7r_4e1P7Il_JE6edY6U7Ps
