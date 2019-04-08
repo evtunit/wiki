@@ -266,6 +266,3 @@ console.log(personObj2); // -> { name: 'John', age: '50' }
 
 ## 참조와 관련하여 정리 했었던 에버노트 링크
 - https://www.evernote.com/l/AqB0xOLXgJxIj7r_4e1P7Il_JE6edY6U7Ps
-
-이건 테스트
-<img src='./resource/scarlett/03/prim4.png'>
