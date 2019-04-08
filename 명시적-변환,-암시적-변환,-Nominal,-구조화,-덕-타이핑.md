@@ -1,13 +1,13 @@
 19.04.09 ~ 19.04.16 (4주차)
 
-| 제목                                                                                                                                        | 번역자   |
-| :------------------------------------------------------------------------------------------------------------------------------------------ | :------- |
-| 1. [Explaining Value vs. Reference in Javascript](https://codeburst.io/explaining-value-vs-reference-in-javascript-647a975e12a0)            | 스칼렛   |
-| 2. [Understand Value and Reference Types in JavaScript](https://www.zsoltnagy.eu/understand-value-and-reference-types-in-javascript/)       | 멀린     |
-| 3. [Primitive Types & Reference Types in JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Primitive-Types-&-Reference-Types-in-JavaScript)                    | 길버트   |
-| 4. [Value Types, Reference Types and Scope in JavaScript](https://medium.com/@benastontweet/lesson-1b-javascript-fundamentals-380f601ba851) | 에드워드 |
-| 5. [Back to roots: JavaScript Value vs Reference](https://medium.com/dailyjs/back-to-roots-javascript-value-vs-reference-8fb69d587a18)      | 빵야     |
-| 6. [Grasp “By Value” and “By Reference” in JavaScript](https://hackernoon.com/grasp-by-value-and-by-reference-in-javascript-7ed75efa1293)   | 디아     |
-| 7. [JavaScript Reference and Copy Variables](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/javascript-reference-and-copy-variables)                   | 제이크   |
+| 제목                                                                                                                                                                   | 번역자 |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
+| 1. [What you need to know about Javascript's Implicit Coercion — Promise Tochi](https://dev.to/promhize/what-you-need-to-know-about-javascripts-implicit-coercion-e23) | Who    |
+| 2. [JavaScript Type Coercion Explained — Alexey Samoshkin](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)                                    | Who    |
+| 3. [Javascript Coercion Explained — Ben Garrison](https://hackernoon.com/javascript-coercion-explained-545c895213d3)                                                   | Who    |
+| 4. [What exactly is Type Coercion in Javascript? - Stack Overflow](https://stackoverflow.com/questions/19915688/what-exactly-is-type-coercion-in-javascript)           | Who    |
+| 5. [You Don't Know JS: Types & Grammar [Book] — Kyle Simpson](https://www.oreilly.com/library/view/you-dont-know/9781491905159/ch04.html)                              | Who    |
+| 6. [(Not) Everything in JavaScript is an Object - Daniel Li](http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/)                                       | Who    |
+| 7. [Type Coercion in JavaScript, and why everyone gets it wrong.](https://thedevs.network/blog/type-coercion-in-javascript-and-why-everyone-gets-it-wrong)             | Who    |
 
 - [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=QkFkFqg-J04)
