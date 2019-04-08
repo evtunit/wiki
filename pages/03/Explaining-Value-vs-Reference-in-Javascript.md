@@ -19,7 +19,7 @@ var z = null;
 ```
 x는 10을 포함, y는 'abc'를 포함한다. 이 아이디어를 확고히 하기 위해서 우리는 이 변수들과 각각의 값들이 메모리에서 어떻게 보이는지에 대한 이미지를 유지할 것이다. 
 
-<img src='../resource/scarlett/03/prim1.png'>
+<img src='./resource/scarlett/03/prim1.png'>
 
 우리는 =을 사용하여 이들 변수에 다른 변수를 할당할 때, 우리는 새로운 변수의 값을 복사한다. 그리고 우리는 값을 복사한다. 
 
@@ -32,7 +32,7 @@ console.log(x, y, a, b); // -> 10, 'abc', 10, 'abc'
 ```
 a와 x에 10을 모두 포함한다. b와 y는 'abc'를 포함한다. 그들은 값이 복사 되었기 때문에 각각의 변수에 값을 가진다.
 
-<img src='../resource/scarlett/03/prim2.png'>
+<img src='./resource/scarlett/03/prim2.png'>
 
 하나를 바꾼 다고해서 다른 것이 바뀌는 것은 아니다. 변수들이 서로 관계가 없다고 생각해야한다. 
 
@@ -65,7 +65,7 @@ Object는 컴퓨터 메모리의 일부 위치에 생성된다. ```arr = [] ``` 
 
 메모리에서 1, 2 라인을 표현하면 아래와 같다.
 
-<img src='../resource/scarlett/03/obj1.png'>
+<img src='./resource/scarlett/03/obj1.png'>
 
 이 변수 arr은 값을 포함하고, 주소는 정적임을 유의하라. 배열은 메모리에서 변한다. 우리가 값을 push하는 것 처럼 같게 하기 위해서 arr을 사용 할 때, 자바스크립트 엔진은 메모리에 있는 arr의 위치로 가서 그 곳에 있는 저장된 정보로 일을 하게 한다. 
 
@@ -79,7 +79,7 @@ var refCopy = reference;
 
 위의 코드는 메모리에서는 아래와 같이 보여진다.
 
-<img src='../resource/scarlett/03/obj2.png'>
+<img src='./resource/scarlett/03/obj2.png'>
 
 각 각의 변수는 지금 같은 배열의 참조를 포함하고 있다. 이 뜻은 만약 reference를 변경하면 retCopy에서 다음과 같은 변경 사항을 볼 수 있다. 
 
@@ -88,7 +88,7 @@ reference.push(2);
 console.log(reference, refCopy); // -> [1, 2], [1, 2]
 ```
 
-<img src='../resource/scarlett/03/obj3.png'>
+<img src='./resource/scarlett/03/obj3.png'>
 
 2를 메모리에 push하고, reference와 refCopy가 사용될 때 같은 배열을 가리키고 있다.
 
@@ -110,7 +110,7 @@ obj = { second: 'ref2' }
 
 주소는 obj 변경사항에 의해 저장이 된다. first object는 여전히 메모리에 존재하며, 그 다음 object도 동일하다. 
 
-<img src='../resource/scarlett/03/obj5.png'>
+<img src='./resource/scarlett/03/obj5.png'>
 
 위의 주소 ```#234```에서 보듯이 object에 대한 참조가 남아있지 않을 때, 자바스크립트 엔진은 garbage collection을 실행할 수 있다. 이 것은 단지 프로그래머가 그 object에 대한 모든 참조를 잃어버려서 그 object를 더 이상 사용할 수 없다는 것을 의미하므로, 엔진은 계속해서 메모리에서 안전하게 삭제를 할 수 있다. 이 경우 {first:'reference'}는 더 이상 액세스할 수 없으며 엔진에서 garbage collection을 위해 사용할 수 있다.
 
@@ -155,7 +155,7 @@ var twoHundred = multiply(hundred, two);
 
 위의 예제에서, hundred의 값은 100이다. hundred가 multiply로 전달되어 변수 x 가 그 값을 100으로 얻는다. 이 값은 마치 =을 사용하여 값이 복사 되어졌다. 다시 말하지만, hundred의 값은 영향을 받지 않는다. multiply 함수 안의 PAUSE 주석에서 메모리가 어떻게 생겼는지 보여주는 스냅샷이 있다. (Here is a snapshot of what the memory looks like right at the PAUSE comment line in multiply.)
 
-<img src='../resource/scarlett/03/obj6.png'>
+<img src='./resource/scarlett/03/obj6.png'>
 
 ### 순수 함수(Pure Function)
 우리는 외부 scope에서 아무런 영향을 받지 않는 함수를 pure Function이라고 부른다. 함수가 primitive 값만을 파라미터로 하고, 그 주변 scope에 변수를 사용하지 않는 한, 외부 scope의 어떤 것도 영향을 줄 수 없기 때문에 자동적으로 pure해진다. 내부에서 생성된 모든 변수는 함수가 반환되는 즉시 garbage-colledted 해진다. 
