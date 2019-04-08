@@ -1,5 +1,7 @@
 # Javascript의 Value와 Reference Types 이해
 
+`번역 :`https://www.zsoltnagy.eu/understand-value-and-reference-types-in-javascript/
+
 자바스크립트는 메모리에 있는 데이터 구조의 전체 접근 권한을 주지 않는다.
 하지만 언어차원에서 reference types는 존재한다. 
 value와 reference types의 혼합은 원하지 않은 사이드 이펙트나 버그를 유발하기도 한다. 
