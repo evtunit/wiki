@@ -66,17 +66,15 @@ console.log(identity.firstName); // "Carla"
 - 변수 `identity`는 생성이 되고 `myName`을 가르키게 된다. 여기서 이 변수는 `identity`에 대한 메모리 공간이 없게 되고 오롯이 `myName`의 값만 바라보게 된다
 - `myName`의 프로퍼티인 `firstName`의 값이 'Carla'로 변경이 되면서 `identity`의 값 또한 변경이 된다.
 
-When we log myName.firstName it displays the new value, which is pretty straightforward. But when we log identity.firstName its also displays myName.firstName's new value "Carla". This happens because identity.firstName only points to myName.firstName’s place in the memory.
+`myName.firstName`를 기록할 때 새 값이 표기가 되고 이 부분은 매우 간단하다. 그러나 `identity.firstName`을 기록할 때 `myName.firstName`까지 새로운 'Carla'값잉 할당이 된다. 이 것은 `identity.firstName`이 오로지 `myName.firstName`의 메모리 장소를 따라가기 때문이다.
 
+> Object로 작업할 때 =로 할당되는 것은 원래의 객체에 대해 비슷한 객체를 생성하는 것이고 새로운 객채를 생성하지 않는다. "by reference"라는 말이 바로 그 뜻이다.
 
-When working with objects, the =operator creates an alias to the original object, it doesn’t create a new object. That’s what “by reference” means.
+## 2. 함수에 기본값 및 개체 전달
 
+**기본 데이터 유형이 값에 따라 함수에 전달됨**
 
-## 2. Passing Primitives and Objects to a function
-
-**Primitive Data Types are passed to a function by value**
-
-If you change the value of a Primitive Data Type inside a function, this change won’t affect the variable in the outer scope:
+함수 내에서 초기 데이터 유형의 값을 변경하면 외부 범위의 변수에 영향을 주지 않음:
 
 ```js
 var myName = "Carlos";
@@ -87,6 +85,8 @@ myNameIs(myName);
 console.log(myName); // "Carlos"
 ```
 
+function이 호출된 후 `myNameIs`내부에 있는 변수 `myName`를  바꾸려고 할 때, 이 것은 여전히 'Carlos'라는 값을 가지고 있다.
+it still has the value "Carlos".
 Even if we are changing the myName variable inside of the function myNameIs, when we print it after calling the function, it still has the value "Carlos". That is because when primitive types are passed, they are passed by value.
 
 We are passing a copy of myName: anything you do to myName inside the body of the function won't affect the myNamevariable in the global scope because you are passing a copy of myName, and not the original myName variable.
