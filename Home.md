@@ -4,7 +4,7 @@
 | [원시 자료형](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%9B%90%EC%8B%9C%EC%9E%90%EB%A3%8C%ED%98%95) |
 | [값 타입(Value Type)과 참조 타입(Refecrence Type)](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EA%B0%92-%ED%83%80%EC%9E%85(Value-Type)%EA%B3%BC-%EC%B0%B8%EC%A1%B0-%ED%83%80%EC%9E%85(Refecrence-Type))|
 | [명시적 변환, 암시적 변환, Nominal, 구조화, 덕 타이핑](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EB%AA%85%EC%8B%9C%EC%A0%81-%EB%B3%80%ED%99%98,-%EC%95%94%EC%8B%9C%EC%A0%81-%EB%B3%80%ED%99%98,-Nominal,-%EA%B5%AC%EC%A1%B0%ED%99%94,-%EB%8D%95-%ED%83%80%EC%9D%B4%ED%95%91)|
-| == vs === vs typeof|
+| [== vs === vs typeof](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/==-vs-===-vs-typeof) |
 | 함수 범위, 블록 범위, 렉시컬(lexical) 범위|
 | 식(expression) vs 문(statement)|
 | IIFE, Modules, Namespaces |
