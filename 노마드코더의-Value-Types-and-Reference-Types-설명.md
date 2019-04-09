@@ -72,3 +72,5 @@ console.log(x)
 
 value는 string, number, boolean, NaN, undefined, null가능
 reference는 array, object, function에서 사용될 수 있음. 
+
+영상 : https://www.youtube.com/watch?v=hYHv5m1NMFE
