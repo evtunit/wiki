@@ -2,12 +2,13 @@
 
 | 제목                                                                                                                                                                   | 번역자 |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
-| 1. [What you need to know about Javascript's Implicit Coercion — Promise Tochi](https://dev.to/promhize/what-you-need-to-know-about-javascripts-implicit-coercion-e23) | Who    |
-| 2. [JavaScript Type Coercion Explained — Alexey Samoshkin](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)                                    | Who    |
-| 3. [Javascript Coercion Explained — Ben Garrison](https://hackernoon.com/javascript-coercion-explained-545c895213d3)                                                   | Who    |
-| 4. [What exactly is Type Coercion in Javascript? - Stack Overflow](https://stackoverflow.com/questions/19915688/what-exactly-is-type-coercion-in-javascript)           | Who    |
-| 5. [You Don't Know JS: Types & Grammar [Book] — Kyle Simpson](https://www.oreilly.com/library/view/you-dont-know/9781491905159/ch04.html)                              | Who    |
-| 6. [(Not) Everything in JavaScript is an Object - Daniel Li](http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/)                                       | Who    |
-| 7. [Type Coercion in JavaScript, and why everyone gets it wrong.](https://thedevs.network/blog/type-coercion-in-javascript-and-why-everyone-gets-it-wrong)             | Who    |
+| 1. [What you need to know about Javascript's Implicit Coercion — Promise Tochi](https://dev.to/promhize/what-you-need-to-know-about-javascripts-implicit-coercion-e23) | 임용관    |
+| 2. [JavaScript Type Coercion Explained — Alexey Samoshkin](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)                                    | 김해연 |
+| 3. [Javascript Coercion Explained — Ben Garrison](https://hackernoon.com/javascript-coercion-explained-545c895213d3)                                                   | 방승민    |
+| 4.           | 이현아    |
+| 5.                            | 최호철    |
+| 6. [(Not) Everything in JavaScript is an Object - Daniel Li](http://blog.brew.com.hk/not-everything-in-javascript-is-an-object/)                                       | 최재욱    |
+| 7. [Type Coercion in JavaScript, and why everyone gets it wrong.](https://thedevs.network/blog/type-coercion-in-javascript-and-why-everyone-gets-it-wrong)             | 고석진    |
 
+- 멀린과 디아는 stackoverflow와 book이 걸려서 차주에 진행할 내용을 한주씩 걸쳐 2번 진행하기로 협의.
 - [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=hYHv5m1NMFE)
