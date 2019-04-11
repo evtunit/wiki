@@ -7,9 +7,9 @@
 | 3. [Should I use === or == equality comparison operator in JavaScript? — Panu Pitkamaki](https://bytearcher.com/articles/equality-comparison-operator-javascript/) | 김해연 |
 | 4. [== vs === JavaScript: Double Equals and Coercion — AJ Meyghani](https://www.codementor.io/javascript/tutorial/double-equals-and-coercion-in-javascript)| 고석진 |
 | 5. [Why Use the Triple-Equals Operator in JavaScript? — Louis Lazaris](https://www.impressivewebs.com/why-use-triple-equals-javascipt/)| 최재욱 |
-| 6. [What is the difference between == and === in JavaScript? — Craig Buckler](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/What-is-the-difference-between-==-and-===-in-JavaScript%3F) | 이현아 |
+| 6. [== 이랑 ===는 어떻게 다른 것인가?](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/What-is-the-difference-between-==-and-===-in-JavaScript%3F) | 이현아 |
 | 7. [Checking Types in Javascript — Toby Ho](http://tobyho.com/2011/01/28/checking-types-in-javascript/)                                                            | 임용관 |
-| 8. [How to better check data types in JavaScript — Webbjocke](https://webbjocke.com/javascript-check-data-types/) | 이현아 |
+| 8. [데이터 유형을 더 잘 확인하는 방법](https://webbjocke.com/javascript-check-data-types/) | 이현아 |
 | 9. [Checking for the Absence of a Value in JavaScript — Tomer Aberbach](https://tomeraberba.ch/html/post/checking-for-the-absence-of-a-value-in-javascript.html) | 최호철 |
 
 - [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=QkFkFqg-J04)
