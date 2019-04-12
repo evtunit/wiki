@@ -1,5 +1,7 @@
 # Javascript의 암묵적 형 변환(Implicit coercion)에 관하여
 
+> 원문: [What you need to know about Javascript's Implicit Coercion](https://dev.to/promhize/what-you-need-to-know-about-javascripts-implicit-coercion-e23)
+
 자바스크립트의 암묵적 형 변환은 예기치 못한 값 타입을 기대되는 타입으로 변환하려고 시도하는 것을 말한다. 따라서 문자열 등을 기대하는 곳에 올바른 문자열을, 숫자를 기대하는 곳에 올바른 숫자를 전달해 줄 수 있다. 이것은 자바스크립트의 특징 중 하나이다.
 
 
