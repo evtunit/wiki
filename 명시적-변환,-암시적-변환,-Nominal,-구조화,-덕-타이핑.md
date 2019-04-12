@@ -2,7 +2,7 @@
 
 | 제목                                                                                                                                                                   | 번역자 |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
-| 1. [What you need to know about Javascript's Implicit Coercion — Promise Tochi](https://dev.to/promhize/what-you-need-to-know-about-javascripts-implicit-coercion-e23) | 임용관    |
+| 1. [Javascript의 암묵적 형 변환(Implicit coercion)에 관하여](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/what-you-need-to-know-about-javascripts-implicit-coercion) | 임용관    |
 | 2. [JavaScript Type Coercion Explained — Alexey Samoshkin](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)                                    | 김해연 |
 | 3. [Javascript Coercion Explained — Ben Garrison](https://hackernoon.com/javascript-coercion-explained-545c895213d3)                                                   | 방승민    |
 | 4.           | 이현아    |
