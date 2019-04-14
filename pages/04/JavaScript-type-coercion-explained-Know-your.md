@@ -516,3 +516,5 @@ Axel Rauschmayer이 쓴 [SpeakingJS](http://speakingjs.com/)은 ES5를 익히기
 JavaScript Comparison Table — https://dorey.github.io/JavaScript-Equality-Table/
 
 wtfjs — 작은 코드들을 제공함 — https://wtfjs.com/
+
+> 번역 원문 : https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839
