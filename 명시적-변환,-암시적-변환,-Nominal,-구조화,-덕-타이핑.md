@@ -11,4 +11,4 @@
 | 7. [Type Coercion in JavaScript, and why everyone gets it wrong.](https://thedevs.network/blog/type-coercion-in-javascript-and-why-everyone-gets-it-wrong)             | 고석진    |
 
 - 멀린과 디아는 stackoverflow와 book이 걸려서 차주에 진행할 내용을 한주씩 걸쳐 2번 진행하기로 협의.
-- [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=hYHv5m1NMFE)
+- [노마드코더 니콜라스 식의 설명 영상](https://www.youtube.com/watch?v=dIIQmSsg0SI)
