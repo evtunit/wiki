@@ -2,7 +2,7 @@
 
 |   제목   | 번역자  |
 | :------ | :---- |
-| 1. [JavaScript Double Equals vs. Triple Equals — Brandon Morelli](https://codeburst.io/javascript-double-equals-vs-triple-equals-61d4ce5a121a) | 최호철 |
+| 1. [JavaScript Double Equals vs. Triple Equals — Brandon Morelli](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/JavaScript---%EC%9D%B4%EC%A4%91-%EA%B0%99%EC%9D%8C-vs.-%EC%82%BC%EC%A4%91-%EA%B0%99%EC%9D%8C) | 최호철 |
 | 2. [What is the difference between =, ==, and === in JS? — Codecademy](https://www.codecademy.com/en/forum_questions/558ea4f5e39efed371000508) | 방승민 |
 | 3. [Should I use === or == equality comparison operator in JavaScript? — Panu Pitkamaki](https://bytearcher.com/articles/equality-comparison-operator-javascript/) | 김해연 |
 | 4. [== vs === JavaScript: Double Equals and Coercion — AJ Meyghani](https://www.codementor.io/javascript/tutorial/double-equals-and-coercion-in-javascript)| 고석진 |
