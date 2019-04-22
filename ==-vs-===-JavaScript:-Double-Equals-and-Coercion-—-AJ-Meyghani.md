@@ -123,6 +123,10 @@ x.toString();  // -> ",,true,1,5,Sat Mar 05 2016 10:59:47 GMT-0500 (EST),[object
 
  ", true, 1,5, Sat Mar 05 2016 10:59:47 GMT-0500 (EST), [object Object], 1,2,3 "
 
+
+
+### Coercing to number: ToNumber(input)
+
 number 의 강제변환: 
 toNumber 가 다른 유형에 대해 수행하는 작업입니다.
 
@@ -135,5 +139,205 @@ toNumber 가 다른 유형에 대해 수행하는 작업입니다.
 Eg: "5" → 5, "" → 0, "29xY" → NaN - object:
 
 먼저 ToPrimitive 를 호출 한 다음 결과에 대해 ToNumber 를 호출합니다. 
+객체가 어떻게 원시 타입으로 변경되는지 알아보려면 toPrimitive 섹션을 참고하세요 
 
+### Coercing to string: ToString(input)
 
+다음은 ToNumber 가 다른 타입에 대해 수행하는 작업입니다.
+
+- undefined → "undefined"
+- null →  "null"
+- number → “number”
+- boolean → “true”, “false”
+- string → 숫자 반환이면 반환, parse string, 그렇지 않으면 NaN, 빈문자열은 0 
+- object → ToPrimitive 를 먼저 호출한 후 ToPrimitive 결과에 대해 ToString 를 호출합니다. 객체가 어떻게 원시 타입으로 변환되는지 궁금하다면 toPrimitive 섹션을 참고하세요 
+
+### Coercing to boolean: ToBoolean(input)
+
+JavaScript 의 falsy 한 값은 아래와 같습니다.
+
+- undefined
+- null
+- 0
+- ""
+- NaN
+
+- undefined → false
+- null → false
+- number → false if 0, otherwise, true
+- boolean → input iteself
+- string → false if empty string "", otherwise true
+- object → true. This follows that array → true
+- Date → true
+
+## Double Equals Examples
+
+이제 Double Equals 가 어떻게 동작하는지 알게되었다. 몇가지 예제를 살펴 볼 것이다.
+
+### Example: [] == 0
+
+타입이 다릅니다. 우리는 긴 경로를 가야합니다.
+
+null 과 undefined 의 비교 ? no
+숫자와 문자열의 비교 ? no
+boolean 과 다른 타입을 비교 ? no
+object 를 문자나 숫자와 비교 ? yes
+
+배열을 원시타입으로 변경하고 다시 Double Equals 를 호출합니다.
+배열에서의 valueOf 호출의 출력은 [] 입니다. 원시 값이 아니기 때문에 사용할 수 없습니다. 
+toString 을 호출합니다. 결과값은 "" 입니다. 
+
+```js
+"" == 0
+```
+
+### 0 == 0
+
+같은 타입이기 때문에 0 === 0 이고 결과는 true 입니다.
+
+```js
+[] == 0
+↓
+"" == 0
+↓
+0 == 0
+↓
+0 === 0
+→ true
+```
+
+### Example: [] == "0"
+
+```js
+[] == "0"
+↓
+"" == "0"
+↓
+"" === "0"
+→ false
+```
+
+### Example: false == 1
+
+```js
+false == 1
+↓
+0 == 1
+↓
+0 === 1
+→ false
+```
+
+### Example: {} == false
+
+```js
+{} == false
+↓
+{} == 0
+↓
+"[object Object]" == 0
+↓
+NaN == 0
+↓
+NaN === 0
+→ false
+```
+
+### Example: undefined == false
+
+```js
+undefined == false
+↓
+undefined == 0
+→ false
+```
+
+### Example: [1,2,3] == 123:
+
+```js
+[1,2,3] == 123
+↓
+"1,2,3" == 123
+↓
+NaN    ==  123
+↓
+NaN   ===  123
+↓
+→ false
+```
+
+### Example: [123] == 123:
+
+```js
+[123] == 123
+↓
+"123" == 123
+↓
+123    ==  123
+↓
+123   ===  123
+↓
+→ true
+```
+
+### Example: [123] == "123":
+
+```js
+[123] == "123"
+↓
+"123" == "123"
+↓
+"123" === "123"
+↓
+→ true
+```
+
+```js
+var x = {
+  a: '...',
+  toString: function () {
+    return false;
+  },
+  valueOf: function () {
+    return new Boolean(true);
+  }
+};
+```
+
+### Example: x == "0":
+
+```js
+x == "0"
+↓
+false == "0"
+↓
+0    ==  "0"
+↓
+0    ==  0
+↓
+0   === 0
+↓
+→ true
+```
+
+### Example: x == 5:
+
+```js
+x == 5
+↓
+false == 5
+↓
+0    ==  5
+↓
+0   ===  5
+→ false
+```
+
+### Example: x == [1,2,3]:
+
+```js
+x == [1,2,3] // both are objects
+↓
+x === [1,2,3] // they are stored at different addresses
+→ false // the address is not the same
+```
