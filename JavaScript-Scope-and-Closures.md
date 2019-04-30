@@ -320,4 +320,27 @@ function prepareCake (flavor) {
 
 const makeCakeLater = prepareCake('banana')
 ```
+
 DevTools를 열고 Chrome(또는 Firefox의 Debugger 탭)의 Source(소스) 탭으로 이동하면 사용할 수 있는 변수가 나타난다.
+
+![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1502482585/debugger1_zmrmjz.png)
+
+`debugger` 키워드를 통해 클로저로 반환할 수 있다. 이번에는 스코프 변수가 어떻게 변경되는지 확인해보자!
+
+```js
+function prepareCake (flavor) {
+  return function () {
+    // Adding debugger
+    debugger
+    setTimeout(_ => console.log(`Made a ${flavor} cake!`), 1000)
+  }
+}
+
+const makeCakeLater = prepareCake('banana')
+```
+
+![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1502482679/debugger2_fyj91h.png)
+
+이 디버깅 기능을 사용하는 두 번째 방법은 라인 번호를 클릭하여 소스(또는 디버거) 탭에 직접 코드에 중단점을 추가하는 것이다.
+
+![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1502482705/breakpoint_twihuy.png)
