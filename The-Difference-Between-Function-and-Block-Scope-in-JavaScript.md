@@ -63,10 +63,12 @@ var age = 100;
 
 위의 예제에서 console 의 출력결과 
 
+
 ```js
 100
 You are 700 dog years old!
-``
+```
+
 
 만약 `dogYears` 를 부른다면 
 
