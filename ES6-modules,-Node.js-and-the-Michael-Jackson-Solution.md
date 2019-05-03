@@ -33,16 +33,17 @@ Node.js와 다른 서버측 JavaScript 솔루션이 나타나기 시작했을 �
 
 ## How ES6 modules work and why Node.js hasn’t implemented it yet
 
-JavaScript is evolving a lot, specially with ES6, and this problem had to be solved. That’s why ES modules were born. They look a lot like CJS syntactically.
+자바스크립트가 많은 변화가 일어나면서 생겼던 문제들이 있는데 ES6는 문제가 있던 부분들을 컴파일 해주게 된다.
+ES modules는 어떻게 생겨나게 되었을까
 
-Let’s compare them. This is how we import something in both systems:
+*하지만 import를 어떻게 하는지 비교해보자면:*
 
 ```js
 const { helloWorld } = require('./b.js') // CommonJS
 import { helloWorld } from './b.js' // ES modules
 ```
 
-This is how we export functionality:
+이러한 방식으로 기능을 내보내는 방법:
 
 ```js
 // CommonJS
@@ -57,11 +58,12 @@ export function helloWorld () {
 
 엄청 비슷하죠?
 
-It’s been a long time since Node.js has implemented 99% of ECMAScript 2015 (aka ES6), but we will need to wait until the end of 2017 for support for ES6 modules. And it will be only available behind a runtime flag! Why is it taking so long to implement ES6 modules in Node.js if they are so similar to CJS?
+Node.js가 ES6를 구현한 지 오래지만, ES6 모듈 지원을 위해서는 2017년 말까지 기다려야 할 것이다. 그리고 런타임 뒤에서만 사용할 수 있을 것이다!<br>
+ES6 모듈이 CJS와 비슷하다면 Node.js에서 구현하는 데 왜 그렇게 오래 걸리는가?
 
-Well, the devil is in the details. The syntax is pretty similar between both systems, but the semantics are pretty different. There are also subtle edge cases that require a special effort to be 100% compatible with the specification.
+이 구문은 두 시스템 모두에서 매우 유사하지만 의미는 매우 다르다. 100% 호환되도록 특별한 노력이 필요한 edge 케이스가 있습니다.
 
-Even though ES modules are not implemented in Node.js, they are implemented already in some browsers. For example we can test them in Safari 10.1. Let’s see some examples and we will see why the semantics are so important. I’ve created these three files:
+ES 모듈이 Node.js에서 구현되지 않더라도 일부 브라우저에서는 이미 구현되어 있다. 예를 들어, 사파리 10.1에서 그것들을 테스트할 수 있다. 몇 가지 예를 보고 왜 중요한지 알아보자. 나는 이 세 개의 파일을 만들었다
 
 ```js
 // index.html
@@ -77,8 +79,7 @@ export function helloWorld () {
 }
 ```
 
-What do we see in the console when this is run? This is the result:
-
+콘솔을 실행하면 표시되는 내용 그 결과는 다음과 같다.
 
 ```js
 executing b.js
@@ -86,7 +87,7 @@ executing a.js
 hello world
 ```
 
-However, the same code using CJS and running it in Node.js:
+CJS를 사용하고 Node.js에서 실행하는 동일한 코드:
 
 ```js
 // a.js
@@ -100,7 +101,7 @@ export function helloWorld () {
 }
 ```
 
-Will give us:
+다음과 같은 것을 줄 것이다.
 
 ```js
 executing a.js
@@ -108,50 +109,18 @@ executing b.js
 hello world
 ```
 
-So… it has executed the code in different order! This is because ES6 modules are first parsed (without being executed), then the runtime looks for imports, loads them and finally it executes the code. This is called async loading.
+그래서,… 그것은 다른 순서로 코드를 실행했다. 이는 ES6 모듈을 먼저 구문 분석(실행하지 않고)한 다음 런타임에서 가져오기를 찾아 로드한 후 마지막으로 코드를 실행하기 때문이다. 이것을 비동기 부하라고 한다.
 
-On the other hand, Node.js loads the dependencies (requires) on demand while executing the code. Which is very different. In many case this may not make any difference, but in other cases it is a completely different behavior.
+반면 Node.js는 코드를 실행하는 동안 종속성을 로드한다. 많은 경우에 이것은 아무런 차이를 만들지 않을 수도 있지만, 다른 경우에는 전혀 다른 행동이다.
 
-Node.js and web browsers need to implement this new way of loading code keeping the previous one. How do they know when to use a system and when the other one? Browsers know this because you specify it at the <script> level, as we’ve seen in the example with the type property:
+Node.js와 웹브라우저는 이전 코드를 유지하는 새로운 로딩 방식을 구현할 필요가 있다. 언제 시스템을 사용해야 하는지 그리고 언제 다른 시스템을 사용해야 하는지 어떻게 알 수 있을까? 브라우저에서는 유형 속성과 함께 예에서 보았듯이 <script> 수준에서 지정하기 때문에 이 사실을 알고 있다.
 
 ```js
 <script type="module" src="./a.js"></script>
 ```
 
-However, how does Node.js know? There’s been a lot of discussion about this and there’s been a lot of proposals (checking first the syntax and then deciding whether or not it should be treated as a module, defining it in the package.json file,…). Finally the approved proposal has been: the Michael Jackson Solution. Basically if you want a file to be loaded as an ES6 module you will use a different extension: .mjs instead of .js.
+하지만 Node.js는 어떻게 알까? 이것에 대해서 많은 논의가 있었고 (구문을 먼저 확인한 다음에 모듈로 취급해야 하는지 여부를 결정하면서) 규정하는 제안들이 많이 있었다(package.json file,...) 마지막으로 승인된 제안은 Michael Jackson 솔루션이었습니다. 기본적으로 파일을 ES6 모듈로 로드하려면 .js 대신 .mjs라는 다른 확장자를 사용하십시오.
 
-> The extension name (.mjs) is the reason why this is sometimes dubbed the Michael Jackson Solution.
+> 확장명(.mjs)은 이를 Michael Jackson 부르는 이유다.
 
-
-At the beginning it seemed to me a very bad decision, but now I think it’s the best solution, because it’s easy and any tool (text editor, IDE, preprocessor) will know the easiest possible way if a file needs to be treated as an ES6 module or not. And it only adds the minimal overhead possible to the loading process.
-
-If you want to know more about the implementation status of ES6 modules in Node.js you should read this update.
-
----
-<br>
-
-## A note about Babel
-
-Babel implements ES6 modules, but… incorrectly. It doesn’t implement the full spec. So beware that if you are using Babel when switching to a native ES6 modules implementation, you may have side-effects.
-
----
-<br>
-
-## Why ES6 modules are good and how to get the best of both worlds
-ES6 modules are great for two main reasons:
-
-- They are a cross-platform standard. They will work in both Node.js and web browsers.
-- Imports and exports are static. It has to be that way because of how the loading process works. Remember that we said the runtime first loads the file, parses it and then, before executing it, it loads the dependencies? This is only possible if imports and exports are static. You cannot do import 'engine-' + browserVersion This is good for a reason: tools can do static analysis of the code, figure out which code is actually being used and tree shake it. This is specially useful when using third-party libraries: you never use all the functionality they provide, so you can remove lots of bytes of code that the user won’t ever execute.
-
-But, does this mean that I can no longer import functionality dynamically? To me this is very useful. Many times I do things like:
-
-```js
-const provider = process.env.EMAIL_PROVIDER
-const emailClient = require(`./email-providers/${provider}`)
-```
-
-This way I get a different implementation with the same interface just with a configuration change, without having to load the code of all the implementations.
-
-So, what happens with ES6 modules? Well, don’t worry, there’s a stage-3 proposal (which means it will likely be approved soon) that adds an import() function. This function accepts a path and returns the exported functionality as a promise.
-
-So with ES6 modules and import() we will get the best of both worlds. 🚀
+처음에는 좋지않은 결정으로 보였지만 지금은 최선의 해결책이라고 생각한다. 왜냐하면 그것은 쉽고 어떤 도구(텍스트 편집기, IDE, 전처리기)가 파일을 ES6 모듈로 처리해야 할지 말아야 할지 가장 쉬운 방법을 알 것이기 때문이다.
