@@ -9,4 +9,4 @@
 | 5. [Understanding ES6 Modules](https://www.sitepoint.com/understanding-es6-modules/) | 스칼렛 |
 | 6. [An overview of ES6 Modules in JavaScript](https://blog.cloud66.com/an-overview-of-es6-modules-in-javascript/) | 멀린 |
 | 7. [ES6 Modules in Depth](https://ponyfoo.com/articles/es6-modules-in-depth) | 브레드 |
-| 8. [ES6 modules, Node.js and the Michael Jackson Solution](https://medium.com/dailyjs/es6-modules-node-js-and-the-michael-jackson-solution-828dc244b8b) | 누구 |
+| 8. [ES6 modules, Node.js and the Michael Jackson Solution](https://medium.com/dailyjs/es6-modules-node-js-and-the-michael-jackson-solution-828dc244b8b) | 디아 (7주차) |
