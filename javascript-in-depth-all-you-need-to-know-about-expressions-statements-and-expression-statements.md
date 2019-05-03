@@ -1,6 +1,6 @@
 # Javascript의 Expressions, Statements 및 Expression Statements에 대해 알아야 할 모든 것
 
-> 원문: [ All you need to know about Javascript's Expressions, Statements and Expression Statements]([https://dev.to/promhize/javascript-in-depth-all-you-need-to-know-about-expressions-statements-and-expression-statements-5k2](https://dev.to/promhize/javascript-in-depth-all-you-need-to-know-about-expressions-statements-and-expression-statements-5k2))
+> 원문: [All you need to know about Javascript's Expressions, Statements and Expression Statements](https://dev.to/promhize/javascript-in-depth-all-you-need-to-know-about-expressions-statements-and-expression-statements-5k2)
 
 이 포스팅을 다보고 나면  아래  코드가 작동하는 방식과 작동 원리에 대해 자세히 설명 할 수 있어야한다.
 
