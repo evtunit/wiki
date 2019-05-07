@@ -540,7 +540,7 @@ foo.bar()의 예외는 정말로 삼켜진 것처럼 보입니다.
 #### Handling uncaught exceptions (잡히지 않는 예외처리)
 
 많은 사람들이 더 낫다고 말할 수 있는 다른 방법들이 있습니다.  
-일반적인 제안은 promise가 done (...)을 추가해야한다는 것인데, promise chain을 본질적으로 "done"으로 표시합니다. done (...)은 Promise를 생성하고 반환하지 않으므로 done (...)으로 전달된 콜백은 분명히 존재하지 않는 체인된 Promise에 문제를 보고하기 위해 연결되어 있지 않습니다.
+일반적인 제안은 promise가 done (...)을 추가해야한다는 것인데, promise chain을 본질적으로 "done"으로 표시합니다. done (...)은 Promise를 생성하고 반환하지 않으므로 done (...)으로 전달된 콜백은 분명히 존재하지 않는 체인된 Promise 문제를 보고하기 위해 연결되어 있지 않습니다.
 
 일반적으로 잡히지 않은 오류 상황에서 예상대로 대처할 수 있습니다. 
 done(..) 내부의 모든 예외는 global uncaught error(개발자 콘솔에서는 기본적으로)로 처리됩니다.
