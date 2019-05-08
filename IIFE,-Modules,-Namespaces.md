@@ -2,7 +2,7 @@
 
 |   제목   | 번역자  |
 | :-------- | :------ |
-| 1. [Essential JavaScript: Mastering Immediately-invoked Function Expressions](https://medium.com/@vvkchandra/essential-javascript-mastering-immediately-invoked-function-expressions-67791338ddc6) | 디아 |
+| 1. [Essential JavaScript: Mastering Immediately-invoked Function Expressions](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Essential-JavaScript:-Mastering-Immediately-invoked-Function-Expressions) | 디아 |
 | 2. [ES6 모듈이 IIFE를 구시대의 유물로 만드는가?](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/do-es6-modules-make-the-case-of-iifes-obsolete) | 제이크 |
 | 3. [A 10 minute primer to JavaScript modules, module formats, module loaders and module bundlers](https://www.jvandemo.com/a-10-minute-primer-to-javascript-modules-module-formats-module-loaders-and-module-bundlers/) | 버트 |
 | 4. [ES modules: A cartoon deep-dive](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/) | 에더드 |
