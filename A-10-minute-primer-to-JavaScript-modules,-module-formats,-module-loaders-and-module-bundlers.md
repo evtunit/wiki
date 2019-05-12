@@ -173,6 +173,201 @@ ES6 이전에는 JS 에 정식 모듈 형식이 없었습니다.
 
 각각의 구문을 간략하게 살펴보겠습니다.
 
+#### Asynchronous Module Definition (AMD)
+
+AMD 형식은 브라우저에서 사용되며 정의 함수를 모듈을 정의합니다.
+
+```js
+//Calling define with a dependency array and a factory function
+define(['dep1', 'dep2'], function (dep1, dep2) {
+
+    //Define the module value by returning a value.
+    return function () {};
+});
+```
+
+#### CommonJS format
+
+CommonJs 는 Node 에서 사용되며 require 및 module exports 를 사용하여 종속성과 모듈을 관리합니다.
+
+```js
+var dep1 = require('./dep1');  
+var dep2 = require('./dep2');
+
+module.exports = function(){  
+  // ...
+}
+```
+
+#### Universal Module Definition (UMD)
+
+브라우저와 Node 에서 모두 사용할 수 있습니다.
+
+```js
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+      define(['b'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory(require('b'));
+  } else {
+    // Browser globals (root is window)
+    root.returnExports = factory(root.b);
+  }
+}(this, function (b) {
+  //use b in some fashion.
+
+  // Just return a value to define the module export.
+  // This example returns an object, but the module
+  // can return a function as the exported value.
+  return {};
+}));
+```
+
+#### System.register
+
+ES5 에서 ES6 모듈 구문을 지원하도록 설계되었습니다
+
+#### ES6 module format
+
+ES6 에서 JS 는 기본적으로 모듈 형식을 지원합니다. export token 을 이용하여 api 를 내보냅니다.
+
+```js
+// lib.js
+
+// Export the function
+export function sayHello(){  
+  console.log('Hello');
+}
+
+// Do not export the function
+function somePrivateFunction(){  
+  // ...
+}
+```
+
+export 된 모듈을 가져오기 위한:
+
+```js
+import { sayHello } from './lib';
+
+sayHello();  
+// => Hello
+```
+
+alias 를 이용하여 가져 올 수도 있습니다.
+
+```js
+import { sayHello as say } from './lib';
+
+say();  
+// => Hello
+```
+
+한번에 전체 모듈을 가져올 수도 있습니다.
+
+```js
+import * as lib from './lib';
+
+lib.sayHello();  
+// => Hello
+```
+
+default export 도 지원합니다.
+
+```js
+// lib.js
+
+// Export default function
+export default function sayHello(){  
+  console.log('Hello');
+}
+
+// Export non-default function
+export function sayGoodbye(){  
+  console.log('Goodbye');
+}
+```
+
+다음과 같이 가져올 수 있습니다.
+
+```js
+import sayHello, { sayGoodbye } from './lib';
+
+sayHello();  
+// => Hello
+
+sayGoodbye();  
+// => Goodbye
+```
+
+함수뿐만아니라 원하는 것을 내보낼 수 있습니다.
+
+```js
+// lib.js
+
+// Export default function
+export default function sayHello(){  
+  console.log('Hello');
+}
+
+// Export non-default function
+export function sayGoodbye(){  
+  console.log('Goodbye');
+}
+
+// Export simple value
+export const apiUrl = '...';
+
+// Export object
+export const settings = {  
+  debug: true
+}
+```
+
+ES6 의 모듈형식은 안타깝게도 모든 브라우저에서 지원되지 않습니다.
+ES6 모듈 포맷을 사용하기 위해 ES5 문법으로 변환하기 위한 Babel 같은 변환기가 필요합니다.
+
+## Module loaders
+
+모듈 로더는 특정 모듈을 형식으로 작성된 모듈을 해석하고 읽습니다.
+
+런타임에 모듈 로더가 실행됩니다.
+
+- 브라우저에 모듈 로더를 로드합니다.
+- 어떤 파일을 로드할 것인지 알려줍니다.
+- 앱 파일을 다운로드하고 해석합니다.
+- 필요한 경우 파일을 다운로드합니다.
+
+
+브라우저의 개발자 콘솔에서 네트워크 탭을 보면 많은 파일이 필요에 따라 모듈 로더에 로드된다는 것을 알 수 있습니다.
+많이 사용되어지는 모듈 로더는 아래와 같습니다.
+
+- RequireJS: AMD 형식의 모듈 로더
+- SystemJS: AMD, common JS, UMD 또는 System.gister 형식의 모듈 로더
+
+## Module bundlers
+
+모듈 번들러는 모듈 로더를 대체합니다.
+
+모듈 로더와 달리 번들은 빌드시에 실행됩니다.
+
+빌드할 때 모듈 번들을 실행하여 번들 파일을 생성합니다.
+브라우저에서 번들파일을 로드합니다.
+네트워크 탭을 확인하면 하나의 파일만 로드합니다.
+브라우저에는 모듈 로더가 필요하지 않습니다.
+모든 코드는 번들파일에 포함되어져있습니다.
+
+많이 쓰이는 모듈 번들은 아래와 같습니다.
+
+- Browserify: bundler for CommonJS modules
+- Webpack: bundler for AMD, CommonJS, ES6 modules
+
+
+
 
 
 
