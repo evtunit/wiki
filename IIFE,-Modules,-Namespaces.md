@@ -8,6 +8,6 @@
 | 4. [ES modules: A cartoon deep-dive](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/ES-modules-:-A-cartoon-deep-dive) | 에더드 |
 | 5. [Understanding ES6 Modules](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Understanding-ES6-Modules) | 스칼렛 |
 | 6. [An overview of ES6 Modules in JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Javascript-%EC%9D%98-ES6-%EB%AA%A8%EB%93%88%EC%9D%98-%EA%B0%9C%EC%9A%94) | 멀린 |
-| 7. [ES6 Modules in Depth](https://ponyfoo.com/articles/es6-modules-in-depth) | 브레드 |
+| 7. [ES6 Modules in Depth](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/ES6-%EB%AA%A8%EB%93%88%EC%9D%98-%EA%B9%8A%EC%9D%B4) | 브래드 |
 | 8. [ES6 modules, Node.js and the Michael Jackson Solution](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/ES6-modules,-Node.js-and-the-Michael-Jackson-Solution) | 디아 (7주차) |
 | 영상. [제목](링크) | 아일라 |
