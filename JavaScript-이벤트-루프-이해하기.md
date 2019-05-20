@@ -97,7 +97,8 @@ console.log(resposne3);
 이에 대한 해결책은 비동기식 콜백입니다. 아마도 이미 프로그램에서 비동기 코드를 사용했을 것입니다.  
 setTimeout 또는 xhr 요청과 같은 API는 비동기입니다.  
 그러나 실제로 작동하는 방법을 탐색하기 전에 비동기 코드를 실행할 때 호출 스택이 어떻게 나타나는지 시각화 해 보겠습니다.  
-![](https://d6vdma9166ldh.cloudfront.net/media/images/97388fc6-c13c-4049-8049-ecd25a370f7a.gif)
+![](http://mifort.org/data/blog/eventloop.gif)
+* 위 이미지는 본문과 다르지만 본문 이미지의 문제로 다른 비슷한 이미지로 대체하였습니다.
 
 실행시 프로그램은 setTimeout을 만나면 일정한 간격 후에 실행되도록 대기 한 다음 다음 줄로 이동합니다.  
 스택이 비어지면 (그리고 타임 아웃이 끝난 후) setTimeout 콜백이 마술처럼 스택에 푸시되고 실행됩니다.  
@@ -111,11 +112,10 @@ JavaScript가 단일 스레드 인 경우 동시 프로세스를 실행할 수�
 
 ![](https://d6vdma9166ldh.cloudfront.net/media/images/9aacbcd0-44c5-45e1-b3eb-be84a2eb99d8.png)
 
-
 이것이 전체 JavaScript 환경의 모습입니다.  
 노드 컨텍스트에서 위의 그림은 웹 API 대신 스레드, 파일 시스템 등의 C ++ API를 사용한다는 점을 제외하고는 동일하게 유지됩니다.  
 이전 섹션에서 실행 한 코드로 돌아가서 더 큰 그림에 어떻게 적용되는지 확인해 봅시다.  
-![](https://d6vdma9166ldh.cloudfront.net/media/images/fce32518-167c-4981-ac3a-a8e0dc1237c3.gif)
+![](https://cdn-images-1.medium.com/max/1600/1*p2sGJmCG9H_bFzJmIeKSYg.gif)
 
 setTimeout, xhr 등의 Apis는 런타임에는 없지만 Web API에서는 제공됩니다.  
 setTimout 함수를 호출하면 콜백과 함께 타이머 함수가 등록됩니다. 타이머가 만료되면 콜백을 이벤트 대기열로 보냅니다.   
