@@ -1,7 +1,7 @@
 
 # 자바스크립트의 이벤트 루프
 
-> 원문: [Event loop in javascriptㄷ](https://code.likeagirl.io/what-the-heck-is-event-loop-1e414fccef49)
+> 원문: [Event loop in javascript](https://code.likeagirl.io/what-the-heck-is-event-loop-1e414fccef49)
 
 자바스크립트를 좋아한다면 이걸 배워야 한다. 자바스크립트의 깊은 측면 중 하나인 이벤트 루프이다. 많은 개발자들이 수년간 일하면서도 여전히 이벤트 루프를 이해하지 못한다. 그러나 이 게시물을 통해 이벤트 루프가 무엇인지, 그리고 실제로 그렇게 복잡하지는 않다는 것을 알려주고 싶다.
 
