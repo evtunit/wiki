@@ -2,7 +2,7 @@
 
 |   제목   | 번역자  |
 | :-------- | :------ |
-| 1. [Scheduling: setTimeout and setInterval](https://javascript.info/settimeout-setinterval) | 멀린 |
+| 1. [Scheduling: setTimeout and setInterval](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Scheduling:-setTimeout-and-setInterval) | 멀린 |
 | 2. [Why not to use setInterval](https://dev.to/akanksha_9560/why-not-to-use-setinterval--2na9) | 현아 |
 | 3. [setTimeout VS setInterval](https://develoger.com/settimeout-vs-setinterval-cff85142555b) | 용관 |
 | 4. [Using requestAnimationFrame](https://css-tricks.com/using-requestanimationframe/) | 승민 |
