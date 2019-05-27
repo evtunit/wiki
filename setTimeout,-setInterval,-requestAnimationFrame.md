@@ -7,5 +7,5 @@
 | 3. [setTimeout VS setInterval](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/settimeout-vs-setinterval) | 용관 |
 | 4. [Using requestAnimationFrame](https://css-tricks.com/using-requestanimationframe/) | 승민 |
 | 5. [Understanding JavaScript's requestAnimationFrame() method for smooth animations](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Understanding-JavaScript's-requestAnimationFrame()-method-for-smooth-animations) | 해연 |
-| 6. [Handling time intervals in JavaScript](https://www.amitmerchant.com/Handling-Time-Intervals-In-Javascript/) | 재욱 |
+| 6. [Handling time intervals in JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Handling-time-intervals-in-JavaScript) | 재욱 |
 | 7. 버트 | 버트 |
