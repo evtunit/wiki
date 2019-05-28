@@ -8,4 +8,4 @@
 | 4. [Using requestAnimationFrame](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Using-requestAnimationFrame) | 승민 |
 | 5. [Understanding JavaScript's requestAnimationFrame() method for smooth animations](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Understanding-JavaScript's-requestAnimationFrame()-method-for-smooth-animations) | 해연 |
 | 6. [Handling time intervals in JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Handling-time-intervals-in-JavaScript) | 재욱 |
-| 7. 버트 | 버트 |
+| 7. [react-ko](https://github.com/appear/reactjs-interview-questions-ko) | 버트 |
