@@ -26,7 +26,7 @@ V8은 Google이 제공하는 강력한 오픈 소스 Javascript 엔진입니다.
 
 자바스크립트 코드를 마이크로프로세서가 이해할 수 있는 낮은 레벨 또는 기계 코드로 변환하는 프로그램입니다.
 
-![Rhino](https://en.wikipedia.org/wiki/Rhino_(JavaScript_engine)), ![JavaScriptCore](https://en.wikipedia.org/wiki/WebKit#JavaScriptCore) 및 ![SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey)를 비롯한 다양한 JavaScript 엔진이 있습니다. 
+[Rhino](https://en.wikipedia.org/wiki/Rhino_(JavaScript_engine)), [JavaScriptCore](https://en.wikipedia.org/wiki/WebKit#JavaScriptCore) 및 [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey)를 비롯한 다양한 JavaScript 엔진이 있습니다. 
 
 이러한 엔진은 ECMAScript 표준을 따릅니다. ECMAScript는 스크립팅 언어의 표준을 정의합니다. 
 
