@@ -7,15 +7,25 @@
 
 ---
 engine : 엔진
+
 type: 유형
+
 lookup: 룩업
+
 Monomorphic: 단일
+
 polymorphic: 다형성
+
 object: 객체
+
 boxing: [복싱](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)#Boxing)
+
 linear: 선형
+
 arrays where the set of keys are very compact : 컴팩트한 배열
+
 sparse array: 희소 배열
+
 allocate:  할당
 
 ---
@@ -77,10 +87,14 @@ V8은 JavaScript 코드를 어떻게 컴파일합니까?
 ## 레퍼런스
 
 Google I/O 2012 “Breaking the JavaScript Speed Limit with V8” with Daniel Clifford, tech lead and manager of the V8 team: [video](https://www.youtube.com/watch?v=UJPdhx5zTaw) and [slides](http://v8-io12.appspot.com/).
+
 V8: an open source JavaScript engine: [video](https://www.youtube.com/watch?v=hWhMKalEicY) of Lars Bak, V8 core engineer.
+
 Nikkei Electronics Asia blog post: Why Is the New Google V8 Engine So Fast?
 
 ## 관련 포스트글
 [Relational database and Normalization 28 Feb 2013](http://thibaultlaurens.github.io/database/2013/02/28/relational-database-and-normalization/)
+
 [Ruby: tips, tricks and bytecode analysis 11 Feb 2013](http://thibaultlaurens.github.io/ruby/2013/02/11/ruby-tips-tricks-and-deep-analysis/)
+
 [Generics in C# 12 Jan 2013](http://thibaultlaurens.github.io/microsoft/2013/01/12/generics-with-csharp/)
