@@ -1,70 +1,86 @@
-# How the V8 engine works?
+# 어떻게 자바스크립트 엔진이 작동하는가?
 
 원문 : http://thibaultlaurens.github.io/javascript/2013/04/29/how-the-v8-engine-works/
+작성일 : 2013-4-29
 
-29 Apr 2013
-V8 is a JavaScript engine built at the google development center, in Germany. It is open source and written in C++. It is used for both client side (Google Chrome) and server side (node.js) JavaScript applications.
+## 용어 사전 정의 (영->한)
 
-V8 was first designed to increase the performance of the JavaScript execution inside web browsers. In order to obtain speed, V8 translates JavaScript code into more efficient machine code instead of using an interpreter. It compiles JavaScript code into machine code at execution by implementing a JIT (Just-In-Time) compiler like a lot of modern JavaScript engines such as SpiderMonkey or Rhino (Mozilla) are doing. The main difference with V8 is that it doesn’t produce bytecode or any intermediate code.
+---
+engine : 엔진
+type: 유형
+lookup: 룩업
+Monomorphic: 단일
+polymorphic: 다형성
+object: 객체
+boxing: [복싱](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)#Boxing)
+linear: 선형
+arrays where the set of keys are very compact : 컴팩트한 배열
+sparse array: 희소 배열
+allocate:  할당
 
-The aim of this article is to show and to understand how V8 works, in order to produce optimized code for both client side or server side applications. If you are already asking yourself “Should I care about JavaScript performance?” then I will answer with a quote from Daniel Clifford (tech lead and manager of the V8 team): “It’s not just about making your current application run faster, it’s about enabling things that you have never been able to do in the past”.
+---
 
-## Hidden class
+V8은 독일의 Google 개발 센터에서 구축 된 자바 스크립트 엔진입니다. 오픈 소스이며 C ++로 작성되었습니다. 클라이언트 측 (Chrome)과 서버 측 (node.js) JavaScript 애플리케이션 모두에 사용됩니다.
 
-JavaScript is a prototype-based language: there are no classes and objects are created by using a cloning process. JavaScript is also dynamically typed: types and type informations are not explicit and properties can be added to and deleted from objects on the fly. Accessing types and properties effectively makes a first big challenge for V8. Instead of using a dictionary-like data structure for storing object properties and doing a dynamic lookup to resolve the property location (like most JavaScript engines do), V8 creates hidden classes, at runtime, in order to have an internal representation of the type system and to improve the property access time.
+V8은 웹 브라우저 내에서 JavaScript 실행 성능을 높이기 위해 처음 개발되었습니다. V8은 속도를 높이기 위해 인터프리터 대신 JavaScript 코드로 보다 효율적인 기계 코드로 변환합니다. SpiderMonkey 또는 Rhino (Mozilla)와 같은 많은 최신 자바 스크립트 엔진으로 JIT (Just-In-Time) 컴파일러를 구현하여 실행시 JavaScript 코드를 기계 코드로 컴파일합니다. V8과의 주요 차이점은 바이트 코드 또는 중간 코드를 생성하지 않는다는 것입니다.
 
-Let’s have for instance a Point function and the creation of two Point objects:
+이 글의 목적은 클라이언트 측 또는 서버 측 애플리케이션 모두에 최적화 된 코드를 생성하기 위해 V8의 작동 방식을 보여주고 이해하는 것입니다. "JavaScript 성능에 관심을 가져야할까요?"라고 묻는다면, Daniel Clifford (V8 팀 기술 책임자 겸 관리자)의 말을 인용하여 대답 할 것입니다. "현재의 애플리케이션을 더 빨리 실행할 수있는 것은 아닙니다. 과거에는 할 수 없었던 일들을 가능하게합니다."
+
+## 숨겨진 클래스
+
+JavaScript는 프로토 타입 기반 언어입니다. 복제 프로세스를 사용하여 클래스와 객체가 생성되지 않습니다. JavaScript는 또한 동적으로 유형이 지정됩니다. 유형 및 유형 정보는 명시 적이지 않으며 속성은 즉석에서 객체에 추가 및 삭제할 수 있습니다. 유형 및 속성에 효과적으로 액세스하는 것이 V8의 첫 번째 큰 도전 과제입니다. 객체 속성을 저장하기 위해 사전과 같은 데이터 구조를 사용하고 (대부분의 자바 스크립트 엔진과 마찬가지로) 속성 위치를 확인하기 위해 동적 룩업을 수행하는 대신 V8은 런타임에 숨겨진 클래스를 생성하여 유형 시스템의 내부 표현을 가짐으로써 속성 액세스 시간을 향상시킬 수 있습니다.
+
+예를 들어 Point 함수와 두 개의 Point 객체를 만들어 보겠습니다.
 <img src="./resource/scarlett/11/hiddenclass.png">
 
-If the layouts are the same, which is the case here, p and q belong to the same hidden class created by V8. This highlights another advantage of using hidden classes: it allows V8 to group objects for which properties are the same. Here p and q use the same optimized code.
+레이아웃이 동일하다면, p와 q는 V8에 의해 생성 된 것과 동일한 숨겨진 클래스에 속한다. 이는 숨겨진 클래스를 사용하는 또 다른 이점을 강조합니다. V8에서는 속성이 동일한 객체를 그룹화 할 수 있습니다. 여기서 p와 q는 동일한 최적화 된 코드를 사용합니다.
 
-Now, let’s assume that we want to add a z property to our q object, right after its declaration (which is perfectly fine with a dynamically typed language).
+이제 q 객체에 z 속성을 추가하고 싶다고 가정 해 봅시다. 선언 직후에 (동적으로 형식이 지정된 언어에서 완벽하게 괜찮습니다).
 
-How will V8 deal with this scenario? In fact, V8 creates a new hidden class everytime the constructor function declares a property and keeps track of the change in the hidden class. Why? Because if two objects are created (p and q) and if a member is added to the second object (q) after the creation, V8 needs to keep the last hidden class created (for the first object p) and to create a new one (for the second object q) with the new member.
+V8은이 시나리오를 어떻게 다루겠습니까? 사실 V8은 생성자 함수가 속성을 선언하고 숨겨진 클래스의 변경 사항을 추적 할 때마다 새로운 숨겨진 클래스를 만듭니다. 왜? 두 개의 객체가 생성되고 (p와 q) 생성 후 두 번째 객체 (q)에 멤버가 추가되면 V8은 마지막으로 숨겨진 클래스 (첫 번째 객체 p)를 생성하고 새 객체를 생성해야하기 때문에 (두 번째 객체 q)를 새 멤버와 비교합니다.
 
 <img src="./resource/scarlett/11/transition.png">
 
-Everytime a new hidden class is created, the previous one is updated with a class transition indicating what hidden class has to be used instead of it.
+새로운 숨겨진 클래스가 생성 될 때마다 이전 클래스는 숨겨진 클래스가 대신 사용되어야하는 클래스 전환으로 업데이트됩니다.
 
-### Code optimization
-Because V8 creates a new hidden class for each property, hidden class creation should be kept to a minimum. To do this, try to avoid adding properties after the object creation, and always initialize object members in the same order (to avoid the creation of different tree of hidden classes).
+### 코드 최적화
+V8은 각 속성에 대해 새로운 숨겨진 클래스를 작성하기 때문에 숨겨진 클래스 작성을 최소한으로 유지해야합니다. 이렇게하려면 개체를 만든 후에 속성을 추가하지 말고 같은 순서로 개체 멤버를 항상 초기화해야합니다 (다른 숨겨진 클래스 트리를 만들지 않기 위해).
 
-[Update] Another trick: Monomorphic operations are operations which only work on objects with the same hidden class. V8 creates a hidden class when we call a function. If we call it again with different parameter types, V8 needs to create another hidden class: Prefer monomorphic code to polymorphic code
+[업데이트] 또 다른 속임수 : 단일 연산은 동일한 숨겨진 클래스를 가진 객체에서만 작동하는 연산입니다. V8은 함수를 호출 할 때 숨겨진 클래스를 생성합니다. 다른 매개 변수 유형으로 다시 호출하면 V8은 다른 숨겨진 클래스를 만들어야합니다. 단일 형태 코드를 다형성 코드로 선호합니다.
 
-## More example on how V8 optimized JavaScript code
+## V8 최적화 된 JavaScript 코드의 예
 
-### Tagged values
+### 태그 값
 
-To have an efficient representation of numbers and JavaScript objects, V8 represents both with a 32 bit value. It uses a bit to know if it is an object (flag = 1) or an integer (flag = 0) called here SMall Integer or SMI because of its 31 bits. Then, if a numeric value is bigger than 31 bits, V8 will box the number, turning it into a double and creating a new object to put the number inside.
+숫자와 자바 스크립트 객체를 효율적으로 표현하기 위해 V8은 둘 다 32 비트 값을 나타냅니다. 31 비트이기 때문에 여기서 SMall Integer 또는 SMI라고하는 객체 (플래그 = 1) 또는 정수 (플래그 = 0)인지 여부를 알기 위해 비트를 사용합니다. 그런 다음 숫자 값이 31 비트보다 큰 경우 V8은 숫자를 상자에 넣고 이중으로 바꾸고 새 개체를 만들어 내부에 번호를 넣습니다.
 
-Code optimization: Try to use 31 bit signed numbers whenever possible to avoid the expensive boxing operation into a JavaScript object.
+코드 최적화 : 자바 스크립트 객체에 값 비싼 복싱(boxing) 작업을 피하기 위해 가능한 한 31 비트 부호가 있는 숫자를 사용하십시오.
 
-### Arrays
+### 배열
 
-V8 uses two different methods to handle arrays:
+V8은 배열 처리시 두 가지 방법을 사용합니다.
 
-Fast elements: Designed for arrays where the set of keys are very compact. They have a linear storage buffer that can be accessed very efficiently.
-Dictionary elements: Designed for sparse arrays which don’t have every elements inside of them. It is actually a hash table, more expensive to access than “Fast Elements”
-Code optimization: Be sure that V8 uses “Fast Elements” to handle arrays, in other words, avoid sparse arrays where keys are not next incremental numbers. Also, try to avoid pre-allocating large arrays. It is better to grow as you go. Finally, don’t delete elements in arrays: it makes the key set sparse.
+- 빠른 요소 : 키 집합이 매우 컴팩트한 배열 용으로 설계되었습니다. 매우 효율적으로 액세스 할 수있는 선형 저장소 버퍼가 있습니다.
+사전 요소 : 내부에 모든 요소가없는 희소 배열 용으로 설계되었습니다. 실제로는 "빠른 요소"보다 액세스하기가 더 비싼 해시 테이블입니다.
+- 코드 최적화 : V8이 배열을 처리하기 위해 "빠른 요소"를 사용하는지 확인하십시오. 즉, 키가 다음 증가하는 숫자가 아닌 경우 희소 배열을 피하십시오. 또한 큰 배열을 미리 할당하지 않도록하십시오. 사용할 때 할당하는 것이 좋다.(It is better to grow as you go.) 마지막으로 배열의 요소를 삭제하지 마십시오. 키 집합이 희박합니다.
 
-How V8 compiles JavaScript code?
+V8은 JavaScript 코드를 어떻게 컴파일합니까?
 
-## V8 has two compilers!
+## V8에는 두 개의 컴파일러가 있습니다!
 
-- A “Full” Compiler that can generate good code for any JavaScript: good but not great JIT code. The goal of this compiler is to generate code quickly. To achieve its goal, it doesn’t do any type analysis and doesn’t know anything about types. Instead, it uses an Inline Caches or “IC” strategy to refine knowledge about types while the program runs. IC is very efficient and brings about 20 times speed improvment.
+- 자바 스크립트에 좋은 코드를 생성 할 수있는 "전체" 컴파일러 : 훌륭하지만 훌륭한 JIT 코드는 아닙니다. 이 컴파일러의 목표는 코드를 신속하게 생성하는 것입니다. 목표를 달성하기 위해 유형 분석을하지 않으며 유형에 대해 알지 못합니다. 대신 인라인 캐시 (줄여서 IC) 전략을 사용하여 프로그램이 실행되는 동안 유형에 대한 지식을 구체화합니다. IC는 매우 효율적이며 약 20 배의 속도 향상을 가져옵니다.
 
-- An Optimizing Compiler that produces great code for most of the JavaScript language. It comes later and re-compiles hot functions. The optimizing compiler takes types from the Inline Cache and make decisions about how to optimize the code better. However, some language features are not supported yet like try/catch blocks for instance. (The workaround for try/catch blocks is to write the “non stable” code in a function and call the function in the try block)
+- 대부분의 JavaScript 언어에 대해 훌륭한 코드를 생성하는 최적화 컴파일러. 나중에 제공되며 더운 기능을 다시 컴파일합니다. 최적화 컴파일러는 인라인 캐시에서 유형을 가져 와서 코드를 더 잘 최적화하는 방법을 결정합니다. 그러나 일부 언어 기능은 try / catch 블록과 같이 아직 지원되지 않습니다. (try / catch 블록의 해결 방법은 함수에 "비 안정적인"코드를 작성하고 try 블록에서 함수를 호출하는 것입니다)
 
-Code optimization: V8 also supports de-optimization: the optimizing compiler makes optimistic assumptions from the Inline Cache about the different types, de-optimization comes if these assumptions are invalid. For example, if a hidden class generated was not the one expected, V8 throws away the optimized code and comes back to the Full Compiler to get types again from the Inline Cache. This process is slow and should be avoided by trying to not change functions after they are optimized.
+코드 최적화 : V8은 최적화 해제를 지원합니다. 최적화 컴파일러는 인라인 캐시에서 다양한 유형에 대한 긍정적 가정을 합니다. 이러한 가정이 유효하지 않은 경우 최적화가 해제됩니다. 예를 들어 생성 된 숨겨진 클래스가 예상 한 클래스가 아닌 경우 V8은 최적화 된 코드를 버리고 전체 컴파일러로 돌아와 인라인 캐시에서 다시 유형을 가져옵니다. 이 프로세스는 느리고 최적화 된 후에는 함수를 변경하지 않으려 고해서는 안됩니다.
 
-## Resources
+## 레퍼런스
 
 Google I/O 2012 “Breaking the JavaScript Speed Limit with V8” with Daniel Clifford, tech lead and manager of the V8 team: [video](https://www.youtube.com/watch?v=UJPdhx5zTaw) and [slides](http://v8-io12.appspot.com/).
 V8: an open source JavaScript engine: [video](https://www.youtube.com/watch?v=hWhMKalEicY) of Lars Bak, V8 core engineer.
 Nikkei Electronics Asia blog post: Why Is the New Google V8 Engine So Fast?
 
-## Related Posts
-
+## 관련 포스트글
 [Relational database and Normalization 28 Feb 2013](http://thibaultlaurens.github.io/database/2013/02/28/relational-database-and-normalization/)
 [Ruby: tips, tricks and bytecode analysis 11 Feb 2013](http://thibaultlaurens.github.io/ruby/2013/02/11/ruby-tips-tricks-and-deep-analysis/)
 [Generics in C# 12 Jan 2013](http://thibaultlaurens.github.io/microsoft/2013/01/12/generics-with-csharp/)
