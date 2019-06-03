@@ -17,6 +17,7 @@ SpiderMonkey라는 코드명을 가진 최초의 자바스크립트 엔진은 Ne
 토큰은 파서에 의해 분석되고 bytecode와 같은 중간 언어로 구문 트리에 내장됩니다. 마침내 JIT 컴파일러가 코드를 실행합니다.  
 
 <br>
+
 #### 2008년에 구글은 엔진의 보급형 버전인 V8을 발표했습니다.       
 
 V8 엔진은 여러 스레드를 사용합니다. 메인 쓰래드는 당신이 기대하는 대로 수행합니다 : 코드를 가져 와서 컴파일하고 실행합니다.   
@@ -36,6 +37,7 @@ Lithium은 최종적으로 기계 코드로 변환되는 표현입니다. 여기
 두 컴파일러를 동시에 실행하면 성능이 27% 향상되며, 아직 끝나지 않았습니다 6주마다 V8 팀이 새로운 지점을 출시합니다. 9월 11일에 팀은 6.2 버전을 발표했으며 몇 주 안에 Chrome 62와 함께 출시 될 예정입니다. 이 다음 버전에는 팀에서 "모든 종류의 개발자 지향적 인 기능"과 성능 최적화를 포함합니다. [여기에 대한 다음 자료](https://v8.dev/blog/v8-release-62)를 읽을 수 있습니다. 
 
 <br>
+
 ##### 더 알아보기
 
 - Chrome V8 developer channel: https://developers.google.com/v8/
@@ -48,6 +50,7 @@ Lithium은 최종적으로 기계 코드로 변환되는 표현입니다. 여기
 
 
 <br>
+
 ##### Additional Resources
 - [AMP'lify Your Website: Google AMP 101](https://www.mediacurrent.com/blog/amplify-your-website-google-amp-101/) | Blog
 - [Next-Level Drupal: Applied Progressive Decoupling with Javascript](https://www.mediacurrent.com/videos/next-level-drupal-applied-progressive-decoupling-javascript/) | Video
