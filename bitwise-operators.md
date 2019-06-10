@@ -1,3 +1,5 @@
+> 원문: [JavaScript: Bitwise Operators](https://www.w3resource.com/javascript/operators/bitwise-operator.php)
+
 비트 단위 연산자는 10 진수, 16 진수 또는 8 진수가 아닌 인수의 비트(0,1)에 대한 연산을 수행한다. 예를 들어 십진수 8은 이진수로 1000으로 표현할 수 있다. 비트 연산자는 이러한 이진 표현(예: 1000)에 대한 연산을 수행하지만 표준 Javascript 숫자 값을 반환한다.
 
 다음은 JavaScript의 비트 연산자 목록이다.
