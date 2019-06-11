@@ -12,7 +12,7 @@
 | [setTimeout, setInterval, requestAnimationFrame](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/setTimeout,-setInterval,-requestAnimationFrame) |
 | [자바스크립트 엔진](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%97%94%EC%A7%84) |
 | [비트 연산자, 형식화 배열, 버퍼(배열)](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EB%B9%84%ED%8A%B8-%EC%97%B0%EC%82%B0%EC%9E%90,-%ED%98%95%EC%8B%9D%ED%99%94-%EB%B0%B0%EC%97%B4,-%EB%B2%84%ED%8D%BC(%EB%B0%B0%EC%97%B4)) |
-| DOM과 Layout Trees |
+| [DOM과 Layout Trees](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/DOM%EA%B3%BC-Layout-Trees) |
 | 팩토리와 클래스 |
 | this, call, apply, bind |
 | new, 생성자, instanceof, 인스턴스 |
