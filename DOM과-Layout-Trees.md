@@ -9,3 +9,6 @@
 | 3. [What is the DOM?](https://css-tricks.com/dom/)| 재욱 |
 | 4. [Traversing the DOM with JavaScript](https://zellwk.com/blog/dom-traversals/)| 승민 |
 | 5. [📌 DOM tree](https://javascript.info/dom-nodes)| 용관 |
+
+번역이 되어있는 developer google 참고
+[렌더링 트리 생성, 레이아웃 및 페인트](https://developers.google.com/web/fundamentals/performance/critical-rendering-)path/render-tree-construction
