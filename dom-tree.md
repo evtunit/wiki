@@ -1,6 +1,9 @@
+
+> 원문: [DOM Tree](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/dom-tree)
+
 # DOM Tree
 
-HTML	문서의 기본은 태그다.
+HTML 문서의 기본은 태그다.
 
 Document Object Model(DOM)에 따르면 모든 HTML 태그는 객체다.
 
@@ -12,7 +15,7 @@ Document Object Model(DOM)에 따르면 모든 HTML 태그는 객체다.
 
 이 문서의 DOM을 살펴보도록 하자.
 
-```markup
+```html
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -50,7 +53,7 @@ DOM은 태그의 트리 구조로서 HTML을 나타낸다. 다음과 같이 보�
 
 아래는 여백이 없고 오직 텍스트 노드만 있는 예이다.
 
-```markup
+```html
 <!DOCTYPE HTML>
 <html><head><title>About elks</title></head><body>The truth about elks.</body></html>
 ```
@@ -77,7 +80,7 @@ DOM은 태그의 트리 구조로서 HTML을 나타낸다. 다음과 같이 보�
 
 DOM을 생성하는 동안 브라우저는 문서의 오류를 자동으로 처리하고 태그를 닫는 등의 작업을 수행한다. 닫히지 않은 태그가 있는 문서가 있다고 가정해보자:
 
-```markup
+```html
 <p>Hello
 <li>Mom
 <li>and
@@ -94,7 +97,7 @@ DOM을 생성하는 동안 브라우저는 문서의 오류를 자동으로 처�
 >
 > 아래와 같은 HTML을 예로 들어보자.
 >
-> ```markup
+> ```html
 > <table id="table"><tr><td>1</td></tr></table>
 > ```
 >
@@ -108,7 +111,7 @@ DOM을 생성하는 동안 브라우저는 문서의 오류를 자동으로 처�
 
 페이지에 더 많은 태그와 코멘트를 추가해보자.
 
-```markup
+```html
 <!DOCTYPE HTML>
 <html>
 <body>
@@ -183,7 +186,7 @@ DOM을 탐색 할 때 Javascript를 적용하려고 할 수도 있다. 마찬가
 
 이제 콘솔에서 마지막으로 선택한 엘리먼트는 `$0`로, 이전에 선택한 요소는 `$1`로 접근 할 수 있다.
 
-커맨드를 실행할 수 있다. 예를 들어, `$0.style.background = 'red'`는 다음과 같이 선택된 목록 항목을 빨간색으로 만든다.
+커맨드를 실행할 수 있다. 예를 들어, `$0.sthtmlyle.background = 'red'`는 다음과 같이 선택된 목록 항목을 빨간색으로 만든다.
 
 [[/resource/yongkwan/13/09.png]]
 
