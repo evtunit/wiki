@@ -5,13 +5,13 @@
 
 <img src="https://css-tricks.com/wp-content/uploads/2013/12/is-html-the-dom.jpg" width="650" alt="">   
 
-너가 쓰는 HTML이 DOM 입니까?  
-아니요. 정말로.
+너가 쓰는 HTML이 DOM 입니까?   
+아니요. 정말로.  
 하지만 작성한 HTML은 브라우저에서 파싱되어 DOM으로 변환됩니다.  
 
 <img src="https://css-tricks.com/wp-content/uploads/2013/12/view-source-no.jpg" width="650" alt="">   
 
-View Source가 DOM 입니까?
+View Source가 DOM 입니까?  
 아니요. 정말로.  
 
 View Source는 해당 페이지를 구성하는 HTML을 보여줍니다. 아마 당신이 쓴 그 HTML일 것입니다.  
