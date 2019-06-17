@@ -23,7 +23,7 @@ View Source는 사실 약간 이상합니다. 그 코드를 보고 싶은 사람
  
 <img src="https://css-tricks.com/wp-content/uploads/2013/12/devtools-dom.jpg" width="650" alt="">   
 
-DevTools의 코드가 DOM입니까?
+DevTools의 코드가 DOM입니까?   
 옙!
 
 여러분이 사용하고 있는 DevTools에서 패널을 볼 때, HTML처럼 보이는 것들을 보여주는데, 그것이 DOM의 시각적 표현입니다!  
