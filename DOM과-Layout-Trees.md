@@ -6,7 +6,7 @@
 | :-------- | :------ |
 | 1. [Introduction to the DOM](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Introduction-to-the-DOM)| 호철 |
 | 2. [JavaScript DOM Tutorial with Example ](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/JavaScript-DOM-Tutorial-with-Example)| 현아 |
-| 3. [What is the DOM?](https://css-tricks.com/dom/)| 재욱 |
+| 3. [What is the DOM?](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/What-is-the-DOM%3F)| 재욱 |
 | 4. [Traversing the DOM with JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/JavaScript%EB%A1%9C-DOM-%EB%93%B1%EC%82%B0%ED%95%98%EA%B8%B0)| 승민 |
 | 5. [📌 DOM 트리](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/dom-tree)| 용관 |
 
