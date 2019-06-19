@@ -8,7 +8,7 @@ JavaScript는 프로토타입 기반 언어이며, JavaScript의 모든 객체�
 
 <br>
 
-# Classes Are Functions
+## Classes Are Functions
 
 JavaScript 클래스는 함수 유형입니다. 클래스는 `class` 키워드로 선언됩니다. 함수 식 구문을 사용하여 함수를 초기화하고 클래스 식 구문을 사용하여 클래스를 초기화합니다.
 
