@@ -6,17 +6,17 @@
 
 ---
 
-Javascript : 자바스크립트
-plain : 단조로운, 뽐내지 않는와 같은 뜻을 지니고 있어 순수로 번역
-Factory Design Pattern : 팩토리디자인패턴
-interpreter : [인터프리터](http://www.terms.co.kr/interpreter.htm)
-[cumbersome](https://ko.wiktionary.org/wiki/cumbersome) : 성가신, 부담스러운
-object : 객체
-In a nutshell : 간단히 말해
-instance : 인스턴스
-function : 함수
-keyword : 키워드
-Mixin : 믹스인
+- Javascript : 자바스크립트
+- plain : 단조로운, 뽐내지 않는와 같은 뜻을 지니고 있어 순수로 번역
+- Factory Design Pattern : 팩토리디자인패턴
+- interpreter : [인터프리터](http://www.terms.co.kr/interpreter.htm)
+- [cumbersome](https://ko.wiktionary.org/wiki/cumbersome) : 성가신, 부담스러운
+- object : 객체
+- In a nutshell : 간단히 말해
+- instance : 인스턴스
+- function : 함수
+- keyword : 키워드
+- Mixin : 믹스인
 
 ---
 
