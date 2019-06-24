@@ -124,4 +124,4 @@ setTimeout(() => {
 }, 0);
 ```
 
-Discover Functional JavaScript는 BookAuthority가 개발 한 최고의 새로운 [Functional Programming eBook] 중 하나입니다!
+Discover Functional JavaScript는 BookAuthority가 개발 한 최고의 새로운 [Functional Programming eBook](https://bookauthority.org/books/new-functional-programming-ebooks?t=2zo8jf&s=award&book=B07PBQJYYG) 중 하나입니다!
