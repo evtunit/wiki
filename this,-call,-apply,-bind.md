@@ -2,7 +2,7 @@
 
 |   제목   | 번역자  |
 | :-------- | :------ |
-| 1. [How-to: call() , apply() and bind() in JavaScript](https://www.codementor.io/niladrisekhardutta/how-to-call-apply-and-bind-in-javascript-8i1jca6jp)| 용관 |
+| 1. [How-to: call() , apply() and bind() in JavaScript](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/how-to-call-apply-and-bind-in-javascript)| 용관 |
 | 2. [Understanding the "this" keyword, call, apply, and bind in JavaScript](https://tylermcginnis.com/this-keyword-call-apply-bind-javascript/)| 재욱 |
 | 3. [Javascript: call(), apply() and bind()](https://medium.com/@omergoldberg/javascript-call-apply-and-bind-e5c27301f7bb)| 호철 |
 | 4. [The difference between call / apply / bind](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/The-difference-between-call---apply---bind)| 현아 |
