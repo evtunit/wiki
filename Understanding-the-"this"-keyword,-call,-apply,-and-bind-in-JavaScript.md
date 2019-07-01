@@ -3,10 +3,11 @@
 자바스크립트의 가장 오해 된 부분 중 하나는 this 키워드입니다. 
 이 글에서는 this 키워드가 참조하고있는 것을 알아내는 다섯 가지 규칙을 배웁니다. 
 Implicit Binding, Explicit Binding, new binding, window binding, Lexical Binding.
-이 기술을 다루는 데있어 .call, .apply, .bind 및 new 키워드와 같은 자바스크립트의 다른 부분도 배우게됩니다.
+이 기술을 다루는 데있어 .call, .apply, .bind 및 new 키워드와 같은 자바스크립트의 다른 부분도 배우게됩니다.    
 
-<iframe width="864" height="486" src="https://www.youtube.com/embed/zE9iro4r918" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="864" height="486" src="https://www.youtube.com/embed/zE9iro4r918" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
 
+<br>
 자바스크립트에서 `this`키워드의 세부사항을 살펴보기 전에 한 걸음 물러서서 `this`키워드가 왜 존재하는지 먼저 살펴보는 것이 중요합니다. 
 `this`키워드는 서로 다른 컨텍스트로 함수를 재사용 할 수 있습니다. 다르게 말하면, `this`키워드는 함수 나 메소드를 호출할 때 어떤 객체가 초점이 되어야하는지 결정할 수 있습니다. 이 후 우리가 이야기하는 모든 것은 그 아이디어를 바탕으로 만들어질 것입니다.
 우리는 다른 컨텍스트 또는 다른 객체에서 함수 나 메소드를 재사용 할 수 있기를 원합니다.
