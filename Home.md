@@ -15,7 +15,7 @@
 | [DOM과 Layout Trees](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/DOM%EA%B3%BC-Layout-Trees) |
 | [팩토리와 클래스](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%ED%8C%A9%ED%86%A0%EB%A6%AC%EC%99%80-%ED%81%B4%EB%9E%98%EC%8A%A4) |
 | [this, call, apply, bind](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/this,-call,-apply,-bind) |
-| new, 생성자, instanceof, 인스턴스 |
+| [new, 생성자, instanceof, 인스턴스](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/new,-%EC%83%9D%EC%84%B1%EC%9E%90,-instanceof,-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4) |
 | 프로토타입의 상속과 체인 |
 | Object.create와 Object.assign |
 | map, reduce, filter |
