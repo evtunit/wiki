@@ -7,4 +7,4 @@
 | 3. [Constructor, operator "new"](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%83%9D%EC%84%B1%EC%9E%90,-%EC%97%B0%EC%82%B0%EC%9E%90-%22new%22)| 승민 |
 | 4. [Understanding JavaScript Constructors ](https://css-tricks.com/understanding-javascript-constructors/)| 해연 |
 | 5. [Learn to code with JavaScript](https://openclassrooms.com/en/courses/3523231-learn-to-code-with-javascript/4379006-use-constructor-functions)| 재욱 |
-| 6. [Beyond typeof and instanceof: simplifying dynamic type checks](https://2ality.com/2017/08/type-right.html)| 용관 |
+| 6. [Beyond typeof and instanceof: simplifying dynamic type checks](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/type-right)| 용관 |
