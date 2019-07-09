@@ -86,3 +86,103 @@ var x = function() {
 
 console.dir(x);
 ```
+
+<br>
+
+![](https://user-images.githubusercontent.com/21126403/40363067-016bfa96-5dec-11e8-9e32-2a848991af39.png)
+
+<br>
+
+그래서 프로토타입 체인 전체를 만들 수 있다. 여기서 호출을 하게 되면
+
+<br>
+
+```js
+console.log(x.toString());
+// > function() {
+// >
+// >  }
+```
+
+<br>
+
+여기서 `x`는 `toString()`을 사용할 필요가 없지만 위로 올라가보면 prototype chain에 있다.
+
+<br> <br>
+
+## Prototypes in Depth
+
+Javascipt는 Java와 같은 `Class defination`을 가지고 있지 않는다. 여기서 `Base class`에서 서브 클래스를 만드는 방법을 소개한다.
+
+<br>
+
+```js
+//Baseclass
+var Bookshop = function() {
+  this.cost = 100;
+}
+
+Bookshop.prototype.bill = function() {
+  console.log('Your Bill is: $'+ this.cost);
+}
+```
+
+<br>
+
+`Bookshop`은 Base Class로 `bill`이 prototype으로 속해있다.
+
+<br>
+
+```js
+//Subclass
+ var BuyBook = function(title,cost) {
+  Bookshop.call(this); // Statement 1
+  
+  this.title = title;
+  if(cost) 
+    this.cost = cost ;
+ }
+
+BuyBook.prototype = Object.create(Bookshop.prototype); // Statement 2
+BuyBook.prototype.constructor = BuyBook; // Statement 3
+```
+
+<br>
+
+`Bookshop`은 Base Class로 `BuyBook`은 그의 Sub Class로 속해있다.
+
+<br> <br>
+
+**Explaination**
+
+1. `Bookshop.call(this)`
+
+이 라인은 생성자를 call할 때 vlaue값으로 `this`를 넘겨주었다. 그래서 `BuyBook : this = { this.cost = 100; }가 된다.
+
+2. `BuyBook.prototype = Object.create(Bookshop.prototype);`
+
+이 라인은 `Bookshop.prototype`의 초기값을 셋팅해준다.
+
+3. `BuyBook.prototype.constructor = BuyBook;`
+
+이 라인은 `BuyBook` 생성자 함수를 셋팅해준다. (BuyBook은 메소드이다)
+
+<br>
+
+```js
+ var person_1 = new BuyBook('GOT', 200);
+ var person_2 = new BuyBook('Harry Potter');
+
+ person_1.bill();
+ //> Your Bill is: $200
+ person_2.bill();
+ //> Your Bill is: $100
+```
+
+<br>
+
+이렇게 하면 상속을 수행할 수 있다. `BuyBook.protype`에서 새 메서드를 정의하여 `bill()` 메서드를 덮어쓸 수도 있다. 예를들면 `BuyBook.prototype.bill = function() { }` 이렇게!
+
+<br>
+
+<End /> 😄
