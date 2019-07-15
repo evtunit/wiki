@@ -88,7 +88,7 @@ Object.prototype.constructor === Object//true
 Object.__proto__ === Function.prototype//true
 ```
 
-자세히 살펴보면 `Function` 자체가 `__proto__` 을 가지고있는 것을 보게 될 것입니다. 즉, `Function` 생성자 함수는 `prototype`을 가진 생성자 함수에서 만들어 졌음을 의미합니다. `Function` 자체는 **function** 이기 때문에 `Function` 생성자, 즉 그 자체로 만들어 져야합니다. 나는 그것이 이상하게 들린다는 것을 알고있다. 그러나 당신이 그것을 점검 할 때, 그것은 사실 인 것으로 판명됩니다.
+자세히 살펴보면 `Function` 자체가 `__proto__` 을 가지고있는 것을 보게 될 것입니다. 즉, `Function` 생성자 함수는 `prototype` 을 가진 어떤 생성자 함수에서 만들어 졌음을 의미합니다. `Function` 자체는 **function** 이기 때문에 `Function` 생성자, 즉 그 자체로 만들어 져야합니다. 나는 그것이 이상하게 들린다는 것을 알고있다. 그러나 당신이 그것을 점검 할 때, 그것은 사실 인 것으로 판명됩니다.
 
 ![](https://cdn-media-1.freecodecamp.org/images/gHONmm8YNyMAgQYD3MQ88WsYsathI0Nr-cp8)
 
@@ -106,7 +106,7 @@ Function.prototype.constructor === Function\\true
 
 ![](https://cdn-media-1.freecodecamp.org/images/ftvp4bDag11U4kaWjV3nG7UfkqQKjSQPA4i0)
 
-다시 말하지만, **함수** 의 **프로토 타입** 은 `__proto__` 을 가지고 있습니다. 놀랍지도 않습니다 . `prototype` 은 객체입니다. 객체를 가질 수 있습니다. 그러나 객체의 _프로토 타입_ 을 가리키고 있음을 주목하십시오.
+다시 말하지만, **Function** 의 **prototype** 은 `__proto__` 을 가지고 있습니다. 놀랍지도 않습니다 . `prototype` 은 객체입니다. 객체를 가질 수 있습니다. 그러나 객체의 _프로토 타입_ 을 가리키고 있음을 주목하십시오.
 
 ```
 Function.prototype.__proto__ == Object.prototype\\true
