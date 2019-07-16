@@ -311,7 +311,3 @@ for(let prop in rabbit) {
 -  읽기/지우기 연산은 객체에 직접적으로 적용된다. 프로토타입을 사용하지 않는다.(setter가 아닌 데이터 속성이라 가정했을 경우).
 - `obj.method()`를 호출하고, 해당 `method`가 프로토타입에서 가져온 것이라면,  `this`는 여전히  `obj`를 킨다. 심지어 메소드들이 상속됬다 하더라도 메소드들을 언제나 현재 객체에 적용될 것입니다.
 - `for..in` 루프는 자신의 값과 상속된 값을 반복한다. 그 외의 key/value를 가져오는 다른  모든 메소드들은 오직 그 자신의 객체의 속성만 가져온다.
-Markdown selection 7374 bytes 1227 words 314 lines Ln 315, Col 92 HTML 5343 characters 1181 words 194 paragraphs
-MENU
-Signed in as Yongkwan Lim.
-Main workspace synced with your Google Drive app data folder.
