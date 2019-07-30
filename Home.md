@@ -19,7 +19,7 @@
 | [프로토타입의 상속과 체인](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%98-%EC%83%81%EC%86%8D%EA%B3%BC-%EC%B2%B4%EC%9D%B8) |
 | [Object.create와 Object.assign](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Object.create%EC%99%80-Object.assign) |
 | [map, reduce, filter](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/map,-reduce,-filter) |
-| 순수함수, 부수효과, 상태변이 |
+| [순수함수, 부수효과, 상태변이](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%88%9C%EC%88%98%ED%95%A8%EC%88%98,-%EB%B6%80%EC%88%98%ED%9A%A8%EA%B3%BC,-%EC%83%81%ED%83%9C%EB%B3%80%EC%9D%B4) |
 | 클로저(Closures) |
 | 고차함수 |
 | 재귀 |
