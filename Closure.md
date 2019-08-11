@@ -2,7 +2,7 @@
 
 |     제목     |    번역자    |
 | :---------- | :--------- |
-| 1. [I never understood JavaScript closures](https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8) | 해연 |
+| 1. [I never understood JavaScript closures](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/I-never-understood-JavaScript-closures) | 해연 |
 | 2. [Closure](https://javascript.info/closure) | 승민 |
 | 3. [Understanding JavaScript Closures](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%ED%81%B4%EB%A1%9C%EC%A0%80-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0) | 현아 |
 | 4. [Understand Closures in JavaScript](https://codeburst.io/understand-closures-in-javascript-d07852fa51e7) | 재욱 |
