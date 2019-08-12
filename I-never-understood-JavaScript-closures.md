@@ -2,6 +2,8 @@
 
 (...음?역설이겠지...)
 
+원문 : https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8
+
 제목에서 유추할 수 있듯이 자바스크립트 클로저는 항상 미스테리입니다. 수 많은 글들을 읽고, 업무에서 클로저를 사용해보고, 가끔은 클로저를 사용하는 중에 깨달음없이 클로저를 사용 했었습니다.
 
 최근에 마침내 클로저를 설명해주는 토크 자리에 갔습니다. 이 글에서 클로저를 설명하기 위해 이 방법을 사용할 것입니다. [CodeSmith][(https://www.codesmith.io/)]와r *JavaScript The Hard Parts* 시리즈에 참여한 분에게 공을 돌리겠습니다
@@ -180,19 +182,19 @@
 16. 12행. 10-14 단계를 반복합니다. c3는 또한 1을 얻습니다.
 17. 13행.  c1, c2, c3의 변수의 본문이 로그로 출력 됩니다.
 
-Try this out for yourself and see what happens. You’ll notice that it is not logging `1`, `1`, and `1` as you may expect from my explanation above. Instead it is logging `1`, `2` and `3`. So what gives?
+각 부분에서 어떤 일이 발생하는지 한번 살펴보세요.  위 설명에서 알수 있듯이 1, 1, 1로 콘솔에 보여 지지 않습니다. 대신에 1, 2, 3이  콘솔에 보여집니다. 따라서 무엇을 주나요?
 
-Somehow, the increment function remembers that `counter `value. How is that working?
+어쨌든 증가 함수는 카운터 값을 기억 합니다. 어떻게 동작하나요?
 
-Is `counter `part of the global execution context? Try `console.log(counter)`and you’ll get `undefined`. So that’s not it.
+counter는 전역 실행 컨텍스트인가요? console.log(counter)을 입력하면 undefined을 얻을 것입니다. 따라서 전역 실행 컨텍스트가 아닙니다.
 
-Maybe, when you call `increment`, somehow it goes back to the the function where it was created (`createCounter`)? How would that even work? The variable `increment` contains the function definition, not where it came from. So that’s not it.
+아마도 increment을 호출하면 어떻게든 increment가 생성된 함수(createCounter)로 돌아갑니다.  어떻게 작동할까요? increment변수는 함수 정의를 포함하고 있습니다. 그래서 그렇지 않습니다.
 
-So there must be another mechanism. **The Closure.** We finally got to it, the missing piece.
+그래서 다른 메커니즘이 있어야 합니다. 클로저. 잃어버린 조각에 도착 했습니다.
 
-Here is how it works. Whenever you declare a new function and assign it to a variable, you store the function definition, *as well as a closure*. The closure contains all the variables that are in scope at the time of creation of the function. It is analogous to a backpack. A function definition comes with a little backpack. And in its pack it stores all the variables that were in scope at the time that the function definition was created.
+작동 방식은 다음과 같습니다. 새로운 함수를 선언하고 변수에 할당할 때마다 함수 정의와 클로저를 저장합니다. 클로저는 함수 생성 시 스코프 내에 있는 모든 변수가 포함됩니다. 배낭과 비슷합니다. 함수 정의는 작은 배낭과 함께 제공됩니다. 그리고 팩에는 함수 정의가 작성될 때 범위 내에 있던 모든 변수가 저장됩니다.
 
-So our explanation above was *all wrong*, let’s try it again, but correctly this time.
+위의 설명은 모두 잘못되었습니다. 이번에는 다시 시도해보겠습니다.
 
 ```javascript
 1: function createCounter() {
@@ -210,33 +212,33 @@ So our explanation above was *all wrong*, let’s try it again, but correctly th
 13: console.log('example increment', c1, c2, c3)
 ```
 
-1. Lines 1–8. We create a new variable `createCounter` in the global execution context and it get’s assigned function definition. Same as above.
-2. Line 9. We declare a new variable named `increment` in the global execution context. Same as above.
-3. Line 9 again. We need call the `createCounter` function and assign its returned value to the `increment` variable. Same as above.
-4. Lines 1–8 . Calling the function. Creating new local execution context. Same as above.
-5. Line 2. Within the local execution context, declare a new variable named `counter`. Number `0` is assigned to `counter`. Same as above.
-6. Line 3–6. Declaring new variable named `myFunction`. The variable is declared in the local execution context. The content of the variable is yet another function definition. As defined in lines 4 and 5. Now we also create a *closure* and include it as part of the function definition. The closure contains the variables that are in scope, in this case the variable `counter` (with the value of `0`).
-7. Line 7. Returning the content of the `myFunction` variable. Local execution context is deleted. `myFunction` and `counter` no longer exist. Control is returned to the calling context. So we are returning the function definition *and its closure*, the backpack with the variables that were in scope when it was created.
-8. Line 9. In the calling context, the global execution context, the value returned by `createCounter` is assigned to `increment`. The variable increment now contains a function definition (and closure). The function definition that was returned by `createCounter`. It is no longer labeled `myFunction`, but it is the same definition. Within the global context, it is called `increment`.
-9. Line 10. Declare a new variable (`c1`).
-10. Line 10 (continued). Look up the variable `increment`, it’s a function, call it. It contains the function definition returned from earlier, as defined in lines 4–5. (and it also has a backpack with variables)
-11. Create a new execution context. There are no parameters. Start execution the function.
-12. Line 4. `counter = counter + 1`. We need to look for the variable `counter`. Before we look in the *local* or *global* execution context, let’s look in our backpack. Let’s check the closure. Lo and behold, the closure contains a variable named `counter`, its value is `0`. After the expression on line 4, its value is set to `1`. And it is stored in the backpack again. The closure now contains the variable `counter` with a value of `1`.
-13. Line 5. We return the content of `counter`, or the number `1`. We destroy the local execution context.
-14. Back to line 10. The returned value (`1`) gets assigned to `c1`.
-15. Line 11. We repeat steps 10–14. This time, when we look at our closure, we see that the `counter` variable has a value of 1. It was set in step 12 or line 4 of the program. Its value gets incremented and stored as `2` in the closure of the increment function. And `c2` gets assigned `2`.
-16. Line 12. We repeat steps 10–14, `c3` gets assigned `3`.
-17. Line 13. We log the content of variables `c1`, `c2` and `c3`.
+1. 1행–8행.  전역 실행 컨텍스트에서 createCounter 새로운 변수를 생성합니다. 그리고 함수 정의를 할당합니다. 위와 동일 합니다.
+2. 9행. increment 이름을 가진 새로운 변수를 전역 실행 컨텍스트에 선언합니다. 위와 동일합니다.
+3. 다시 9행. createCounter 함수 호출을 필요로하고, increment 변수의 값을 할당합니다. 위와 동일합니다.
+4. 1행–8행 . 함수의 호출. 새로운 지역 실행 컨텍스트를 생성합니다. 위와 동일 합니다.
+5. 2행. 지역 실행 컨텍스트 내부에서, counter이름을 가진 변수를 선언합니다. 숫자 0은 counter에 할당됩니다. 위와 동일합니다.
+6. 3행–6행. myFunction이름을 가진 변수를 선언합니다. 지역 실행 컨텍스트에 변수를 선언합니다. 변수의 본문은 아직 다른 함수 정의에 있습니다. 4행에서 5행에 정의된 대로 이제 클로저 그리고 함수 정의를 일부로 포함이 됩니다. 클로저는 범위 내에 있는 변수, 이 경우 counter을 포함합니다. (값 0과 함께).
+7. 7행. myFunction 변수의 본문을 반환합니다. 지역 실행 컨텍스트는 삭제됩니다. myFunction 그리고 counter은 더 이상 존재하지 않습니다. 제어는 호출 컨텍스트로 리턴됩니다. 그래서 함수 정의와 클로저를, 이것이 생성 되었을 때 스코프에서  백팩과 변수를 반환합니다.
+8. 9행. 전역 실행 컨텍스트인 호출 컨텍스트에서 createCounter에 의해 반환된 값은 increment에 할당이 되어 집니다.  변수 increment는 함수 정의와 클로저가 포함이 되어 있습니다.  createCounter에 반환되어진 함수를 정의 합니다. 더 이상 myFunction이라고 표시되지 않지만 같은 정의 입니다. 글로벌 컨텍스트에서 increment가 호출됩니다.
+9. 10행. 새로운 변수를 선언합니다(`c1`).
+10. 10행 (계속 진행). increment변수를 찾아보면 함수 입니다. 4-5행에 정의된 대로 이전에 반환된 함수 정의를 포함합니다.(그리고 이것 또한 백팩과 변수를 포함합니다.)
+11. 새로운 실행 컨텍스트를 생성합니다. 파라미터를 가지고 있지 않습니다. 함수의 실행을 시작합니다.
+12. 4행. `counter = counter + 1`.counter변수를 찾는 것이 필요합니다. 지역 또는 전역 실행 컨텍스트에서 찾기 전에, 백팩에 찾아봅니다. 클로저를 확인합니다. Lo 그리고 behold, 클로저는 counter이름을 가진 변수를 포함하고 있고 값은 0 입니다.  4행에서의 표현식 이후 값은 1이 셋팅이 되어 집니다. 그리고 백팩에 다시 저장이 됩니다. 클로저는 지금 변수counter 그리고 값은 1을 포함하고 있습니다.
+13. 5행. counter의 본문 또는 숫자 1을 반환합니다. 지역 실행 컨텍스트가 소멸됩니다.
+14. 10행으로 돌아갑니다. 반환된 값 1은 c1에 할당됩니다.
+15. 11행. 10단계에서 부터 14단계까지를 반복합니다. 이번에는 클로저를 보면 counter변수의 값이 1이라는 것을 알 수 있습니다. 프로그램의 12단계 또는 4행에서 설정이 되었습니다. 그것의 값은 증가 함수의 클로저에서 증가하고 2로 저장이 됩니다. 그리고 c2에는 2가 할당됩니다.
+16. 12행. 10단계에서 14단계까지를 반복합니다. c3은 3이 할당됩니다. 
+17. 13행. c1, c2, c3 변수의 본문이 콘솔에 보여집니다.
 
-So now we understand how this works. The key to remember is that when a function gets declared, it contains a function definition and a closure. The closure is a collection of all the variables in scope at the time of creation of the function.
+이제 이것이 어떻게 작동하는지 이해할 수 있습니다. 기억해야할 핵심은 함수가 선언될 때 함수 정의와 클로저를 포함한다는 것입니다. 클로저는 함수 생성 시 범위에 있는 모든 변수의 모음입니다.
 
-You may ask, does any function has a closure, even functions created in the global scope? The answer is yes. Functions created in the global scope create a closure. But since these functions were created in the global scope, they have access to all the variables in the global scope. And the closure concept is not really relevant.
+전역 범위에서 작성된 함수 조차도 어떤 함수에 클로저가 있습니까? 대답은 예입니다. 전역 범위에서 생성된 함수는 클로저를 만듭니다. 그러나 이러한 함수는 전역 범위에서 작성 되었으므로 전역 범위의 모든 변수에 액세스할 수 있습니다. 클로저 개념은 실제로 관련이 없습니다.
 
-When a function returns a function, that is when the concept of closures becomes more relevant. The returned function has access to variables that are not in the global scope, but they solely exist in its closure.
+함수가 함수를 반환할 때, 즉 클로저 개념이 더 관련성이 더 높아집니다. 반환된 함수는 전역 범위에 없는 변수에 액세스 할 수 있지만 클로저에만 존재합니다.
 
-## Not so trivial closures
+## 사소한 클로저는 아닙니다.
 
-Sometimes closures show up when you don’t even notice it. You may have seen an example of what we call partial application. Like in the following code.
+눈치 채지 못할 때도 종종 클로저가 나타납니다. 부분 애플리케이션이라고 하는 예제를 보셨을 것입니다. 다음 코드와 같이.
 
 ```javascript
 let c = 4
@@ -246,7 +248,7 @@ let d = addThree(c)
 console.log('example partial application', d)
 ```
 
-In case the arrow function throws you off, here is the equivalent.
+화살표 함수인 경우가 여기에 해당 합니다.
 
 ```javascript
 let c = 4
@@ -260,15 +262,15 @@ let d = addThree(c)
 console.log('example partial application', d)
 ```
 
-We declare a generic adder function `addX` that takes one parameter (`x`) and returns another function.
+하나의 매개변수 (x)를 사용하고 다른 함수를 반환하는 일반 addr함수 addX를 선언합니다.
 
-The returned function also takes one parameter and adds it to the variable `x`.
+리턴된 함수는 하나의 매개 변수를 가지고 와서 변수 x에 추가합니다.
 
-The variable `x` is part of the closure. When the variable `addThree` gets declared in the local context, it is assigned a function definition and a closure. The closure contains the variable `x`.
+변수 x는 클로저의 일부 입니다. 'addThree' 변수가 지역 컨텍스트에서 선언되면 함수 정의와 클로저가 할당됩니다. 클로저는 변수 x를 포합합니다.
 
-So now when `addThree` is called and executed, it has access to the variable `x` from its closure and the variable `n` which was passed as an argument and is able to return the sum.
+이제 addThree가 호출되어 실행될 때, 변수는 클로저에서 변수 x와 인자로 전달된 변수 n에 액세스 할 수 있으며 sum을 리턴할 수 있습니다.
 
-In this example the console will print the number `7`.
+이 예제에서 콘솔은 숫자 7을 인쇄합니다.
 
 ![img](https://miro.medium.com/max/60/1*ZrJKJqBsksWd-8uKM9OvgA.png?q=20)
 
@@ -276,10 +278,10 @@ In this example the console will print the number `7`.
 
 ## 결론
 
-The way I will always remember closures is through **the backpack analogy**. When a function gets created and passed around or returned from another function, it carries a backpack with it. And in the backpack are all the variables that were in scope when the function was declared.
+클로저를 기억하는 방법은 배낭 비유를 통하는 것입니다. 함수가 만들어지고 다른 함수에서 전달되거나 반환되면 배낭과 함께 배낭을 운반합니다. 그리고 배낭에는 함수가 선언 되었을 때 스코프 내에 있던 모든 변수가 있습니다.
 
-> *If you enjoyed reading this, don’t forget the applause. 👏* 
-> Thank you.
+> *만약 이 글이 즐거웠다면 박수를 잊지 마세요. 👏* 
+> 감사합니다.
 
 [
 ](https://medium.com/dailyjs?source=post_sidebar--------------------------post_sidebar-)
