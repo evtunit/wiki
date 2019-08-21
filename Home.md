@@ -22,7 +22,7 @@
 | [순수함수, 부수효과, 상태변이](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%88%9C%EC%88%98%ED%95%A8%EC%88%98,-%EB%B6%80%EC%88%98%ED%9A%A8%EA%B3%BC,-%EC%83%81%ED%83%9C%EB%B3%80%EC%9D%B4) |
 | [클로저(Closures)](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Closure) |
 | [고차함수](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98) |
-| 재귀 |
+| [재귀](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%9E%AC%EA%B7%80) |
 | 컬렉션과 생성기 |
 | Promises |
 | async/await |
