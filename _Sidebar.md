@@ -22,3 +22,4 @@
 - [Closure](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Closure)
 - [고차함수](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98)
 - [재귀](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%9E%AC%EA%B7%80)
+- [컬렉션과 생성기](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%BB%AC%EB%A0%89%EC%85%98%EA%B3%BC-%EC%83%9D%EC%84%B1%EA%B8%B0)
