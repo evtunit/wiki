@@ -1,5 +1,7 @@
 # 자바스크립트의 Set 소개
 
+> 원문: [Introduction to Sets in JavaScript — Alligator.io](https://alligator.io/js/sets-introduction/ )
+
 `Set`은 고유 한 값의 모음을 만들 수 있는 ES6(ES2015)의 새로운 객체 유형이다. `Set`의 값은 문자열 또는 정수와 같은 원시값 일 수 있지만 객체 리터럴 또는 배열과 같은 더 복잡한 객체 유형도 Set의 일부가 될 수 있다.
 
 다음은 기본 set과 `add` , `size` , `has` , `forEach` , `delete` 및 `clear`와 같이 사용 가능한 몇 가지 메소드를 보여주는 간단한 예이다 .
