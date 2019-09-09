@@ -121,6 +121,7 @@ withdraw.then(function(amount){
 });
 ```
 
+<br>
 
 Promise는 이전 Promise이 해결되거나 완료된 후에 어떤 일이 일어나야 하는지를 보여주기 위해 `.then` 구문을 사용한다. 이 경우, Promise의 최종 결과는 금액 내에 포함되어 있다.
 
@@ -129,4 +130,148 @@ Promise는 이전 Promise이 해결되거나 완료된 후에 어떤 일이 일�
 또 다른 중요한 메모-플레이슬롯은 꾸며낸 function이다. 우리는 그것이 두 가지 주장, 즉 당신이 가진 돈의 총액과 도박을 할 의향이 있는 액수를 필요로 한다고 상상하고 있다.
 
 <br>
+
 ![](https://i1.wp.com/blog.codeanalogies.com/wp-content/uploads/2018/08/promisev2.jpg?w=1460&ssl=1)
+
+<br>
+
+이 Promise chain에 한 걸음 더 알아보기 위해 포커 게임으로 예를 들어 보자.
+
+슬롯머신의 Promise과 비슷하게 작동할 것이다. 이번 건은 우리가 원하는 만큼 도박을 할 것이다.
+
+<br>
+
+```js
+withdraw.then(function(amount){
+  let slotResults = playSlots(amount, 100);
+   
+  if(slotResults <= 0)
+    throw err;
+     
+  return slotResults;
+})
+.then(function(slotResults){
+  let pokerResults = playPoker(slotResults);
+ 
+  if(pokerResults <= 0) 
+    throw err; 
+ 
+  return pokerResults;
+})
+```
+
+그래서 우리는 포커 게임으로 슬롯머신을 한 후에 남은 현금을 모두 먹인다. 꽤 공격적이군,
+
+<br>
+
+![](https://i1.wp.com/blog.codeanalogies.com/wp-content/uploads/2018/08/pokerresults.jpg?w=1460&ssl=1)
+
+<br>
+
+위의 그림의 코드 도표를 보자.
+
+<br>
+
+![](https://i2.wp.com/blog.codeanalogies.com/wp-content/uploads/2018/08/promiseexplainedwithmarketing2.jpg?w=1460&ssl=1)
+
+우리가 이제 도박으로 돈을 다 날렸다고 상상해보자. 원래 게임을 더 할 생각이었지만 돈이 남아 있지 않다. 이 사슬에 더 많은 약속이 추가될 수도 있지만, 우리는 그것을 해결할 수 없을 것이다.
+
+대신 포커 끝나고 0달러 남았기 때문에 이 Promise는 오류를 일으킬 것이다. 그것은 여전히 해결되었지만 거절당한 상태로 있다.
+
+여기서 `.catch()` 방법이 유용하다. catch는 Promise chain에 발생할 수 있는 어떤 오류도 처리할 수 있게 해준다. 각 콜백에 대해 오류 처리기를 쓸 필요는 없다.
+
+돈을 다 도박을 하고 나면 곧장 술집으로 향한다고 상상해보자. 여기 코드에서 보이는 것이 있다.
+
+<br>
+
+```js
+withdraw.then(function(amount){
+  let slotResults = playSlots(amount, 100);
+   
+  if(slotResults <= 0)
+    throw err;
+     
+  return slotResults;
+})
+.then(function(slotResults){
+  let pokerResults = playPoker(slotResults);
+ 
+  if(pokerResults <= 0) 
+    throw err; 
+ 
+  return pokerResults;
+})
+.catch(function(e){
+  goToBar();
+});
+```
+
+<br>
+
+어떤 Promise이 거부되든 상관없이 이 에러핸들링을 통해 말끔하게 코드진행을 할 수 있을 것이다.
+
+<br>
+
+![](https://i2.wp.com/blog.codeanalogies.com/wp-content/uploads/2018/08/catchstatementdiagram.jpg?w=1460&ssl=1)
+
+<br>
+
+## Using Objects Within Promises
+
+지금까지, 우리의 Promise은 단지 숫자만 돌아왔다. 하지만, 그들은 또한 사슬을 따라 어떤 다른 종류의 데이터도 전달할 수 있다.
+
+당신이 슬롯머신을 하고, 약간의 돈을 벌었다고 상상해보자. 슬롯머신은 현금으로 바로 주지 않는다. 나중에 환불할 수 있는 표를 준다. 그걸 티켓인, 티켓아웃제라고 하는데.
+
+이제, 여러분은 두 가지 가치, 즉 수중에 있는 현금의 양과 티켓의 가치를 추적해야 한다. 이 상황에서는 어떤 물체가 가장 잘 작동할 것이다.
+
+슬롯을 재생한 체인의 두 번째 Promise을 수정해 봅시다.
+
+<br>
+
+```js
+withdraw.then(function(amount){
+  let ticketValue = playSlots(amount, 100);
+   
+  if(ticketValue <= 0)
+    throw err;
+     
+  return {tickets: ticketValue, cash: amount};
+});
+```
+
+이제 두 가지 속성이 있는 개체를 반환하는 중. 다음과 같이 보인다.
+
+![](https://i1.wp.com/blog.codeanalogies.com/wp-content/uploads/2018/08/Objectinpromise.jpg?w=1460&ssl=1)
+
+<br>
+
+포커 테이블은 오직 칩을 위한 현금만 받을 것이다. 그러므로 당신은 다음 Promise에서 그 부동산을 사용할 필요가 있다.
+
+```js
+withdraw.then(function(amount){
+  let ticketValue = playSlots(amount, 100);
+   
+  if(ticketValue <= 0)
+    throw err;
+     
+  return {tickets: ticketValue, cash: amount};
+})
+.then(function(slotResults){
+  let pokerResults = playPoker(slotResults.cash);
+ 
+  if(pokerResults <= 0) 
+    throw err; 
+ 
+  return {tickets: slotResults.tickets, cash: pokerResults};
+})
+.catch(function(e){
+  goToBar();
+});
+```
+
+<br>
+
+다음 두 가지 사항에 주목하십시오.
+
+1. 포커 게임에서 현금 가치만 사용했다. 마지막에 나는 여전히 마지막 물건에 티켓 값을 더해야 한다. 그렇지 않았다면, 나는 내 승리를 놓쳤을 것이다.
+2. 슬롯결과에는 이름이 없음에도 불구하고 이전 Promise의 개체가 포함되어 있다.
