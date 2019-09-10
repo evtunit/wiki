@@ -67,8 +67,40 @@ promise.then((data) => {
 
 코드펜의 예시 입니다. 새로운 random joke를  보려면 코드펜이 삽입된 화면에서 오른쪽 하단에 있는 RETURN 버튼을 누르세요.  또한 코드의 다른 부분이 실행되는 순서를 볼 수 있도록 브라우저 콘솔을 열어주세요.
 
-<iframe name="cp_embed_1" src="https://codepen.io/SitePoint/embed/eVaXdP?height=345&amp;theme-id=6441&amp;slug-hash=eVaXdP&amp;default-tab=js%2Cresult&amp;user=SitePoint&amp;embed-version=2&amp;pen-title=An%20Overview%20of%20JavaScript%20Promises&amp;name=cp_embed_1" scrolling="no" frameborder="0" height="345" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" title="An Overview of JavaScript Promises" class="cp_embed_iframe " id="cp_embed_eVaXdP" style="box-sizing: border-box; display: block; max-width: 100%; width: 756px; overflow: hidden;"></iframe>
+[코드펜코드](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/An-Overview-of-JavaScript-Promises)
+```javascript
+const promise = new Promise((resolve, reject) => {
+  const request = new XMLHttpRequest();
 
+  request.open("GET", "https://api.icndb.com/jokes/random");
+  request.onload = () => {
+    if (request.status === 200) {
+      resolve(request.response); 
+    } else {
+      reject(Error(request.statusText));
+    }
+  };
+
+  request.onerror = () => {
+    reject(Error("Error fetching data."));
+  };
+
+  request.send();
+});
+
+console.log("Asynchronous request made.");
+
+promise.then(
+  data => {
+    console.log("Got data! Promise fulfilled.");
+    document.body.textContent = JSON.parse(data).value.joke;
+  },
+  error => {
+    console.log("Promise rejected.");
+    console.log(error.message);
+  }
+);
+```
 
 
 프라미스에는 세 가지 상태가 있을 수 있습니다.:
