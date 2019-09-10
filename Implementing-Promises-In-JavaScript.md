@@ -127,7 +127,7 @@ Visual Studio Code용 Jest 확장을 사용하는 것이 좋습니다. 그것은
 
 결과를 보려면 "Output"콘솔을 열고 "Jest"탭을 선택하십시오.  
 
-<img src="https://cdn-media-1.freecodecamp.org/images/0*dr7riPl5ZRkUF8lo" width="800" alt=""> 
+<img src="//cdn-media-1.freecodecamp.org/images/0*dr7riPl5ZRkUF8lo" width="800" alt=""> 
 
 다음 명령을 실행하여 테스트를 실행할 수도 있습니다.  
 
