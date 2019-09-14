@@ -1,5 +1,7 @@
 # 비동기 자바스크립트: 콜백지옥 에서 부터 Async/Await
 
+원문 : https://www.toptal.com/javascript/asynchronous-javascript-async-await-tutorial
+
 성공적인 웹 어플리케이션을 개발하기 위한 키 중에 하나가 페이지당 수십 개의 AJAX를 호출하는 것입니다.
 
 페이지당 수십개의 AJAX를 호출하는 것은 일반적인 비동기 프로그래밍에서 직면하는 문제이고, 비동기 호출을 다루는 방법은 대부분 앱을 만들거나 중단하거나, 잠재적으로 전체를 다시 시작하는 것입니다.
