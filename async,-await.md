@@ -3,7 +3,7 @@
 |     제목     |    번역자    |
 | :---------- | :--------- |
 | 1. [Async/await](https://javascript.info/async-await) | 호철 |
-| 2. [Exploring Async/Await Functions in JavaScript](https://alligator.io/js/async-functions/) | 용관 |
+| 2. [Javascript의 Async/Await 함수 탐구](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/async-functions) | 용관 |
 | 3. [Asynchronous Javascript using Async - Await](https://scotch.io/tutorials/asynchronous-javascript-using-async-await) | 승민 |
 | 4. [Modern Asynchronous JavaScript with Async and Await](https://flaviocopes.com/javascript-async-await/) | 현아 |
 | 5. [Asynchronous JavaScript: From Callback Hell to Async and Await](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/Asynchronous-JavaScript:-From-Callback-Hell-to-Async-and-Await) | 해연 |
