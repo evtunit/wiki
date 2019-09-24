@@ -25,3 +25,4 @@
 - [컬렉션과 생성기](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%EC%BB%AC%EB%A0%89%EC%85%98%EA%B3%BC-%EC%83%9D%EC%84%B1%EA%B8%B0)
 - [Promise](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/%ED%94%84%EB%9D%BC%EB%AF%B8%EC%8A%A4)
 - [async, await](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/async,-await)
+- [자료구조](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/자료구조)
