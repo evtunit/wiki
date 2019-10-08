@@ -28,7 +28,7 @@
 | [async/await](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/async,-await) |
 | [자료 구조](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/자료구조) |
 | [함수 성능과 빅 오(Big-O) 표기법](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/함수-성능과-빅-오(Big-O)-표기법) |
-| 알고리즘 |
+| [알고리즘](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/알고리즘) |
 | 상속, 다형성, 코드의 재사용성 |
 | 설계 패턴 |
 | 부분 어플리케이션, 커링(Currying), Compose, Pipe |
