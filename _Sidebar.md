@@ -27,3 +27,4 @@
 - [async, await](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/async,-await)
 - [자료구조](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/자료구조)
 - [함수 성능과 빅 오 표기법](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/함수-성능과-빅-오(Big-O)-표기법)
+- [알고리즘](https://github.com/Lee-hyuna/33-js-concepts-kr/wiki/알고리즘)
