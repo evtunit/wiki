@@ -2,6 +2,8 @@
 
 # JS: 알고리즘 인터뷰
 
+> 원문: [JS: Interview Algorithm](http://www.thatjsdude.com/interview/js1.html)
+
 ## 1. 소수 검사
 
 **질문 :** 소수를 어떻게 확인 할 것인가?
